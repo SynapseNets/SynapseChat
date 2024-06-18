@@ -1,16 +1,19 @@
-import mysql.connector
-from flask import g, current_app
+import aiomysql, asyncio, os
 
-
-def getConnection():
-    if 'db' not in g or not g.db.is_connected():
-        try:
-            g.db = mysql.connector.connect(
-                host=current_app.config['MYSQL_HOST'],
-                user=current_app.config['MYSQL_USER'],
-                password=current_app.config['MYSQL_PASSWORD'],
-                database=current_app.config['MYSQL_DB']
-            )
-        except mysql.connector.Error as e:
-            print(f"Error connecting to MySQL: {e}")
-    return g.db
+async def init_db(loop: asyncio.AbstractEventLoop):
+    conn = await aiomysql.connect(
+        host=os.getenv('DB_HOST', 'database'),
+        user=os.getenv('DB_USER', 'root'), 
+        password=os.getenv('DB_PASSWORD', 'password'),
+        db=os.getenv('DB_DATABASE', 'test'),
+        port=os.getenv('DB_PORT', 3306),
+        loop=loop
+    )
+    
+    async with conn.cursor() as cur:
+        with open('server/db/db.sql', 'r') as f:
+            sql = f.read().split('\n\n')
+            for i in sql:
+                await cur.execute(i)
+        await conn.commit()    
+    conn.close()
