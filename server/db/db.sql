@@ -1,16 +1,16 @@
 CREATE TABLE IF NOT EXISTS `users` (
-    `id` varchar(36) NOT NULL,  -- UUID4 string for each user
+    `id` INT NOT NULL AUTO_INCREMENT,
     `username` varchar(20) NOT NULL,
-    `password` varchar(30) NOT NULL
+    `password` varchar(64) NOT NULL -- hex sha256 hash of password
 ) PRIMARY KEY (`id`);
 
 CREATE TABLE IF NOT EXISTS `groups` (
-    `id` varchar(36) NOT NULL,  -- UUID4 string for each group
+    `id` INT NOT NULL AUTO_INCREMENT,
     `name` varchar(20) NOT NULL
 ) PRIMARY KEY (`id`);
 
 CREATE TABLE IF NOT EXISTS `user_group` (
-    `user_id` varchar(36) NOT NULL,
-    `group_id` varchar(36) NOT NULL,
-    `last_time` datetime NOT NULL,
+    `user_id` INT NOT NULL,
+    `group_id` INT NOT NULL,
+    `last_time` datetime NOT NULL, -- last time user was online
 ) PRIMARY KEY (`user_id`, `group_id`);

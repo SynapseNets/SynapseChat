@@ -1,11 +1,14 @@
-import aiomysql, asyncio, os
+import mysql
+import asyncio, os
+
+import mysql.connector
 
 async def init_db(loop: asyncio.AbstractEventLoop):
-    conn = await aiomysql.connect(
+    conn = mysql.connector.connect(
         host=os.getenv('DB_HOST', 'database'),
         user=os.getenv('DB_USER', 'root'), 
         password=os.getenv('DB_PASSWORD', 'password'),
-        db=os.getenv('DB_DATABASE', 'test'),
+        database=os.getenv('DB_DATABASE', 'test'),
         port=os.getenv('DB_PORT', 3306),
         loop=loop
     )
@@ -15,5 +18,5 @@ async def init_db(loop: asyncio.AbstractEventLoop):
             sql = f.read().split('\n\n')
             for i in sql:
                 await cur.execute(i)
-        await conn.commit()    
+        await conn.commit()
     conn.close()
