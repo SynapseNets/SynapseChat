@@ -13,38 +13,33 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('SynapseChat'),
-        backgroundColor: const Color(0xff00008b),
-        actions: [
-          IconButton(
-            onPressed: () => print('Hello'),
-            icon: const Icon(Icons.info),
-            
-            ),
-          IconButton(
-            onPressed: () => print('Hello'),
-             icon: const Icon(Icons.settings)
-             )
-        ],
-      ),
       body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('images/logo.png'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                    ElevatedButton(
-                      onPressed: () {
+              Image.asset('images/logo.png', width: 256, height: 256,),
+              const Text(
+                'Welcome to SynapseChat',
+                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                 ),
+              const SizedBox(height: 10),
+              const Text(
+                'The most secure messaging service available.'
+              ),
+              const SizedBox(height: 200),
+              SizedBox(
+                height: 75,
+                width: 150,
+                child: ElevatedButton(
+                  onPressed: () {
                         Navigator.pushNamed(context, '/login');
                       },
-                    child: const Text('CONTINUA'),
-                    ),
-                ],
-              ),
+                  child: const Text(
+                    'Continue',
+                     style: TextStyle(fontSize: 20)
+                     ),
+                  ),
+                ),
             ],
         ),
       ),
