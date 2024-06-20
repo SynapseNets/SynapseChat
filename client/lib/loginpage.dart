@@ -86,19 +86,23 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 5.0),
               SizedBox(
                 width: 300.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                child: 
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Checkbox(
-                      value: _isChecked,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _isChecked = value!;
-                        });
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: _isChecked,
+                          onChanged: (bool? value) {
+                          setState(() {
+                            _isChecked = value!;
+                          });
                       },
                     ),
-                    const Text('Remember Me',),
-                    const SizedBox(width: 80,),
+                      const Text('Remember Me',),
+                    ],
+                    ),
                     SizedBox(
                       width: 90.0,
                       height: 45.0,
