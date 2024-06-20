@@ -1,5 +1,6 @@
 import 'package:client/homepage.dart';
 import 'package:flutter/material.dart';
+import 'loginpage.dart';
 
 void main() {
   runApp(const SynapseNetsApp());
@@ -17,7 +18,11 @@ class SynapseNetsApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: const SynapseNetsAppHomepage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SynapseNetsAppHomepage(),
+        '/login': (context) => const LoginPage(),
+      },
     );
   }
 }

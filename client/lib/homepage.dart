@@ -22,14 +22,16 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
           child: Column(
             children: [
               Image.network(
-                '',
+                'https://static.vecteezy.com/system/resources/previews/023/986/631/original/whatsapp-logo-whatsapp-logo-transparent-whatsapp-icon-transparent-free-free-png.png',
                 height: 300,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                     ElevatedButton(
-                      onPressed: switchToLoginPage, 
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/login');
+                      },
                     child: const Text('CONTINUA'),
                     ),
                 ],
