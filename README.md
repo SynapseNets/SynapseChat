@@ -1,2 +1,2 @@
 # SynapseChat
-Synapse Chat is an Electron-based chat client made using React.js and its server built in Python.
+Synapse Chat is a flutter based client chat application with its server built in Python.
