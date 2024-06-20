@@ -1,6 +1,8 @@
 import 'package:client/homepage.dart';
 import 'package:flutter/material.dart';
 import 'loginpage.dart';
+import 'registrationpage.dart';
+
 
 void main() {
   runApp(const SynapseNetsApp());
@@ -22,6 +24,7 @@ class SynapseNetsApp extends StatelessWidget {
       routes: {
         '/': (context) => const SynapseNetsAppHomepage(),
         '/login': (context) => const LoginPage(),
+        '/registration': (context) => const Registrationpage(),
       },
     );
   }
