@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
     print('Username: $username');
     print('Password: $password');
     print('Remember Me: $rememberMe');
-    
+
     // Puoi aggiungere qui la logica di autenticazione con il backend
   }
 
@@ -39,12 +39,19 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 180.0,
-                height: 180.0,
-                child:Image.asset('images/user.png'),
+              Image.asset('images/user.png',
+              width: 180, 
+              height: 180
               ),
-              const SizedBox(height: 100.0),
+              const SizedBox(height: 30.0),
+              const Text(
+                'Login to SynapseChat',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 70.0),
               SizedBox(
                 width: 300.0,
                 child: TextField(
@@ -71,33 +78,28 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 300.0,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              _isChecked = value!;
-                            });
-                          },
-                        ),
-                        const Text('Remember Me'),
-                      ],
+                    Checkbox(
+                      value: _isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _isChecked = value!;
+                        });
+                      },
                     ),
+                    const Text('Remember Me'),
+                    const SizedBox(width: 80,),
                     SizedBox(
-                      width: 150.0,
+                      width: 90.0,
                       height: 30.0,
-                      child: ElevatedButton(
-                        onPressed: (){
+                      child: TextButton(
+                        onPressed: () {
                           Navigator.pushNamed(context, '/registration');
-                        }, 
+                        },
                         child: const Text(
                           'sign up',
-                          style: TextStyle(
-                            fontSize: 15.0
-                          ),
+                          style: TextStyle(fontSize: 16.0),
                         ),
                       ),
                     ),
