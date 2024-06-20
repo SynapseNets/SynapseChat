@@ -13,11 +13,12 @@ class _RegistrationpageState extends State<Registrationpage> {
   final TextEditingController _password2 = TextEditingController();
   bool _isObscure = true;
 
-  void _register() {
+  bool _register() {
     String username = _username.text;
     String first_password = _password1.text;
     String second_password = _password2.text;
 
+    return true;
     //logica per la registrazione
   }
 
@@ -104,7 +105,9 @@ class _RegistrationpageState extends State<Registrationpage> {
               width: 180.0,
               height: 55.0,
               child: ElevatedButton(
-                onPressed: _register,
+                onPressed: (){
+                   _register() ?  Navigator.pushNamed(context, '/login') : print("registration denied");
+                  },
                 child: const Text(
                   'Register',
                   style: TextStyle(

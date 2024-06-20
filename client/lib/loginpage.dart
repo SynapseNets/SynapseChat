@@ -13,7 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isChecked = false; // Variabile di stato per la checkbox
   bool _isObscure = true; // Variabile di stato per la passwordField
 
-  void _login() {
+  bool _login() {
     // Logica di autenticazione va qui
     String username = _usernameController.text;
     String password = _passwordController.text;
@@ -23,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
     print('Password: $password');
     print('Remember Me: $rememberMe');
 
+    return true;
     // Puoi aggiungere qui la logica di autenticazione con il backend
   }
 
@@ -111,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.pushNamed(context, '/registration');
                         },
                         child: const Text(
-                          'sign up',
+                          'Sign Up',
                           style: TextStyle(fontSize: 16.0),
                         ),
                       ),
@@ -124,7 +125,9 @@ class _LoginPageState extends State<LoginPage> {
                 width: 180.0,
                 height: 55.0,
                 child: ElevatedButton(
-                  onPressed: _login,
+                  onPressed: (){
+                  _login() ?  Navigator.pushNamed(context, '/chat'): print("access denied");
+                  },
                   child: const Text(
                     'Login',
                     style: TextStyle(
