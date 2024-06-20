@@ -11,6 +11,7 @@ class _RegistrationpageState extends State<Registrationpage> {
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password1 = TextEditingController();
   final TextEditingController _password2 = TextEditingController();
+  bool _isObscure = true;
 
   void _register() {
     String username = _username.text;
@@ -37,7 +38,7 @@ class _RegistrationpageState extends State<Registrationpage> {
             ),
             const SizedBox(height: 40),
             const Text(
-              'Sign up to SynapseChat',
+              'Signup to SynapseChat',
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
@@ -58,10 +59,21 @@ class _RegistrationpageState extends State<Registrationpage> {
             SizedBox(
               width: 300.0,
               child: TextField(
+                obscureText: _isObscure,
                 controller: _password1,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isObscure ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                  ),
                 ),
               ),
             ),
@@ -69,10 +81,21 @@ class _RegistrationpageState extends State<Registrationpage> {
             SizedBox(
               width: 300.0,
               child: TextField(
+                obscureText: _isObscure,
                 controller: _password2,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Repeat Password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isObscure ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                  ),
                 ),
               ),
             ),

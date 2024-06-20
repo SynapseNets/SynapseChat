@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,6 +11,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isChecked = false; // Variabile di stato per la checkbox
+  bool _isObscure = true; // Variabile di stato per la passwordField
 
   void _login() {
     // Logica di autenticazione va qui
@@ -66,15 +65,25 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 300.0,
                 child: TextField(
+                  obscureText: _isObscure,
                   controller: _passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Password',
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    )
                   ),
                 ),
               ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: 5.0),
               SizedBox(
                 width: 300.0,
                 child: Row(
@@ -88,11 +97,11 @@ class _LoginPageState extends State<LoginPage> {
                         });
                       },
                     ),
-                    const Text('Remember Me'),
+                    const Text('Remember Me',),
                     const SizedBox(width: 80,),
                     SizedBox(
                       width: 90.0,
-                      height: 30.0,
+                      height: 45.0,
                       child: TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/registration');
