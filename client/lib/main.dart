@@ -13,8 +13,8 @@ class SynapseNetsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.amber,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigoAccent,
           brightness: Brightness.dark,
         ),
       ),

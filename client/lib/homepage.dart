@@ -14,17 +14,26 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SynapseNets'),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        centerTitle: true,
+        title: const Text('SynapseChat'),
+        backgroundColor: const Color(0xff00008b),
+        actions: [
+          IconButton(
+            onPressed: () => print('Hello'),
+            icon: const Icon(Icons.info),
+            
+            ),
+          IconButton(
+            onPressed: () => print('Hello'),
+             icon: const Icon(Icons.settings)
+             )
+        ],
       ),
       body: Center(
-        child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Image.network(
-                'https://static.vecteezy.com/system/resources/previews/023/986/631/original/whatsapp-logo-whatsapp-logo-transparent-whatsapp-icon-transparent-free-free-png.png',
-                height: 300,
-              ),
+              Image.asset('images/logo.png'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -37,7 +46,6 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
                 ],
               ),
             ],
-          ),
         ),
       ),
     );
