@@ -13,8 +13,6 @@ services:
   db:
     image: mysql
     restart: always
-    volumes:
-      - ./db:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 1s
