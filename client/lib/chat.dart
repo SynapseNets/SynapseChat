@@ -17,6 +17,7 @@ class _ChatState extends State<Chat> {
 
     return Scaffold(
       appBar: AppBar( //temporary appBar
+       automaticallyImplyLeading: false,
         actions: [
           IconButton(onPressed: () => setState(() {_chatFocus = !_chatFocus;}), icon: const Icon(Icons.chat))
         ],
