@@ -41,7 +41,7 @@ class _ChatState extends State<Chat> {
         ),
         body: NotificationListener<SizeChangedLayoutNotification>(
           onNotification: (notification) {
-            if (MediaQuery.of(context).size.width != _lastWidth){
+            if (MediaQuery.of(context).size.width != _lastWidth) {
               _lastWidth = MediaQuery.of(context).size.width;
               setState(() {});
             }
