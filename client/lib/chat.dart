@@ -19,7 +19,8 @@ class _ChatState extends State<Chat> {
       appBar: AppBar( //temporary appBar
        automaticallyImplyLeading: false,
         actions: [
-          IconButton(onPressed: () => setState(() {_chatFocus = !_chatFocus;}), icon: const Icon(Icons.chat))
+          IconButton(onPressed: () => setState(() {_chatFocus = !_chatFocus;}), icon: const Icon(Icons.chat)),
+          IconButton(onPressed: () => setState(() {Navigator.pushNamed(context, '/settings');}), icon: const Icon(Icons.settings))
         ],
       ),
         body: NotificationListener<SizeChangedLayoutNotification>(

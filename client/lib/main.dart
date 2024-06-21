@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'loginpage.dart';
 import 'registrationpage.dart';
 import 'chat.dart';
-
+import 'settingspage.dart';
 
 void main() {
   runApp(const SynapseNetsApp());
@@ -27,6 +27,7 @@ class SynapseNetsApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/registration': (context) => const Registrationpage(),
         '/chat' : (context) => const Chat(),
+        '/settings' : (context) => const SettingsPage(),
       },
     );
   }
