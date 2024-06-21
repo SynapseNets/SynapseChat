@@ -2,139 +2,139 @@
 # See https://github.com/flutter/flutter/issues/128635 for more context.
 
 # Miscellaneous
-*.class
-*.lock
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
+client/*.class
+client/*.lock
+client/*.log
+client/*.pyc
+client/*.swp
+client/.DS_Store
+client/.atom/
+client/.buildlog/
+client/.history
+client/.svn/
 
 # IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
+client/*.iml
+client/*.ipr
+client/*.iws
+client/.idea/
 
 # Visual Studio Code related
-.classpath
-.project
-.settings/
-.vscode/*
+client/.classpath
+client/.project
+client/.settings/
+client/.vscode/*
 
 # Flutter repo-specific
-/bin/cache/
-/bin/internal/bootstrap.bat
-/bin/internal/bootstrap.sh
-/bin/mingit/
-/dev/benchmarks/mega_gallery/
-/dev/bots/.recipe_deps
-/dev/bots/android_tools/
-/dev/devicelab/ABresults*.json
-/dev/docs/doc/
-/dev/docs/api_docs.zip
-/dev/docs/flutter.docs.zip
-/dev/docs/lib/
-/dev/docs/pubspec.yaml
-/dev/integration_tests/**/xcuserdata
-/dev/integration_tests/**/Pods
-/packages/flutter/coverage/
-version
-analysis_benchmark.json
+client//bin/cache/
+client//bin/internal/bootstrap.bat
+client//bin/internal/bootstrap.sh
+client//bin/mingit/
+client//dev/benchmarks/mega_gallery/
+client//dev/bots/.recipe_deps
+client//dev/bots/android_tools/
+client//dev/devicelab/ABresults*.json
+client//dev/docs/doc/
+client//dev/docs/api_docs.zip
+client//dev/docs/flutter.docs.zip
+client//dev/docs/lib/
+client//dev/docs/pubspec.yaml
+client//dev/integration_tests/**/xcuserdata
+client//dev/integration_tests/**/Pods
+client//packages/flutter/coverage/
+client/version
+client/analysis_benchmark.json
 
 # packages file containing multi-root paths
-.packages.generated
+client/.packages.generated
 
 # Flutter/Dart/Pub related
-**/doc/api/
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-**/generated_plugin_registrant.dart
-.packages
-.pub-preload-cache/
-.pub-cache/
-.pub/
-build/
-flutter_*.png
-linked_*.ds
-unlinked.ds
-unlinked_spec.ds
+client/**/doc/api/
+client/.dart_tool/
+client/.flutter-plugins
+client/.flutter-plugins-dependencies
+client/**/generated_plugin_registrant.dart
+client/.packages
+client/.pub-preload-cache/
+client/.pub-cache/
+client/.pub/
+client/build/
+client/flutter_*.png
+client/linked_*.ds
+client/unlinked.ds
+client/unlinked_spec.ds
 
 # Android related
-**/android/**/gradle-wrapper.jar
-.gradle/
-**/android/captures/
-**/android/gradlew
-**/android/gradlew.bat
-**/android/local.properties
-**/android/**/GeneratedPluginRegistrant.java
-**/android/key.properties
-*.jks
+client/**/android/**/gradle-wrapper.jar
+client/.gradle/
+client/**/android/captures/
+client/**/android/gradlew
+client/**/android/gradlew.bat
+client/**/android/local.properties
+client/**/android/**/GeneratedPluginRegistrant.java
+client/**/android/key.properties
+client/*.jks
 
 # iOS/XCode related
-**/ios/**/*.mode1v3
-**/ios/**/*.mode2v3
-**/ios/**/*.moved-aside
-**/ios/**/*.pbxuser
-**/ios/**/*.perspectivev3
-**/ios/**/*sync/
-**/ios/**/.sconsign.dblite
-**/ios/**/.tags*
-**/ios/**/.vagrant/
-**/ios/**/DerivedData/
-**/ios/**/Icon?
-**/ios/**/Pods/
-**/ios/**/.symlinks/
-**/ios/**/profile
-**/ios/**/xcuserdata
-**/ios/.generated/
-**/ios/Flutter/.last_build_id
-**/ios/Flutter/App.framework
-**/ios/Flutter/Flutter.framework
-**/ios/Flutter/Flutter.podspec
-**/ios/Flutter/Generated.xcconfig
-**/ios/Flutter/ephemeral
-**/ios/Flutter/app.flx
-**/ios/Flutter/app.zip
-**/ios/Flutter/flutter_assets/
-**/ios/Flutter/flutter_export_environment.sh
-**/ios/ServiceDefinitions.json
-**/ios/Runner/GeneratedPluginRegistrant.*
+client/**/ios/**/*.mode1v3
+client/**/ios/**/*.mode2v3
+client/**/ios/**/*.moved-aside
+client/**/ios/**/*.pbxuser
+client/**/ios/**/*.perspectivev3
+client/**/ios/**/*sync/
+client/**/ios/**/.sconsign.dblite
+client/**/ios/**/.tags*
+client/**/ios/**/.vagrant/
+client/**/ios/**/DerivedData/
+client/**/ios/**/Icon?
+client/**/ios/**/Pods/
+client/**/ios/**/.symlinks/
+client/**/ios/**/profile
+client/**/ios/**/xcuserdata
+client/**/ios/.generated/
+client/**/ios/Flutter/.last_build_id
+client/**/ios/Flutter/App.framework
+client/**/ios/Flutter/Flutter.framework
+client/**/ios/Flutter/Flutter.podspec
+client/**/ios/Flutter/Generated.xcconfig
+client/**/ios/Flutter/ephemeral
+client/**/ios/Flutter/app.flx
+client/**/ios/Flutter/app.zip
+client/**/ios/Flutter/flutter_assets/
+client/**/ios/Flutter/flutter_export_environment.sh
+client/**/ios/ServiceDefinitions.json
+client/**/ios/Runner/GeneratedPluginRegistrant.*
 
 # macOS
-**/Flutter/ephemeral/
-**/Pods/
-**/macos/Flutter/GeneratedPluginRegistrant.swift
-**/macos/Flutter/ephemeral
-**/xcuserdata/
+client/**/Flutter/ephemeral/
+client/**/Pods/
+client/**/macos/Flutter/GeneratedPluginRegistrant.swift
+client/**/macos/Flutter/ephemeral
+client/**/xcuserdata/
 
 # Windows
-**/windows/flutter/generated_plugin_registrant.cc
-**/windows/flutter/generated_plugin_registrant.h
-**/windows/flutter/generated_plugins.cmake
+client/**/windows/flutter/generated_plugin_registrant.cc
+client/**/windows/flutter/generated_plugin_registrant.h
+client/**/windows/flutter/generated_plugins.cmake
 
 # Linux
-**/linux/flutter/generated_plugin_registrant.cc
-**/linux/flutter/generated_plugin_registrant.h
-**/linux/flutter/generated_plugins.cmake
+client/**/linux/flutter/generated_plugin_registrant.cc
+client/**/linux/flutter/generated_plugin_registrant.h
+client/**/linux/flutter/generated_plugins.cmake
 
 # Coverage
-coverage/
+client/coverage/
 
 # Symbols
-app.*.symbols
+client/app.*.symbols
 
 # Exceptions to above rules.
-!**/ios/**/default.mode1v3
-!**/ios/**/default.mode2v3
-!**/ios/**/default.pbxuser
-!**/ios/**/default.perspectivev3
-!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
-!/dev/ci/**/Gemfile.lock
-!.vscode/settings.json
+!client/**/ios/**/default.mode1v3
+!client/**/ios/**/default.mode2v3
+!client/**/ios/**/default.pbxuser
+!client/**/ios/**/default.perspectivev3
+!client//packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+!client//dev/ci/**/Gemfile.lock
+!client/.vscode/settings.json
 
 ../.vscode
