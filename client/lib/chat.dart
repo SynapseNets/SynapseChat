@@ -14,37 +14,50 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar( //temporary appBar
-       automaticallyImplyLeading: false,
-        actions: [
-          IconButton(onPressed: () => setState(() {_chatFocus = !_chatFocus;}), icon: const Icon(Icons.chat)),
-          IconButton(onPressed: () => setState(() {Navigator.pushNamed(context, '/settings');}), icon: const Icon(Icons.settings))
-        ],
-      ),
+        appBar: AppBar(
+          //temporary appBar
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+                onPressed: () => setState(() {
+                      Navigator.pushNamed(context, '/serverconnect');
+                    }),
+                icon: const Icon(Icons.add)),
+            IconButton(
+                onPressed: () => setState(() {
+                      _chatFocus = !_chatFocus;
+                    }),
+                icon: const Icon(Icons.chat)),
+            IconButton(
+                onPressed: () => setState(() {
+                      Navigator.pushNamed(context, '/settings');
+                    }),
+                icon: const Icon(Icons.settings))
+          ],
+        ),
         body: NotificationListener<SizeChangedLayoutNotification>(
-      onNotification: (notification) {
-        setState(() {});
-        return true;
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Builder(
-            builder: (context) {
-              return !_chatFocus || MediaQuery.of(context).size.width > 600
-                  ? const Expanded(child: Sidebar())
-                  : const SizedBox(width: 0);
-            },
+          onNotification: (notification) {
+            setState(() {});
+            return true;
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Builder(
+                builder: (context) {
+                  return !_chatFocus || MediaQuery.of(context).size.width > 600
+                      ? const Expanded(child: Sidebar())
+                      : const SizedBox(width: 0);
+                },
+              ),
+              Builder(builder: (context) {
+                return _chatFocus || MediaQuery.of(context).size.width > 600
+                    ? const Expanded(child: Content())
+                    : const SizedBox(width: 0);
+              })
+            ],
           ),
-          Builder(builder: (context) {
-            return _chatFocus || MediaQuery.of(context).size.width > 600
-                ? const Expanded(child: Content())
-                : const SizedBox(width: 0);
-          })
-        ],
-      ),
-    ));
+        ));
   }
 }

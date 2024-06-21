@@ -1,4 +1,5 @@
 import 'package:client/homepage.dart';
+import 'package:client/serverconnectpage.dart';
 import 'package:flutter/material.dart';
 import 'loginpage.dart';
 import 'registrationpage.dart';
@@ -26,8 +27,9 @@ class SynapseNetsApp extends StatelessWidget {
         '/': (context) => const SynapseNetsAppHomepage(),
         '/login': (context) => const LoginPage(),
         '/registration': (context) => const Registrationpage(),
-        '/chat' : (context) => const Chat(),
-        '/settings' : (context) => const SettingsPage(),
+        '/chat': (context) => const Chat(),
+        '/settings': (context) => const SettingsPage(),
+        '/serverconnect': (context) => const Serverconnectpage()
       },
     );
   }
