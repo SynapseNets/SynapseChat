@@ -28,6 +28,9 @@ class _ContentState extends State<Content> {
       ListView.builder(
         itemCount: messages.length,
         itemBuilder: (context, index) {
+          if (index % 3 == 0){
+            return DateChip(date: DateTime(2024, 6, 9+index));
+          }
           Message message = messages[index];
           return BubbleNormal(
             text: message.text,

@@ -142,6 +142,10 @@ plugin_platform_interface
 3.0
 file:///home/marco/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8/
 file:///home/marco/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8/lib/
+screen_retriever
+2.18
+file:///home/marco/.pub-cache/hosted/pub.dev/screen_retriever-0.1.9/
+file:///home/marco/.pub-cache/hosted/pub.dev/screen_retriever-0.1.9/lib/
 source_span
 2.18
 file:///home/marco/.pub-cache/hosted/pub.dev/source_span-1.10.0/
@@ -182,6 +186,10 @@ web
 3.3
 file:///home/marco/.pub-cache/hosted/pub.dev/web-0.5.1/
 file:///home/marco/.pub-cache/hosted/pub.dev/web-0.5.1/lib/
+window_manager
+3.0
+file:///home/marco/.pub-cache/hosted/pub.dev/window_manager-0.3.9/
+file:///home/marco/.pub-cache/hosted/pub.dev/window_manager-0.3.9/lib/
 client
 3.2
 file:///home/marco/development/SynapseChat/client/
