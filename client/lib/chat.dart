@@ -11,9 +11,12 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
   bool _chatFocus = false; //mobile toggle option
+  double? _lastWidth;
 
   @override
   Widget build(BuildContext context) {
+    _lastWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
         appBar: AppBar(
           //temporary appBar
@@ -38,7 +41,10 @@ class _ChatState extends State<Chat> {
         ),
         body: NotificationListener<SizeChangedLayoutNotification>(
           onNotification: (notification) {
-            setState(() {});
+            if (MediaQuery.of(context).size.width != _lastWidth){
+              _lastWidth = MediaQuery.of(context).size.width;
+              setState(() {});
+            }
             return true;
           },
           child: Row(

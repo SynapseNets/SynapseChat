@@ -24,21 +24,52 @@ class Content extends StatefulWidget {
 class _ContentState extends State<Content> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: messages.length,
-      itemBuilder: (context, index) {
-        Message message = messages[index];
-        return BubbleSpecialOne(
-          text: message.text,
-          isSender: message.isSender,
-          color: message.isSender ? Color(0xffFFC107) : Color(0xffE0E0E0),
-          textStyle: TextStyle(
-            fontSize: 18,
-            color: message.isSender ? Colors.black : Colors.black,
+    return Stack(children: [
+      ListView.builder(
+        itemCount: messages.length,
+        itemBuilder: (context, index) {
+          Message message = messages[index];
+          return BubbleNormal(
+            text: message.text,
+            isSender: message.isSender,
+            color: message.isSender
+                ? const Color(0xff3b28cc)
+                : const Color(0xff1b2a41),
+            textStyle: TextStyle(
+              fontSize: 18,
+              color: message.isSender ? Colors.black : Colors.white,
+            ),
+            tail: true,
+            sent: true,
+            seen: true,
+          );
+        },
+      ),
+      MessageBar(
+        sendButtonColor: const Color(0xff3b28cc),
+        messageBarColor: Theme.of(context).colorScheme.primary,
+        onSend: (_) => print(_),
+        actions: [
+        InkWell(
+          child: const Icon(
+            Icons.add,
+            color: Colors.black,
+            size: 24,
           ),
-          tail: true,
-        );
-      },
-    );
+          onTap: () {},
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: InkWell(
+            child: const Icon(
+              Icons.camera_alt,
+              color: Color(0xff3b28cc),
+              size: 24,
+            ),
+            onTap: () {},
+          ),
+        ),
+      ])
+    ]);
   }
 }
