@@ -82,17 +82,17 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildcustomizationButton() {
     return InkWell(
       onTap: () {
-        // Aggiungi qui l'azione da eseguire al click del secondo bottone
+        Navigator.pushNamed(context, '/chatsettings');
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
         child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.settings), // Esempio di icona
+            Icon(Icons.messenger_outlined), // Esempio di icona
             SizedBox(width: 12),
             Text(
-              'Chat options',
+              'Chat settings',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ],

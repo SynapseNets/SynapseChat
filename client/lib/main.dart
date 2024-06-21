@@ -5,7 +5,8 @@ import 'loginpage.dart';
 import 'registrationpage.dart';
 import 'chat.dart';
 import 'settingspage.dart';
-import 'profileinfo.dart';
+import 'settings/profileinfo.dart';
+import 'settings/chat_preferences.dart';
 
 void main() {
   runApp(const SynapseNetsApp());
@@ -31,7 +32,8 @@ class SynapseNetsApp extends StatelessWidget {
         '/chat': (context) => const Chat(),
         '/settings': (context) => const SettingsPage(),
         '/profileinfo': (context) => const Profileinfo(),
-        '/serverconnect': (context) => const Serverconnectpage()
+        '/serverconnect': (context) => const Serverconnectpage(),
+        '/chatsettings': (context) => const ChatPreferencesPage()
       },
     );
   }
