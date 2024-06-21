@@ -7,7 +7,9 @@ db = SQLAlchemy(current_app)
 class User(db.Model):
     id: Mapped[int] = mapped_column(nullable=False, unique=True, autoincrement=True, primary_key=True)
     username: Mapped[str] = mapped_column(nullable=False, unique=True)
-    password: Mapped[str] = mapped_column(nullable=False) # hash of the actual password
+    password: Mapped[str] = mapped_column(nullable=True) # hash of the actual password
+    # the password is optional for every user since we use OTPs
+    otp_secret: Mapped[str] = mapped_column(nullable=False, unique=True) # base32 encoded secret
     
     def __repr__(self) -> str:
         return f"<User {self.username}, id {self.id}>"
@@ -15,6 +17,7 @@ class User(db.Model):
 class Group(db.Model):
     id: Mapped[int] = mapped_column(nullable=False, unique=True, autoincrement=True, primary_key=True)
     name: Mapped[str] = mapped_column(nullable=False)
+    invite_code: Mapped[str] = mapped_column(nullable=False, unique=True)
     
     def __repr__(self) -> str:
         return f"<Group {self.name}, id {self.id}>"
