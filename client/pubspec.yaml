@@ -62,7 +62,7 @@ flutter:
   assets:
     - images/logo.png             #logo image
     - images/user.png             #login page image
-    - assets/default_profile.png  #default_profile image
+    - images/default_profile.png  #default_profile image
     # - images/a_dot_burr.jpeg
     #- images/a_dot_ham.jpeg
 
