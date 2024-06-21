@@ -1,21 +1,12 @@
-import 'dart:io';
-
 import 'package:client/homepage.dart';
-import 'package:client/serverconnectpage.dart';
 import 'package:flutter/material.dart';
-import 'package:window_manager/window_manager.dart';
 import 'loginpage.dart';
 import 'registrationpage.dart';
 import 'chat.dart';
 import 'settingspage.dart';
+import 'profileinfo.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  windowManager.ensureInitialized();
-
-  if (!(Platform.isAndroid || Platform.isIOS)) {
-    WindowManager.instance.setMinimumSize(const Size(400, 800));
-  }
   runApp(const SynapseNetsApp());
 }
 
@@ -36,9 +27,9 @@ class SynapseNetsApp extends StatelessWidget {
         '/': (context) => const SynapseNetsAppHomepage(),
         '/login': (context) => const LoginPage(),
         '/registration': (context) => const Registrationpage(),
-        '/chat': (context) => const Chat(),
-        '/settings': (context) => const SettingsPage(),
-        '/serverconnect': (context) => const Serverconnectpage()
+        '/chat' : (context) => const Chat(),
+        '/settings' : (context) => const SettingsPage(),
+        '/profileinfo' : (context) => const Profileinfo(),
       },
     );
   }
