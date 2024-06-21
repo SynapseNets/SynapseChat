@@ -1,5 +1,5 @@
-aiomysql==0.2.0
 grpcio==1.64.1
 Flask-SQLAlchemy==3.1.1
 Werkzeug==3.0.3
 pyotp==2.9.0
+mysqlclient==2.2.4

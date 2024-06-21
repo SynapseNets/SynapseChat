@@ -1,8 +1,9 @@
+from werkzeug.security import generate_password_hash
 from flask import Flask, request, jsonify
 from base64 import b32encode
 from utils.db import get_db_path
 from utils.models import *
-import ssl, pyotp, os, uuid, re
+import ssl, pyotp, os, uuid, re, asyncio
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 context.load_cert_chain('server_cert.pem', 'server_key.pem')
@@ -11,35 +12,29 @@ app.config['SQLALCHEMY_DATABASE_URI'] = get_db_path()
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 @app.route('/api/login', methods=['POST'])
-def login():
+async def login():
     data = request.get_json()
     if not isinstance(data, dict):
         return jsonify({'message': 'Invalid JSON'}), 400
     
-    username = data.get('username')
-    password = data.get('password')
-    otp = data.get('otp')
+    username    = data.get('username')
+    otp         = data.get('otp')
 
-    if not username or (not password and not otp):
-        return jsonify({'message': 'Missing username and an authentication method'}), 400
+    if not username or not otp:
+        return jsonify({'message': 'Missing username or the otp code'}), 400
+    
+    if not isinstance(username, str) or not isinstance(otp, str):
+        return jsonify({'message': 'Invalid format username or otp code'}), 400
     
     user: User = User.query.filter_by(username=username).first()
     if not user:
         return jsonify({'message': 'User not found'}), 404
 
-    if not password:
-        if not isinstance(otp, str):
-            return jsonify({'message': 'Invalid OTP'}), 400
-        otp_server = pyotp.TOTP(user.otp_secret, name=username, issuer=os.getenv('ISSUER')).now()
-
-        if otp_server == otp:
-            return jsonify({'message': 'Logged in'}), 200 # TODO: add session
-        else:
-            return jsonify({'message': 'Invalid OTP'}), 401 # TODO: add check for bruteforce (attack) since the OTP is valid for 30 seconds
+    await asyncio.sleep(0.5) # TODO: remove this if tool anti-DDoS is enabled
+    if pyotp.TOTP(user.otp_secret).verify(otp):
+        return jsonify({'auth': generate_password_hash(os.urandom(20).hex())}), 200 # token of user
     else:
-        if not isinstance(username, str) or not isinstance(password, str):
-            return jsonify({'message': 'Invalid username or password'}), 400
-        # TODO: finish
+        return jsonify({'message': 'Invalid OTP'}), 403
 
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -48,12 +43,21 @@ def register():
         return jsonify({'message': 'Invalid JSON'}), 400
     
     username = data.get('username')
-    password = data.get('password')
     
     if not username:
         return jsonify({'message': 'Missing username'}), 400
     
-    # TODO: decide register policy
+    if not isinstance(username, str):
+        return jsonify({'message': 'Invalid username'}), 400
+    
+    # TODO : check if username is already taken
+    
+    otp_secret = b32encode(os.urandom(32)).decode()[:52]
+    user = User(username=username, otp_secret=otp_secret)
+    db.session.add(user)
+    db.session.commit()
+    
+    return {"auth": pyotp.TOTP(otp_secret).provisioning_uri(name=username, issuer_name=os.getenv('ISSUER'))}, 201
 
 @app.route('/api/create_group', methods=['POST'])
 def create_group():
@@ -69,10 +73,8 @@ def create_group():
     if not isinstance(name, str):
         return jsonify({'message': 'Invalid name'}), 400
 
-    while True:
-        invite_code = str(uuid.uuid4())
-        if not Group.query.filter_by(invite_code=invite_code).first():
-            break
+    # assert that the invite code is unique
+    invite_code = str(uuid.uuid4())
 
     group = Group(name=name, invite_code=invite_code)
     db.session.add(group)
@@ -94,7 +96,7 @@ def join_group():
     if not isinstance(invite_code, str):
         return jsonify({'message': 'Invalid invite code'}), 400
     if not re.match(r'^[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}$', invite_code):
-        return jsonify({'message': 'Invalid invite code'}), 400
+        return jsonify({'message': 'Invalid invite code format'}), 403
     
     group = Group.query.filter_by(invite_code=invite_code).first()
     if not group:
@@ -104,4 +106,7 @@ def join_group():
         # TODO : add user in group by its id
 
 if __name__ == '__main__':
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
     app.run(host='0.0.0.0', port=5050, ssl_context=context)
