@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  image_picker: ^0.8.4+4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -60,8 +60,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/logo.png
-    - images/user.png
+    - images/logo.png             #logo image
+    - images/user.png             #login page image
+    - assets/default_profile.png  #default_profile image
     # - images/a_dot_burr.jpeg
     #- images/a_dot_ham.jpeg
 
