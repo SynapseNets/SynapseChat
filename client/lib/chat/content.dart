@@ -47,10 +47,14 @@ class _ContentState extends State<Content> {
   Duration duration = const Duration(seconds: 30);
   Duration position = const Duration(seconds: 0);
 
+  final TextEditingController _message = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
       ListView.builder(
+        controller: _scrollController,
         padding: const EdgeInsets.only(top: 8, bottom: 8),
         physics: const BouncingScrollPhysics(),
         itemCount: messages.length + 1,
@@ -99,7 +103,8 @@ class _ContentState extends State<Content> {
                   maxWidth: MediaQuery.of(context).size.width * 0.4,
                   maxHeight: 65,
                 ),
-                duration: duration.inSeconds.toDouble(), //TODO: add changeable duration
+                duration: duration.inSeconds
+                    .toDouble(), //TODO: add changeable duration
                 position: position.inSeconds.toDouble(), //TODO: same as above
                 onSeekChanged: (value) {
                   setState(() {
@@ -131,39 +136,46 @@ class _ContentState extends State<Content> {
           }
         },
       ),
-      Padding(
-          padding: const EdgeInsets.all(20),
-          child: MessageBar(
-              sendButtonColor: const Color(0xff3b28cc),
-              messageBarColor: Theme.of(context).colorScheme.primary,
-              onSend: (_) => setState(() {
-                    messages.add(Message(
-                      text: _,
-                      type: MessageType.text,
-                      sender: 'me',
-                    ));
-                  }),
-              actions: [
-                InkWell(
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.black,
-                    size: 24,
-                  ),
-                  onTap: () {},
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8),
-                  child: InkWell(
-                    child: const Icon(
-                      Icons.camera_alt,
-                      color: Color(0xff3b28cc),
-                      size: 24,
-                    ),
-                    onTap: () {},
-                  ),
-                ),
-              ]))
+      Container(
+          // Bottom bar
+          alignment: Alignment.bottomCenter,
+            child: SizedBox(
+                child: Container(
+                    color: Theme.of(context).colorScheme.surface,
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: _message,
+                            decoration: const InputDecoration(
+                              hintText: 'Type a message',
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                              ),
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              messages.add(Message(
+                                  text: _message.text,
+                                  type: MessageType.text,
+                                  sender: 'me'));
+                              _message.clear();
+                              _scrollController.animateTo(
+                                  _scrollController.position.maxScrollExtent,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.fastEaseInToSlowEaseOut);
+                            });
+                          },
+                          icon: const Icon(Icons.send),
+                        ),
+                      ],
+                    ))),
+          )
     ]);
   }
 }
