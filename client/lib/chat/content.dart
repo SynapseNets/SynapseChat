@@ -3,15 +3,32 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'message.dart';
 
 List<Message> messages = [
-  Message(isSender: false, text: 'Hello!', time: DateTime.now()),
-  Message(isSender: true, text: 'Hi!', time: DateTime.now()),
-  Message(isSender: false, text: 'How are you?', time: DateTime.now()),
-  Message(isSender: true, text: 'I am fine.', time: DateTime.now()),
-  Message(isSender: false, text: 'What are you doing?', time: DateTime.now()),
-  Message(isSender: true, text: 'Nothing much.', time: DateTime.now()),
-  Message(isSender: false, text: 'Okay.', time: DateTime.now()),
-  Message(isSender: true, text: 'Bye!', time: DateTime.now()),
-  Message(isSender: false, text: 'Goodbye!', time: DateTime.now()),
+  Message(text: 'Hi', type: MessageType.text, sender: 'not me'),
+  Message(text: 'Hello', type: MessageType.text, sender: 'me'),
+  Message(text: 'How are you?', type: MessageType.text, sender: 'not me'),
+  Message(text: 'I am fine', type: MessageType.text, sender: 'me'),
+  Message(text: 'How about you?', type: MessageType.text, sender: 'me'),
+  Message(text: 'I am good too', type: MessageType.text, sender: 'not me'),
+  Message(text: 'What are you doing?', type: MessageType.text, sender: 'me'),
+  Message(text: 'Nothing much', type: MessageType.text, sender: 'not me'),
+  Message(text: 'Just chilling', type: MessageType.text, sender: 'not me'),
+  Message(text: 'Cool', type: MessageType.text, sender: 'me'),
+  Message(text: 'What about you?', type: MessageType.text, sender: 'me'),
+  Message(text: 'Same here', type: MessageType.text, sender: 'not me'),
+  Message(text: 'I am bored', type: MessageType.text, sender: 'me'),
+  Message(text: 'Let\'s go out', type: MessageType.text, sender: 'me'),
+  Message(text: 'Where?', type: MessageType.text, sender: 'not me'),
+  Message(text: 'To the park', type: MessageType.text, sender: 'me'),
+  Message(text: 'Okay', type: MessageType.text, sender: 'not me'),
+  Message(text: 'I will be there in 10 minutes', type: MessageType.text, sender: 'me'),
+  Message(text: 'Okay', type: MessageType.text, sender: 'not me'),
+  Message(text: 'See you soon', type: MessageType.text, sender: 'me'),
+  Message(text: 'Bye', type: MessageType.text, sender: 'not me'),
+  Message(text: 'Bye', type: MessageType.text, sender: 'me'),
+  Message(text: 'Check this out', type: MessageType.image, sender: 'me'),
+  Message(text: 'Bye', type: MessageType.text, sender: 'not me'),
+  Message(text: 'Bye', type: MessageType.text, sender: 'me'),
+  Message(text: 'Bye', type: MessageType.text, sender: 'not me'),
 ];
 
 class Content extends StatefulWidget {
@@ -26,26 +43,74 @@ class _ContentState extends State<Content> {
   Widget build(BuildContext context) {
     return Stack(children: [
       ListView.builder(
-        itemCount: messages.length,
+        itemCount: messages.length + 1,
         itemBuilder: (context, index) {
-          if (index % 3 == 0){
-            return DateChip(date: DateTime(2024, 6, 9+index));
+          
+          if(index == messages.length){
+            return const SizedBox(height: 100);
           }
+
           Message message = messages[index];
-          return BubbleNormal(
-            text: message.text,
-            isSender: message.isSender,
-            color: message.isSender
-                ? const Color(0xff3b28cc)
-                : const Color(0xff1b2a41),
-            textStyle: TextStyle(
-              fontSize: 18,
-              color: message.isSender ? Colors.black : Colors.white,
-            ),
-            tail: true,
-            sent: true,
-            seen: true,
-          );
+
+          switch(message.type){
+            case MessageType.text:
+              return BubbleNormal(
+                text: message.text,
+                isSender: message.sender == 'me',
+                color: message.sender == 'me'
+                    ? const Color(0xff3b28cc)
+                    : const Color(0xff1b2a41),
+                textStyle: TextStyle(
+                  fontSize: 16,
+                  color: message.sender == 'me' ? Colors.black : Colors.white,
+                ),
+                tail: true,
+                sent: message.status == MessageStatus.sent,
+                delivered: message.status == MessageStatus.delivered,
+                seen: message.status == MessageStatus.seen,
+              );
+            case MessageType.image || MessageType.video:
+              return SizedBox(
+                height: 256,
+                child: 
+              BubbleNormalImage(
+                id: message.text,
+                image: Image.asset('images/default_profile.png'),
+                isSender: message.sender == 'me',
+                color: message.sender == 'me'
+                    ? const Color(0xff3b28cc)
+                    : const Color(0xff1b2a41),
+                tail: true,
+                sent: message.status == MessageStatus.sent,
+                delivered: message.status == MessageStatus.delivered,
+                seen: message.status == MessageStatus.seen,
+              ));
+            case MessageType.audio:
+              return BubbleNormalAudio(
+                onSeekChanged: (value) => print(value),
+                onPlayPauseButtonClick: () => print('Play/Pause'),
+                isSender: message.sender == 'me',
+                color: message.sender == 'me'
+                    ? const Color(0xff3b28cc)
+                    : const Color(0xff1b2a41),
+                tail: true,
+                sent: message.status == MessageStatus.sent,
+                delivered: message.status == MessageStatus.delivered,
+                seen: message.status == MessageStatus.seen,
+              );
+            case MessageType.file:
+              return BubbleNormal(
+                text: message.text,
+                isSender: message.sender == 'me',
+                color: message.sender == 'me'
+                    ? const Color(0xff3b28cc)
+                    : const Color(0xff1b2a41),
+                tail: true,
+                sent: message.status == MessageStatus.sent,
+                delivered: message.status == MessageStatus.delivered,
+                seen: message.status == MessageStatus.seen,
+              );
+          }
         },
       ),
       MessageBar(
