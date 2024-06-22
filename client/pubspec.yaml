@@ -65,6 +65,7 @@ flutter:
     - images/logo.png             #logo image
     - images/user.png             #login page image
     - images/default_profile.png  #default_profile image
+    - images/add_server.png       #add server image
     # - images/a_dot_burr.jpeg
     #- images/a_dot_ham.jpeg
 

@@ -18,52 +18,73 @@ class _ChatState extends State<Chat> {
     _lastWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        appBar: AppBar(
-          //temporary appBar
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-                onPressed: () => setState(() {
-                      Navigator.pushNamed(context, '/serverconnect');
-                    }),
-                icon: const Icon(Icons.add)),
-            IconButton(
-                onPressed: () => setState(() {
-                      _chatFocus = !_chatFocus;
-                    }),
-                icon: const Icon(Icons.chat)),
-            IconButton(
-                onPressed: () => setState(() {
-                      Navigator.pushNamed(context, '/settings');
-                    }),
-                icon: const Icon(Icons.settings))
-          ],
-        ),
-        body: NotificationListener<SizeChangedLayoutNotification>(
-          onNotification: (notification) {
-            if (MediaQuery.of(context).size.width != _lastWidth) {
-              _lastWidth = MediaQuery.of(context).size.width;
-              setState(() {});
-            }
-            return true;
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      appBar: AppBar(
+        //temporary appBar
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          Stack(
+            alignment: Alignment.center,
             children: [
-              Builder(
-                builder: (context) {
-                  return !_chatFocus || MediaQuery.of(context).size.width > 600
-                      ? const Expanded(child: Sidebar())
-                      : const SizedBox(width: 0);
-                },
+              Image.asset(
+                'images/add_server.png',
+                width: 33,
+                height: 33,
+                fit: BoxFit.cover,
               ),
-              Builder(builder: (context) {
-                return _chatFocus || MediaQuery.of(context).size.width > 600
-                    ? const Expanded(child: Content())
-                    : const SizedBox(width: 0);
-              })
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/serverconnect');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  padding: EdgeInsets.zero,
+                  shape: const CircleBorder(),
+                ),
+                child: const SizedBox(width: 40, height: 40),
+              ),
             ],
           ),
-        ));
+          IconButton(
+            onPressed: () => setState(() {
+              _chatFocus = !_chatFocus;
+            }),
+            icon: const Icon(Icons.chat),
+          ),
+          IconButton(
+            onPressed: () => setState(() {
+              Navigator.pushNamed(context, '/settings');
+            }),
+            icon: const Icon(Icons.settings),
+          ),
+        ],
+      ),
+      body: NotificationListener<SizeChangedLayoutNotification>(
+        onNotification: (notification) {
+          if (MediaQuery.of(context).size.width != _lastWidth) {
+            _lastWidth = MediaQuery.of(context).size.width;
+            setState(() {});
+          }
+          return true;
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Builder(
+              builder: (context) {
+                return !_chatFocus || MediaQuery.of(context).size.width > 600
+                    ? const Expanded(child: Sidebar())
+                    : const SizedBox(width: 0);
+              },
+            ),
+            Builder(builder: (context) {
+              return _chatFocus || MediaQuery.of(context).size.width > 600
+                  ? const Expanded(child: Content())
+                  : const SizedBox(width: 0);
+            }),
+          ],
+        ),
+      ),
+    );
   }
 }
