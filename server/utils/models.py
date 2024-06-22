@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
 
 db = SQLAlchemy()
 
@@ -29,10 +29,21 @@ class Group(db.Model):
     def __repr__(self) -> str:
         return f"<Group {self.name}, id {self.id}>"
 
+class Messages(db.Model):
+    id          = Column(Integer, nullable=False, unique=True, autoincrement=True, primary_key=True)
+    user_id     = Column(Integer, nullable=False)
+    group_id    = Column(Integer, nullable=False)
+    message     = Column(String(300), nullable=False)
+    time        = Column(DateTime, nullable=False)
+    # TODO: add status of message
+    
+    def __repr__(self) -> str:
+        return f"<Message user {self.user_id}, group {self.group_id}, time {self.time}>"
+
 class UserGroup(db.Model):
     user_id     = Column(Integer, nullable=False, primary_key=True)
     group_id    = Column(Integer, nullable=False, primary_key=True)
-    last_time   = Column(Integer, nullable=False)
+    last_time   = Column(DateTime, nullable=False)
     
     def __repr__(self) -> str:
         return f"<UserGroup user {self.user_id}, group {self.group_id}, last_time {self.last_time}>"

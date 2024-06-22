@@ -1,9 +1,11 @@
 from werkzeug.security import generate_password_hash
 from flask import Flask, request, jsonify
+from datetime import datetime
 from base64 import b32encode
 from utils.db import get_db_path
 from utils.models import *
-import ssl, pyotp, os, uuid, re, asyncio
+import ssl, pyotp, os
+import uuid, re, asyncio
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 context.load_cert_chain('server_cert.pem', 'server_key.pem')
@@ -76,12 +78,15 @@ def create_group():
     # assert that the invite code is unique
     invite_code = str(uuid.uuid4())
 
+    user_id = 1 # TODO : get user id from token
     group = Group(name=name, invite_code=invite_code)
-    db.session.add(group)
-    db.session.commit()
-    # TODO: add user to the group
+    user_group = UserGroup(user_id=user_id, group_id=group.id, last_time=datetime.now())
     
-    return jsonify({'message': 'Group created'}), 201
+    db.session.add(group)
+    db.session.add(user_group)
+    db.session.commit()
+    
+    return jsonify({'message': 'Group created', 'invite_code': invite_code, 'id': group.id}), 201
 
 @app.route('/api/join_group', methods=['POST'])
 def join_group():
@@ -101,9 +106,38 @@ def join_group():
     group = Group.query.filter_by(invite_code=invite_code).first()
     if not group:
         return jsonify({'message': 'Group not found'}), 404
-    else:
-        group_id = group.id
-        # TODO : add user in group by its id
+    
+    group_id = group.id
+    user_id = 1 # TODO : get user id from token
+    user_group = UserGroup(user_id=user_id, group_id=group_id, last_time=datetime.now())
+    
+    db.session.add(user_group)
+    db.session.commit()
+    
+    return jsonify({'message': 'Joined group', 'id': group_id}), 200
+
+@app.route('/api/leave_group', methods=['POST'])
+def leave_group():
+    data = request.get_json()
+    if not isinstance(data, dict):
+        return jsonify({'message': 'Invalid JSON'}), 400
+    
+    group_id = data.get('group_id')    
+    user_id = 1 # TODO : get user id from token
+    
+    if not group_id:
+        return jsonify({'message': 'Missing group id'}), 400
+    if not isinstance(group_id, int):
+        return jsonify({'message': 'Invalid group id'}), 400
+    
+    user_group = UserGroup.query.filter_by(user_id=user_id, group_id=group_id).first()
+    if not user_group:
+        return jsonify({'message': 'User not in group'}), 404
+    
+    db.session.delete(user_group)
+    db.session.commit()
+    
+    return jsonify({'message': 'Left group'}), 200
 
 if __name__ == '__main__':
     db.init_app(app)
