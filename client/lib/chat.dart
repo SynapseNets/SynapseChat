@@ -19,45 +19,59 @@ class _ChatState extends State<Chat> {
 
     return Scaffold(
       appBar: AppBar(
-        //temporary appBar
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Image.asset(
-                'images/add_server.png',
-                width: 33,
-                height: 33,
-                fit: BoxFit.cover,
+        // App bar title
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'SynapseChat',
+              style: TextStyle(
+                fontSize: 30,
+                color: Color(0xff3b28cc)
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/serverconnect');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  padding: EdgeInsets.zero,
-                  shape: const CircleBorder(),
+              ), // Text on the left
+            Row(
+              children: [
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      'images/add_server.png',
+                      width: 33,
+                      height: 33,
+                      fit: BoxFit.cover,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/serverconnect');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        padding: EdgeInsets.zero,
+                        shape: const CircleBorder(),
+                      ),
+                      child: const SizedBox(width: 40, height: 40),
+                    ),
+                  ],
                 ),
-                child: const SizedBox(width: 40, height: 40),
-              ),
-            ],
-          ),
-          IconButton(
-            onPressed: () => setState(() {
-              _chatFocus = !_chatFocus;
-            }),
-            icon: const Icon(Icons.chat),
-          ),
-          IconButton(
-            onPressed: () => setState(() {
-              Navigator.pushNamed(context, '/settings');
-            }),
-            icon: const Icon(Icons.settings),
-          ),
-        ],
+                IconButton(
+                  onPressed: () => setState(() {
+                    _chatFocus = !_chatFocus;
+                  }),
+                  icon: const Icon(Icons.chat),
+                ),
+                IconButton(
+                  onPressed: () => setState(() {
+                    Navigator.pushNamed(context, '/settings');
+                  }),
+                  icon: const Icon(Icons.settings),
+                ),
+              ],
+            ),
+          ],
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: NotificationListener<SizeChangedLayoutNotification>(
         onNotification: (notification) {
