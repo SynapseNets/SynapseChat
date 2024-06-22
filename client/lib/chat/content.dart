@@ -52,7 +52,8 @@ class _ContentState extends State<Content> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
+    return Stack(
+      children: [
       ListView.builder(
         controller: _scrollController,
         padding: const EdgeInsets.only(top: 8, bottom: 8),
@@ -160,12 +161,17 @@ class _ContentState extends State<Content> {
                         IconButton(
                           onPressed: () {
                             setState(() {
+                              if (_message.text.isEmpty || _message.text.trim().isEmpty) {
+                                _message.clear();
+                                return;
+                              }
+
                               messages.add(Message(
                                   text: _message.text,
                                   type: MessageType.text,
                                   sender: 'me'));
                               _message.clear();
-                              _scrollController.animateTo(
+                                _scrollController.animateTo(
                                   _scrollController.position.maxScrollExtent,
                                   duration: const Duration(milliseconds: 300),
                                   curve: Curves.fastEaseInToSlowEaseOut);
