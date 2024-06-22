@@ -116,7 +116,7 @@ class _SettingsPageState extends State<SettingsPage> {
           children: <Widget>[
             CircleAvatar(
               radius: 23,
-              backgroundImage: AssetImage('images/chat_settings.png')
+              backgroundImage: AssetImage('images/language.png')
             ),
             SizedBox(width: 12),
             Text(
