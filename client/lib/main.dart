@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:client/homepage.dart';
 import 'package:client/serverconnectpage.dart';
@@ -14,9 +13,9 @@ import 'settings/chat_preferences.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  windowManager.ensureInitialized();
 
   if(!(Platform.isAndroid || Platform.isIOS)) {
+    windowManager.ensureInitialized();
     WindowManager.instance.setMinimumSize(const Size(450, 800));
   }
 

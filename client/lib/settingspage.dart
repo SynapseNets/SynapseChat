@@ -10,7 +10,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  File?_image;
 
 @override
   Widget build(BuildContext context) {
@@ -47,27 +46,25 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-        child: Row(
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             CircleAvatar(
-              radius: 30,
-              backgroundImage: _image == null
-                  ? const AssetImage('images/default_profile.png')
-                  : FileImage(_image!) as ImageProvider,
+              radius: 40,
+              backgroundImage: AssetImage('images/default_profile.png')
             ),
-            const SizedBox(width: 12),
-            const Column(
+            SizedBox(width: 12),
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   'Nome Utente',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 4),
                 Text(
                   'Descrizione Utente',
-                  style: TextStyle(fontSize: 14),
+                  style: TextStyle(fontSize: 18),
                 ),
               ],
             ),
@@ -89,11 +86,14 @@ class _SettingsPageState extends State<SettingsPage> {
         child: const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.messenger_outlined), // Esempio di icona
+            CircleAvatar(
+              radius: 23,
+              backgroundImage: AssetImage('images/chat_settings.png')
+            ),
             SizedBox(width: 12),
             Text(
               'Chat settings',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
         ),
