@@ -23,7 +23,8 @@ class _SettingsPageState extends State<SettingsPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _buildProfileInfoButton(),
-            _buildcustomizationButton(),
+            _buildCustomizationButton(),
+            _buildCustomizationLanguages()
           ],
         ),
       ),
@@ -76,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   ///////////////////customization chat button///////////////////
 
-  Widget _buildcustomizationButton() {
+  Widget _buildCustomizationButton() {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, '/chatsettings');
@@ -93,6 +94,33 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(width: 12),
             Text(
               'Chat settings',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  ///////////////////change languages button///////////////////
+
+  Widget _buildCustomizationLanguages() {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/languagesettings');
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+        child: const Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            CircleAvatar(
+              radius: 23,
+              backgroundImage: AssetImage('images/chat_settings.png')
+            ),
+            SizedBox(width: 12),
+            Text(
+              'Languages',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],

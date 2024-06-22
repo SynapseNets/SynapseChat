@@ -10,6 +10,8 @@ import 'chat.dart';
 import 'settingspage.dart';
 import 'settings/profileinfo.dart';
 import 'settings/chat_preferences.dart';
+import 'settings/languagespage.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +45,8 @@ class SynapseNetsApp extends StatelessWidget {
         '/settings': (context) => const SettingsPage(),
         '/profileinfo': (context) => const Profileinfo(),
         '/serverconnect': (context) => const Serverconnectpage(),
-        '/chatsettings': (context) => const ChatPreferencesPage()
+        '/chatsettings': (context) => const ChatPreferencesPage(),
+        '/languagesettings': (context) => const ChatLanguagesPage()
       },
     );
   }
