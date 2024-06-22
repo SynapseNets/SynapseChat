@@ -105,12 +105,17 @@ def join_group(user_id):
     if not re.match(r'^[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}$', invite_code):
         return jsonify({'message': 'Invalid invite code format'}), 403
     
-    group = Group.query.filter_by(invite_code=invite_code).first()
+    group: Group = Group.query.filter_by(invite_code=invite_code).first()
     if not group:
         return jsonify({'message': 'Group not found'}), 404
     
     group_id = group.id
-    user_group = UserGroup(user_id=user_id, group_id=group_id, last_time=datetime.now())
+    user_group = UserGroup(
+        user_id=user_id, 
+        group_id=group_id, 
+        group_name=group.name, 
+        last_time=datetime.now()
+    )
     
     db.session.add(user_group)
     db.session.commit()
@@ -140,6 +145,71 @@ def leave_group(user_id):
     
     return jsonify({'message': 'Left group'}), 200
 
+@app.route('/api/get_groups', methods=['POST'])
+@token_required
+def get_groups(user_id):
+    groups: list[UserGroup] = UserGroup.query.filter_by(user_id=user_id).all()
+    return jsonify([
+        {
+            'id'    : group.group_id,
+            'name'  : group.group_name
+        }
+        for group in groups
+    ]), 200
+
+@app.route('/api/send_message', methods=['POST'])
+@token_required
+def send_message(user_id):
+    data = request.get_json()
+    if not isinstance(data, dict):
+        return jsonify({'message': 'Invalid JSON'}), 400
+    
+    group_id = data.get('group_id')
+    message = data.get('message')
+    username = User.query.filter_by(id=user_id).first().username
+    
+    if not group_id or not message:
+        return jsonify({'message': 'Missing group id or message'}), 400
+    if not isinstance(group_id, int) or not isinstance(message, str):
+        return jsonify({'message': 'Invalid group id or message'}), 400
+    
+    user_group = UserGroup.query.filter_by(user_id=user_id, group_id=group_id).first()
+    if not user_group:
+        return jsonify({'message': 'User not in group'}), 404
+    
+    message = Messages(user_id=user_id, group_id=group_id, username=username, message=message, time=datetime.now())
+    db.session.add(message)
+    db.session.commit()
+    
+    return jsonify({'message': 'Message sent'}), 200
+
+@app.route('/api/get_messages', methods=['POST'])
+@token_required
+def get_messages(user_id):
+    data = request.get_json()
+    if not isinstance(data, dict):
+        return jsonify({'message': 'Invalid JSON'}), 400
+    
+    group_id = data.get('group_id')
+    if not group_id:
+        return jsonify({'message': 'Missing group id'}), 400
+    if not isinstance(group_id, int):
+        return jsonify({'message': 'Invalid group id'}), 400
+    
+    user_group = UserGroup.query.filter_by(user_id=user_id, group_id=group_id).first()
+    if not user_group:
+        return jsonify({'message': 'User not in group'}), 404
+    
+    messages: list[Messages] = Messages.query.filter_by(group_id=group_id).all()
+    return jsonify([
+        {
+            'username'  : message.username,
+            'message'   : message.message,
+            'time'      : message.time
+        } 
+        for message in messages
+    ]), 200
+    
 if __name__ == '__main__':
     db.init_app(app)
     with app.app_context():

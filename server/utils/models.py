@@ -33,6 +33,7 @@ class Messages(db.Model):
     id          = Column(Integer, nullable=False, unique=True, autoincrement=True, primary_key=True)
     user_id     = Column(Integer, nullable=False)
     group_id    = Column(Integer, nullable=False)
+    username    = Column(String(20), nullable=False)
     message     = Column(String(300), nullable=False)
     time        = Column(DateTime, nullable=False)
     # TODO: add status of message
@@ -43,6 +44,7 @@ class Messages(db.Model):
 class UserGroup(db.Model):
     user_id     = Column(Integer, nullable=False, primary_key=True)
     group_id    = Column(Integer, nullable=False, primary_key=True)
+    group_name  = Column(String(20), nullable=False)
     last_time   = Column(DateTime, nullable=False)
     
     def __repr__(self) -> str:
