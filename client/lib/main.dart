@@ -1,6 +1,10 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:client/homepage.dart';
 import 'package:client/serverconnectpage.dart';
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 import 'loginpage.dart';
 import 'registrationpage.dart';
 import 'chat.dart';
@@ -9,6 +13,13 @@ import 'settings/profileinfo.dart';
 import 'settings/chat_preferences.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  windowManager.ensureInitialized();
+
+  if(!(Platform.isAndroid || Platform.isIOS)) {
+    WindowManager.instance.setMinimumSize(const Size(450, 800));
+  }
+
   runApp(const SynapseNetsApp());
 }
 
