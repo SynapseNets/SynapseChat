@@ -10,7 +10,6 @@ class SynapseNetsAppHomepage extends StatefulWidget {
 }
 
 class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,21 +61,39 @@ class LanguageDropDown extends StatefulWidget {
 }
 
 class _LanguageDropDownState extends State<LanguageDropDown> {
-  String dropDownValue = languages.first;
+  String? dropDownValue;
+  final List<String> _options = ['English', 'Italiano', 'Español'];
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<String>(
-      initialSelection: languages.first,
-      onSelected: (String? value) {
-        setState(() {
-          dropDownValue = value!;
-        });
-      },
-      dropdownMenuEntries:
-          languages.map<DropdownMenuEntry<String>>((String value) {
-        return DropdownMenuEntry<String>(value: value, label: value);
-      }).toList(),
+    return Center(
+      child: SizedBox(
+        width: 300,
+        child: DropdownButtonFormField<String>(
+          value: dropDownValue,
+          hint: Text('Select a language'),
+          icon: Icon(Icons.arrow_drop_down),
+          iconSize: 24,
+          elevation: 16,
+          decoration: InputDecoration(
+            labelText: 'Options',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+          onChanged: (String? newValue) {
+            setState(() {
+              dropDownValue = newValue;
+            });
+          },
+          items: _options.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+      ),
     );
   }
 }
