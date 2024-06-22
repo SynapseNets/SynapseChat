@@ -4,6 +4,7 @@ from datetime import datetime
 from base64 import b32encode
 from utils.db import get_db_path
 from utils.models import *
+from utils.decorators import token_required
 import ssl, pyotp, os
 import uuid, re, asyncio
 
@@ -33,7 +34,7 @@ async def login():
         return jsonify({'message': 'User not found'}), 404
 
     await asyncio.sleep(0.5) # TODO: remove this if tool anti-DDoS is enabled
-    if pyotp.TOTP(user.otp_secret).verify(otp):
+    if pyotp.TOTP(user.otp_secret, name=user.username, issuer=os.getenv('ISSUER')).verify(otp):
         return jsonify({'auth': generate_password_hash(os.urandom(20).hex())}), 200 # token of user
     else:
         return jsonify({'message': 'Invalid OTP'}), 403
@@ -62,7 +63,8 @@ def register():
     return {"auth": pyotp.TOTP(otp_secret).provisioning_uri(name=username, issuer_name=os.getenv('ISSUER'))}, 201
 
 @app.route('/api/create_group', methods=['POST'])
-def create_group():
+@token_required
+def create_group(user_id):
     data = request.get_json()
     if not isinstance(data, dict):
         return jsonify({'message': 'Invalid JSON'}), 400
@@ -78,7 +80,6 @@ def create_group():
     # assert that the invite code is unique
     invite_code = str(uuid.uuid4())
 
-    user_id = 1 # TODO : get user id from token
     group = Group(name=name, invite_code=invite_code)
     user_group = UserGroup(user_id=user_id, group_id=group.id, last_time=datetime.now())
     
@@ -89,7 +90,8 @@ def create_group():
     return jsonify({'message': 'Group created', 'invite_code': invite_code, 'id': group.id}), 201
 
 @app.route('/api/join_group', methods=['POST'])
-def join_group():
+@token_required
+def join_group(user_id):
     data = request.get_json()
     if not isinstance(data, dict):
         return jsonify({'message': 'Invalid JSON'}), 400
@@ -108,7 +110,6 @@ def join_group():
         return jsonify({'message': 'Group not found'}), 404
     
     group_id = group.id
-    user_id = 1 # TODO : get user id from token
     user_group = UserGroup(user_id=user_id, group_id=group_id, last_time=datetime.now())
     
     db.session.add(user_group)
@@ -117,13 +118,13 @@ def join_group():
     return jsonify({'message': 'Joined group', 'id': group_id}), 200
 
 @app.route('/api/leave_group', methods=['POST'])
-def leave_group():
+@token_required
+def leave_group(user_id):
     data = request.get_json()
     if not isinstance(data, dict):
         return jsonify({'message': 'Invalid JSON'}), 400
     
-    group_id = data.get('group_id')    
-    user_id = 1 # TODO : get user id from token
+    group_id = data.get('group_id')
     
     if not group_id:
         return jsonify({'message': 'Missing group id'}), 400

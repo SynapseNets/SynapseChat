@@ -15,7 +15,7 @@ class User(db.Model):
 class Session(db.Model):
     id          = Column(Integer, nullable=False, unique=True, autoincrement=True, primary_key=True)
     user_id     = Column(Integer, nullable=False)
-    token       = Column(String(36), nullable=False, unique=True)
+    token       = Column(String(162), nullable=False, unique=True) # safe hash of random token
     expiration  = Column(Integer, nullable=False)
     
     def __repr__(self) -> str:
