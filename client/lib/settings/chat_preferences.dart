@@ -11,6 +11,7 @@ class ChatPreferencesPage extends StatefulWidget {
 class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
   double sizeChar = 15;
   Color backgroundColor = const Color.fromARGB(255, 134, 120, 235);
+  Color textColor = Colors.white;
   bool isDarkTheme = false;
 
   void toggleTheme(bool value) {
@@ -118,7 +119,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                           ),
                           child: Text(
                             'Hi there!',
-                            style: TextStyle(fontSize: sizeChar),
+                            style: TextStyle(fontSize: sizeChar, color: textColor),
                           ),
                         ),
                       ),
@@ -133,7 +134,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                           ),
                           child: Text(
                             'Hello! How are you?',
-                            style: TextStyle(fontSize: sizeChar),
+                            style: TextStyle(fontSize: sizeChar, color: textColor),
                           ),
                         ),
                       ),
@@ -148,7 +149,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                           ),
                           child: Text(
                             'I\'m good, thanks! And you?',
-                            style: TextStyle(fontSize: sizeChar),
+                            style: TextStyle(fontSize: sizeChar, color: textColor),
                           ),
                         ),
                       ),
@@ -189,6 +190,45 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                       const SizedBox(width: 10),
                       const Text(
                         'Change Background Color',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                InkWell(
+                  onTap: () {
+                    // Open a dialog to change the text color
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Choose Text Color'),
+                          content: SingleChildScrollView(
+                            child: BlockPicker(
+                              pickerColor: textColor,
+                              onColorChanged: (Color color) {
+                                setState(() {
+                                  textColor = color;
+                                });
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.text_fields,
+                        size: 40,
+                        color: textColor,
+                      ),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'Change Text Color',
                         style: TextStyle(fontSize: 18),
                       ),
                     ],
