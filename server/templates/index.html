@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Server panel{% endblock %}
+
+{% block content %}
+<div id="carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='images/server1.jpeg') }}" class="d-block w-100" alt="yep this is ai generated">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/server2.jpeg') }}" class="d-block w-100" alt="yep this is also ai generated">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/server3.jpeg') }}" class="d-block w-100" alt="yeah maybe this time is not (it is)">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/server4.jpeg') }}" class="d-block w-100" alt="maybe it is maybe not">
+        </div>
+    </div>
+</div>
+{% endblock %}
