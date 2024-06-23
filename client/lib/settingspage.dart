@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 
 class SettingsPage extends StatefulWidget {
@@ -24,7 +23,8 @@ class _SettingsPageState extends State<SettingsPage> {
           children: [
             _buildProfileInfoButton(),
             _buildCustomizationButton(),
-            _buildCustomizationLanguages()
+            _buildCustomizationLanguages(),
+            _buildCreditsPage()
           ],
         ),
       ),
@@ -121,6 +121,33 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(width: 12),
             Text(
               'Languages',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  ///////////////////change languages button///////////////////
+
+  Widget _buildCreditsPage() {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '/languagesettings');
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+        child: const Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            CircleAvatar(
+              radius: 23,
+              backgroundImage: AssetImage('images/language.png')
+            ),
+            SizedBox(width: 12),
+            Text(
+              'Credits',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
