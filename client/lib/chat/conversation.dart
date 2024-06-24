@@ -11,4 +11,19 @@ class Conversation {
   final String? receiver;
   final String? lastMessage;
   final String? lastMessageTime;
+
+  @override
+  Map<String, String> toMap() {
+    return {
+      'receiver': receiver!,
+      'lastMessage': lastMessage!,
+      'lastMessageTime': lastMessageTime!,
+    };
+  }
+
+  Map<String, String> prepareDb() {
+    return {
+      'name': receiver!,
+    };
+  }
 }
