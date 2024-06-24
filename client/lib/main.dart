@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'dart:async';
 
+import 'package:client/settings/credits/developerscredits.dart';
+import 'package:client/settings/credits/iconscredits.dart';
+import 'package:client/settings/creditspage.dart';
 import 'package:client/utils/db.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:client/chat/message.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'package:client/homepage.dart';
 import 'package:client/serverconnectpage.dart';
@@ -43,24 +45,26 @@ class SynapseNetsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigoAccent,
-          brightness: Brightness.dark,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.indigoAccent,
+            brightness: Brightness.dark,
+          ),
         ),
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const SynapseNetsAppHomepage(),
-        '/login': (context) => const LoginPage(),
-        '/registration': (context) => const Registrationpage(),
-        '/chat': (context) => const Chat(),
-        '/settings': (context) => const SettingsPage(),
-        '/profileinfo': (context) => const Profileinfo(),
-        '/serverconnect': (context) => const Serverconnectpage(),
-        '/chatsettings': (context) => const ChatPreferencesPage(),
-        '/languagesettings': (context) => const ChatLanguagesPage()
-      },
-    );
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const SynapseNetsAppHomepage(),
+          '/login': (context) => const LoginPage(),
+          '/registration': (context) => const Registrationpage(),
+          '/chat': (context) => const Chat(),
+          '/settings': (context) => const SettingsPage(),
+          '/profileinfo': (context) => const Profileinfo(),
+          '/serverconnect': (context) => const Serverconnectpage(),
+          '/chatsettings': (context) => const ChatPreferencesPage(),
+          '/languagesettings': (context) => const ChatLanguagesPage(),
+          '/credits': (context) => const Creditspage(),
+          '/developerscredits': (context) => const Developerscredits(),
+          '/iconscredits': (context) => const Iconscredits(),
+        });
   }
 }
