@@ -71,8 +71,8 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
         width: 300,
         child: DropdownButtonFormField<String>(
           value: dropDownValue,
-          hint: Text('English'),
-          icon: Icon(Icons.arrow_drop_down),
+          hint: const Text('English'),
+          icon: const Icon(Icons.arrow_drop_down),
           iconSize: 24,
           elevation: 16,
           decoration: InputDecoration(
