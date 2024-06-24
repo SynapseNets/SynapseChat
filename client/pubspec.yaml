@@ -71,6 +71,7 @@ flutter:
     - images/chat_settings.png    #chat preferences image
     - images/language.png
     - images/background.png
+    - images/info.png
     # - images/a_dot_burr.jpeg
     #- images/a_dot_ham.jpeg
 

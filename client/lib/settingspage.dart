@@ -129,7 +129,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  ///////////////////change languages button///////////////////
+  ///////////////////credits button///////////////////
 
   Widget _buildCreditsPage() {
     return InkWell(
@@ -143,7 +143,7 @@ class _SettingsPageState extends State<SettingsPage> {
           children: <Widget>[
             CircleAvatar(
               radius: 23,
-              backgroundImage: AssetImage('images/language.png')
+              backgroundImage: AssetImage('images/info.png')
             ),
             SizedBox(width: 12),
             Text(
