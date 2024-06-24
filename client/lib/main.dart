@@ -1,7 +1,11 @@
 import 'dart:io';
 import 'dart:async';
 
+import 'package:client/utils/db.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:client/chat/message.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:client/homepage.dart';
@@ -16,14 +20,19 @@ import 'settings/profileinfo.dart';
 import 'settings/chat_preferences.dart';
 import 'settings/languagespage.dart';
 
-
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if(!(Platform.isAndroid || Platform.isIOS)) {
-    windowManager.ensureInitialized();
-    WindowManager.instance.setMinimumSize(const Size(450, 800));
+  if (!(Platform.isAndroid || Platform.isIOS)) {
+    await windowManager.ensureInitialized();
+    await WindowManager.instance.setMinimumSize(const Size(450, 800));
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
   }
+
+  //await insertMessage(Message(text: 'Hello', time: DateTime(2016, 3, 2, 13, 15, 27, 11, 100), type: MessageType.text, sender: 'not me'));
+  //var result = await retrieveMessage('not me');
+  //print(result[0]);
 
   runApp(const SynapseNetsApp());
 }

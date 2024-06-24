@@ -39,6 +39,7 @@ dependencies:
   chat_bubbles: ^1.6.0
   window_manager: ^0.3.9
   sqflite: ^2.3.3+1
+  sqflite_common_ffi: ^2.3.3
 
 dev_dependencies:
   flutter_test:

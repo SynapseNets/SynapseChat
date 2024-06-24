@@ -4,36 +4,33 @@ import 'package:chat_bubbles/chat_bubbles.dart';
 import 'message.dart';
 
 List<Message> messages = [
-  Message(text: 'Hi', type: MessageType.text, sender: 'not me'),
-  Message(text: 'Hello', type: MessageType.text, sender: 'me'),
-  Message(text: 'How are you?', type: MessageType.text, sender: 'not me'),
-  Message(text: 'I am fine', type: MessageType.text, sender: 'me'),
-  Message(text: 'How about you?', type: MessageType.text, sender: 'me'),
-  Message(text: 'I am good too', type: MessageType.text, sender: 'not me'),
-  Message(text: 'What are you doing?', type: MessageType.text, sender: 'me'),
-  Message(text: 'Nothing much', type: MessageType.text, sender: 'not me'),
-  Message(text: 'Just chilling', type: MessageType.text, sender: 'not me'),
-  Message(text: 'Cool', type: MessageType.text, sender: 'me'),
-  Message(text: 'What about you?', type: MessageType.text, sender: 'me'),
-  Message(text: 'Same here', type: MessageType.text, sender: 'not me'),
-  Message(text: 'I am bored', type: MessageType.text, sender: 'me'),
-  Message(text: 'Let\'s go out', type: MessageType.text, sender: 'me'),
-  Message(text: 'Where?', type: MessageType.text, sender: 'not me'),
-  Message(text: 'To the park', type: MessageType.text, sender: 'me'),
-  Message(text: 'Okay', type: MessageType.text, sender: 'not me'),
-  Message(
-      text: 'I will be there in 10 minutes',
-      type: MessageType.text,
-      sender: 'me'),
-  Message(text: '', type: MessageType.audio, sender: 'me'),
-  Message(text: 'Okay', type: MessageType.text, sender: 'not me'),
-  Message(text: 'See you soon', type: MessageType.text, sender: 'me'),
-  Message(text: 'Bye', type: MessageType.text, sender: 'not me'),
-  Message(text: 'Bye', type: MessageType.text, sender: 'me'),
-  Message(text: 'Check this out', type: MessageType.image, sender: 'me'),
-  Message(text: 'Bye', type: MessageType.text, sender: 'not me'),
-  Message(text: 'Bye', type: MessageType.text, sender: 'me'),
-  Message(text: 'Bye', type: MessageType.text, sender: 'not me'),
+  Message(text: 'Hi', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'Hello', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'How are you?', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'I am fine', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'How about you?', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'I am good too', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'What are you doing?', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'Nothing much', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'Just chilling', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'Cool', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'What about you?', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'Same here', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'I am bored', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'Let\'s go out', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'Where?', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'To the park', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'Okay', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'I will be there in 10 minutes', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: '', time: DateTime.now(), type: MessageType.audio, sender: 'me'),
+  Message(text: 'Okay', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'See you soon', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'Bye', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'Bye', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'Check this out', time: DateTime.now(), type: MessageType.image, sender: 'me'),
+  Message(text: 'Bye', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
+  Message(text: 'Bye', time: DateTime.now(), type: MessageType.text, sender: 'me'),
+  Message(text: 'Bye', time: DateTime.now(), type: MessageType.text, sender: 'not me'),
 ];
 
 class Content extends StatefulWidget {
@@ -101,7 +98,7 @@ class _ContentState extends State<Content> {
             case MessageType.audio:
               return BubbleNormalAudio(
                 constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.4,
+                  maxWidth: MediaQuery.of(context).size.width * (Theme.of(context).platform == TargetPlatform.android || Theme.of(context).platform == TargetPlatform.iOS ? 0.7 : 0.4),
                   maxHeight: 65,
                 ),
                 duration: duration.inSeconds
@@ -168,6 +165,7 @@ class _ContentState extends State<Content> {
 
                               messages.add(Message(
                                   text: _message.text,
+                                  time: DateTime.now(), 
                                   type: MessageType.text,
                                   sender: 'me'));
                               _message.clear();
