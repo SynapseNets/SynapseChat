@@ -3,20 +3,21 @@
 {% block title %}Server panel{% endblock %}
 
 {% block content %}
-<div id="carousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="{{ url_for('static', filename='images/server1.jpeg') }}" class="d-block w-100" alt="yep this is ai generated">
-        </div>
-        <div class="carousel-item">
-            <img src="{{ url_for('static', filename='images/server2.jpeg') }}" class="d-block w-100" alt="yep this is also ai generated">
-        </div>
-        <div class="carousel-item">
-            <img src="{{ url_for('static', filename='images/server3.jpeg') }}" class="d-block w-100" alt="yeah maybe this time is not (it is)">
-        </div>
-        <div class="carousel-item">
-            <img src="{{ url_for('static', filename='images/server4.jpeg') }}" class="d-block w-100" alt="maybe it is maybe not">
-        </div>
+<div class="fixed-top">
+    <img id="server1" class="opacity-25 w-100 img-responsive active" src="{{ url_for('static', filename='images/server1.jpeg') }}"></img>
+    <!-- <img id="server2" class="opacity-0 w-100 img-responsive" src="{{ url_for('static', filename='images/server2.jpeg') }}" hidden></img> -->
+    <!-- <img id="server3" class="opacity-0 w-100 img-responsive" src="{{ url_for('static', filename='images/server3.jpeg') }}" hidden></img> -->
+    <!-- <img id="server4" class="opacity-0 w-100 img-responsive" src="{{ url_for('static', filename='images/server4.jpeg') }}" hidden></img> -->
+</div>
+<div class="d-flex justify-content-center align-items-center vh-100 fixed-top">
+    <div class="d-flex flex-column">
+        <h1 class="display-1 p-4"><strong>SERVER PANEL</strong></h1>
+        <h1 href="{{ url_for('main.login') }}" class="btn btn-outline-light display-6 p-8">Login</h1>
+        <h1 href="https://github.com/SynapseNets/SynapseChat" class="btn btn-outline-light d-flex align-items-center display-6">
+            Github repository
+            <img class="" src="{{ url_for('static', filename='images/github.svg')}}"></img>
+        </h1>
     </div>
 </div>
+<!-- <script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
 {% endblock %}
