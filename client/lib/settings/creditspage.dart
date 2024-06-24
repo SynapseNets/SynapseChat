@@ -11,6 +11,9 @@ class _CreditspageState extends State<Creditspage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Credits'),
+      ),
       body: Center(
         child: Column(
           children: [
