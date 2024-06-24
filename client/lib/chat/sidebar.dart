@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'conversation.dart';
+import 'chatbutton.dart';
 
 final List<Conversation> conversations = [
   Conversation(
@@ -48,11 +49,7 @@ class _SidebarState extends State<Sidebar> {
       itemCount: conversations.length,
       itemBuilder: (context, index) {
         Conversation conversation = conversations[index];
-        return ListTile(
-          title: Text(conversation.receiver!),
-          subtitle: Text(conversation.lastMessage!),
-          trailing: Text(conversation.lastMessageTime!),
-        );
+        return ChatButton(title: conversation.receiver!, lastMessage: conversation.lastMessage!, time: conversation.lastMessageTime!, onPressed: () {} ); //TODO add logic
       },
     );
   }
