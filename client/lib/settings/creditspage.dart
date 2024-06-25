@@ -21,7 +21,7 @@ class _CreditspageState extends State<Creditspage> {
             const Text(
               "Credits",
               style: TextStyle(
-                  color: const Color(0xff3b28cc),
+                  color: Color(0xff3b28cc),
                   fontSize: 60,
                   fontWeight: FontWeight.bold),
             ),
@@ -39,7 +39,7 @@ class _CreditspageState extends State<Creditspage> {
                     width: 2,
                   ),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Developers credits',
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
@@ -61,7 +61,7 @@ class _CreditspageState extends State<Creditspage> {
                     width: 2,
                   ),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Icons credits',
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
