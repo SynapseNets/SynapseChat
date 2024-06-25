@@ -1,8 +1,10 @@
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, DateTime
 
 db = SQLAlchemy()
+
+####################### APIs MODELS #######################
 
 class User(db.Model):
     id          = Column(Integer, nullable=False, unique=True, autoincrement=True, primary_key=True)
@@ -49,3 +51,17 @@ class UserGroup(db.Model):
     
     def __repr__(self) -> str:
         return f"<UserGroup user {self.user_id}, group {self.group_id}, last_time {self.last_time}>"
+
+####################### PANEL MODELS #######################
+
+class UserPanel(db.Model, UserMixin):
+    id          = Column(Integer, nullable=False, unique=True, autoincrement=True, primary_key=True)
+    username    = Column(String(20), nullable=False, unique=True)
+    password    = Column(String(200), nullable=False)
+    
+    def __repr__(self) -> str:
+        return f"<UserPanel {self.username}, id {self.id}>"
+
+    def get_id(self):
+        print(str(self.id), flush=True)
+        return str(self.id)

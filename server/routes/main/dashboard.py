@@ -1,8 +1,4 @@
-from flask import render_template, redirect
-from flask_login import current_user
+from flask import render_template
 
-def dashboard():
-    if not current_user.is_authenticated:
-        return redirect('main.login')
-    
+def dashboard():   
     return render_template('dashboard.html')

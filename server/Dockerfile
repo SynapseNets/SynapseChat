@@ -9,6 +9,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /server
 WORKDIR /server
 RUN /bin/sh init.sh
-RUN mkdir logs
+# RUN mkdir logs
 
 CMD ["python", "main.py"]
