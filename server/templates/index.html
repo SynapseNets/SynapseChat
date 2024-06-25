@@ -3,20 +3,22 @@
 {% block title %}Server panel{% endblock %}
 
 {% block content %}
-<div class="fixed-top">
-    <img id="server1" class="opacity-25 w-100 img-responsive active" src="{{ url_for('static', filename='images/server1.jpeg') }}"></img>
-    <!-- <img id="server2" class="opacity-0 w-100 img-responsive" src="{{ url_for('static', filename='images/server2.jpeg') }}" hidden></img> -->
-    <!-- <img id="server3" class="opacity-0 w-100 img-responsive" src="{{ url_for('static', filename='images/server3.jpeg') }}" hidden></img> -->
-    <!-- <img id="server4" class="opacity-0 w-100 img-responsive" src="{{ url_for('static', filename='images/server4.jpeg') }}" hidden></img> -->
-</div>
-<div class="d-flex justify-content-center align-items-center vh-100 fixed-top">
+<div class="d-flex justify-content-center align-items-center vh-100">
     <div class="d-flex flex-column">
-        <h1 class="display-1 p-4"><strong>SERVER PANEL</strong></h1>
-        <h1 href="{{ url_for('main.login') }}" class="btn btn-outline-light display-6 p-8">Login</h1>
-        <h1 href="https://github.com/SynapseNets/SynapseChat" class="btn btn-outline-light d-flex align-items-center display-6">
-            Github repository
-            <img class="" src="{{ url_for('static', filename='images/github.svg')}}"></img>
+        <h1 class="display-1 p-4">
+            <strong>SERVER PANEL</strong>
         </h1>
+        <a href="{{ url_for('main.login') }}" class="btn btn-outline-light d-flex justify-content-center display-6 my-3">
+            <h3 class="px-4 py-3">Login</h3>
+        </a>
+        <div class="d-flex justify-content-center align-items-center">
+            <a href="https://github.com/SynapseNets/SynapseChat" class="btn btn-outline-light d-flex justify-content-center display-6">
+                <h3 class="px-4 py-3">Github repository</h3>
+            </a>
+            <div class="container-fluid w-auto">
+                <img src="{{ url_for('static', filename='images/github.svg')}}"></img>
+            </div>
+        </div>
     </div>
 </div>
 <!-- <script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
