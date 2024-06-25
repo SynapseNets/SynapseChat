@@ -23,7 +23,11 @@ class _ContentState extends State<Content> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      ListView.builder(
+      FutureBuilder<List<Message>>(future: retrieveMessage('me'), builder: (context, snapshot){
+        if (snapshot.hasData) {
+              messages = snapshot.data!;
+              
+              return ListView.builder(
         controller: _scrollController,
         padding: const EdgeInsets.only(top: 8, bottom: 8),
         physics: const BouncingScrollPhysics(),
@@ -109,7 +113,13 @@ class _ContentState extends State<Content> {
               );
           }
         },
-      ),
+      );
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else {
+              return const Text("Error");
+            }
+      }),
       Container(
         // Bottom bar
         alignment: Alignment.bottomCenter,
@@ -139,11 +149,12 @@ class _ContentState extends State<Content> {
                             return;
                           }
 
-                          messages.add(Message(
-                              text: _message.text,
-                              time: DateTime.now(),
-                              type: MessageType.text,
-                              sender: 'me'));
+                          insertMessage(Message(
+                            text: _message.text,
+                            time: DateTime.now(),
+                            type: MessageType.text,
+                            sender: 'me',
+                          ));
                           _message.clear();
                           _scrollController.animateTo(
                               _scrollController.position.maxScrollExtent,
