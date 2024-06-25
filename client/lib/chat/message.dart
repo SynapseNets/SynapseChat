@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:get/get.dart';
 import 'package:path/path.dart';
 
 class Message {
@@ -7,6 +8,7 @@ class Message {
   final MessageType type;
   MessageStatus status = MessageStatus.sent;
   final String sender;
+  final String name;
   String? audio;
   Image? image;
 
@@ -15,6 +17,7 @@ class Message {
     required this.time,
     required this.type,
     required this.sender,
+    required this.name,
     this.audio,
     this.image,
   });
@@ -26,6 +29,7 @@ class Message {
       'time': time.toIso8601String(),
       'status': status.index,
       'sender': sender,
+      'name': name,
       'audio': audio?.toString(),
       'image': image?.toString(),
     };

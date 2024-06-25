@@ -2,6 +2,8 @@ import 'package:client/utils/db.dart';
 import 'package:flutter/material.dart';
 import 'chat/sidebar.dart';
 import 'chat/content.dart';
+import 'package:client/chat/chatcontroller.dart';
+import 'package:get/get.dart';
 
 class Chat extends StatefulWidget {
   const Chat({super.key});
@@ -13,6 +15,7 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
   bool _chatFocus = false; //mobile toggle option
   double? _lastWidth;
+  final ChatController currentChatController = Get.put(ChatController());
 
   @override
   Widget build(BuildContext context) {
@@ -88,13 +91,13 @@ class _ChatState extends State<Chat> {
             Builder(
               builder: (context) {
                 return !_chatFocus || MediaQuery.of(context).size.width > 600
-                    ? const Expanded(child: Sidebar())
+                    ? Expanded(child: Sidebar(currentChatController: currentChatController,))
                     : const SizedBox(width: 0);
               },
             ),
             Builder(builder: (context) {
               return _chatFocus || MediaQuery.of(context).size.width > 600
-                  ? const Expanded(child: Content())
+                  ? Expanded(child: Content(currentChatController: currentChatController,))
                   : const SizedBox(width: 0);
             }),
           ],

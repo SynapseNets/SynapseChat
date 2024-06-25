@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:async';
 
+import 'package:client/chat/conversation.dart';
 import 'package:client/settings/credits/developerscredits.dart';
 import 'package:client/settings/credits/iconscredits.dart';
 import 'package:client/settings/creditspage.dart';

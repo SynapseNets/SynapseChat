@@ -12,9 +12,9 @@ Future<Database> getDb() async {
     join(await getDatabasesPath(), 'database.db'),
     onCreate: (db, version) {
       db.execute(
-          'CREATE TABLE IF NOT EXISTS messages(id AUTO_INCREMENT INTEGER PRIMARY KEY, text TEXT, type INTEGER, status INTEGER, sender TEXT, time TEXT, audio TEXT, image TEXT)');
+          'CREATE TABLE IF NOT EXISTS messages(id AUTO_INCREMENT INTEGER PRIMARY KEY, text TEXT, type INTEGER, status INTEGER, sender TEXT, name TEXT, time TEXT, audio TEXT, image TEXT)');
       db.execute(
-          'CREATE TABLE IF NOT EXISTS conversations(id AUTO_INCREMENT INTEGER PRIMARY KEY, name TEXT)' //name = sender
+          'CREATE TABLE IF NOT EXISTS conversations(id AUTO_INCREMENT INTEGER PRIMARY KEY, name TEXT)' //name = name
           );
     },
     version: 1,
@@ -33,13 +33,13 @@ Future<void> insertMessage(Message message) async {
   );
 }
 
-Future<List<Message>> retrieveMessage(String sender) async {
+Future<List<Message>> retrieveMessage(String name) async {
   final db = await getDb();
 
   final List<Map<String, Object?>> messages = await db.query(
     'messages',
-    where: 'sender = ?',
-    whereArgs: [sender],
+    where: 'name = ?',
+    whereArgs: [name],
   );
 
   List<Message> result = [];
@@ -50,6 +50,7 @@ Future<List<Message>> retrieveMessage(String sender) async {
       time: DateTime.parse(message['time'] as String),
       type: MessageType.values[message['type'] as int],
       sender: message['sender'] as String,
+      name: message['name'] as String,
       audio: message['audio'] as String?,
     ));
   }
@@ -74,19 +75,28 @@ Future<void> deleteMessage(final DateTime time, final String sender) async {
 Future<List<Conversation>> getConversations() async {
   final db = await getDb();
 
-  List<Conversation> result = List.empty();
+  List<Conversation> result = [];
 
-  for (var conversation in await db.query('conversations')) {
-    DateTime time =
-        (await retrieveMessage(conversation['name'] as String)).last.time;
+  for (var conversation in await db.rawQuery('SELECT name FROM conversations')) {
+    print(conversation);
+
+    Message lastMessage;
+    try{
+          lastMessage = (await retrieveMessage(conversation['name'] as String)).last;
+    } catch (e) {
+      lastMessage = Message(text: 'This is the start of the conversation', time: DateTime.now(), type: MessageType.text, sender: 'me', name: conversation['name'] as String);
+    }
+
+    DateTime time = lastMessage.time;
 
     result.add(Conversation(
       receiver: conversation['name'] as String,
-      lastMessage:
-          (await retrieveMessage(conversation['name'] as String)).last.text,
+      lastMessage: lastMessage.text,
       lastMessageTime: '${time.hour}:${time.minute} ',
     ));
   }
+
+  print(result);
 
   return result;
 }
