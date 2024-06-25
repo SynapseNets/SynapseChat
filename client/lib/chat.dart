@@ -1,3 +1,4 @@
+import 'package:client/utils/db.dart';
 import 'package:flutter/material.dart';
 import 'chat/sidebar.dart';
 import 'chat/content.dart';
