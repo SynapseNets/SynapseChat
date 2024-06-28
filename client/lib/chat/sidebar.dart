@@ -4,15 +4,18 @@ import 'chatbutton.dart';
 import 'package:client/chat/chatcontroller.dart';
 import 'package:client/utils/db.dart';
 import 'package:client/chat/messagenotifier.dart';
+import 'package:client/chat/chatfocus.dart';
 
 class Sidebar extends StatefulWidget {
   final ChatController currentChatController;
   final MessageNotifier messageNotifier;
+  final ChatFocus chatFocus;
 
   const Sidebar(
       {super.key,
       required this.currentChatController,
-      required this.messageNotifier});
+      required this.messageNotifier,
+      required this.chatFocus});
 
   @override
   State<Sidebar> createState() => _SidebarState();
@@ -41,6 +44,7 @@ class _SidebarState extends State<Sidebar> {
                           lastMessage: conversation.lastMessage,
                           time: conversation.lastMessageTime.toString().substring(0, 19),
                           onPressed: () {
+                            widget.chatFocus.toggleChatFocus();
                             widget.currentChatController
                                 .change(conversation.receiver);
                           });

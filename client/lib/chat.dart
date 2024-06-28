@@ -5,6 +5,7 @@ import 'chat/content.dart';
 import 'package:client/chat/chatcontroller.dart';
 import 'package:get/get.dart';
 import 'package:client/chat/messagenotifier.dart';
+import 'package:client/chat/chatfocus.dart';
 
 class Chat extends StatefulWidget {
   const Chat({super.key});
@@ -14,7 +15,7 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
-  bool _chatFocus = false; //mobile toggle option
+  final ChatFocus _chatFocus = ChatFocus(); //mobile toggle option
   double? _lastWidth;
   final ChatController currentChatController = Get.put(ChatController());
   final MessageNotifier messageNotifier = MessageNotifier();
@@ -27,84 +28,104 @@ class _ChatState extends State<Chat> {
       appBar: AppBar(
         // App bar title
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            ListenableBuilder(
+                listenable: _chatFocus,
+                builder: (context, child){
+              return _chatFocus.chatFocus &&
+                      MediaQuery.of(context).size.width <= 600
+                  ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _chatFocus.toggleChatFocus();
+                        });
+                      },
+                      icon: const Icon(Icons.menu),
+                    )
+                  : const SizedBox(
+                      width: 0,
+                    );
+            }),
             const Text(
               'SynapseChat',
-              style: TextStyle(
-                fontSize: 30,
-                color: Color(0xff3b28cc)
-              ),
-              ), // Text on the left
-            Row(
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.asset(
-                      'images/add_server.png',
-                      width: 33,
-                      height: 33,
-                      fit: BoxFit.cover,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/serverconnect');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        padding: EdgeInsets.zero,
-                        shape: const CircleBorder(),
-                      ),
-                      child: const SizedBox(width: 40, height: 40),
-                    ),
-                  ],
-                ),
-                IconButton(
-                  onPressed: () => setState(() {
-                    _chatFocus = !_chatFocus;
-                  }),
-                  icon: const Icon(Icons.chat),
-                ),
-                IconButton(
-                  onPressed: () => setState(() {
-                    Navigator.pushNamed(context, '/settings');
-                  }),
-                  icon: const Icon(Icons.settings),
-                ),
-              ],
-            ),
+              style: TextStyle(fontSize: 30, color: Color(0xff3b28cc)),
+            ), // Text on the left
           ],
         ),
+        actions: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'images/add_server.png',
+                width: 33,
+                height: 33,
+                fit: BoxFit.cover,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/serverconnect');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  padding: EdgeInsets.zero,
+                  shape: const CircleBorder(),
+                ),
+                child: const SizedBox(width: 40, height: 40),
+              ),
+            ],
+          ),
+          IconButton(
+            onPressed: () => setState(() {
+              Navigator.pushNamed(context, '/settings');
+            }),
+            icon: const Icon(Icons.settings),
+          ),
+        ],
         automaticallyImplyLeading: false,
       ),
       body: NotificationListener<SizeChangedLayoutNotification>(
-        onNotification: (notification) {
-          if (MediaQuery.of(context).size.width != _lastWidth) {
-            _lastWidth = MediaQuery.of(context).size.width;
-            setState(() {});
-          }
-          return true;
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Builder(
-              builder: (context) {
-                return !_chatFocus || MediaQuery.of(context).size.width > 600
-                    ? Expanded(child: Sidebar(currentChatController: currentChatController, messageNotifier: messageNotifier,))
-                    : const SizedBox(width: 0);
-              },
-            ),
-            Builder(builder: (context) {
-              return _chatFocus || MediaQuery.of(context).size.width > 600
-                  ? Expanded(child: Content(currentChatController: currentChatController, messageNotifier: messageNotifier,))
-                  : const SizedBox(width: 0);
-            }),
-          ],
-        ),
-      ),
+          onNotification: (notification) {
+            if (MediaQuery.of(context).size.width != _lastWidth) {
+              _lastWidth = MediaQuery.of(context).size.width;
+              setState(() {});
+            }
+            return true;
+          },
+          child: ListenableBuilder(
+              listenable: _chatFocus,
+              builder: (context, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Builder(
+                      builder: (context) {
+                        return !_chatFocus.chatFocus ||
+                                MediaQuery.of(context).size.width > 600
+                            ? Expanded(
+                                child: Sidebar(
+                                currentChatController: currentChatController,
+                                messageNotifier: messageNotifier,
+                                chatFocus: _chatFocus,
+                              ))
+                            : const SizedBox(width: 0);
+                      },
+                    ),
+                    Builder(builder: (context) {
+                      return _chatFocus.chatFocus ||
+                              MediaQuery.of(context).size.width > 600
+                          ? Expanded(
+                              child: Content(
+                              currentChatController: currentChatController,
+                              messageNotifier: messageNotifier,
+                            ))
+                          : const SizedBox(width: 0);
+                    }),
+                  ],
+                );
+              })),
     );
   }
 }

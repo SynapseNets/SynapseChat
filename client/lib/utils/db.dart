@@ -78,11 +78,10 @@ Future<List<Conversation>> getConversations() async {
   List<Conversation> result = [];
 
   for (var conversation in await db.rawQuery('SELECT name FROM conversations')) {
-    print(conversation);
 
     Message lastMessage;
     try{
-          lastMessage = (await retrieveMessage(conversation['name'] as String)).last;
+      lastMessage = (await retrieveMessage(conversation['name'] as String)).last;
     } catch (e) {
       lastMessage = Message(text: 'This is the start of the conversation', time: DateTime.now(), type: MessageType.text, sender: 'me', name: conversation['name'] as String);
     }
