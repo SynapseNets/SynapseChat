@@ -92,11 +92,14 @@ Future<List<Conversation>> getConversations() async {
     result.add(Conversation(
       receiver: conversation['name'] as String,
       lastMessage: lastMessage.text,
-      lastMessageTime: '${time.hour}:${time.minute} ',
+      lastMessageTime: time,
     ));
   }
 
   print(result);
+  result.sort((a, b) {
+    return b.lastMessageTime.compareTo(a.lastMessageTime);
+  });
 
   return result;
 }

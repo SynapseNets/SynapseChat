@@ -3,27 +3,26 @@
 class Conversation {
 
   Conversation({
-    this.receiver,
-    this.lastMessage,
-    this.lastMessageTime,
+    required this.receiver,
+    required this.lastMessage,
+    required this.lastMessageTime,
   });
 
-  final String? receiver;
-  final String? lastMessage;
-  final String? lastMessageTime;
+  final String receiver;
+  final String lastMessage;
+  final DateTime lastMessageTime;
 
-  @override
-  Map<String, String> toMap() {
+  Map<String, Object> toMap() {
     return {
-      'receiver': receiver!,
-      'lastMessage': lastMessage!,
-      'lastMessageTime': lastMessageTime!,
+      'receiver': receiver,
+      'lastMessage': lastMessage,
+      'lastMessageTime': lastMessageTime,
     };
   }
 
   Map<String, String> prepareDb() {
     return {
-      'name': receiver!,
+      'name': receiver,
     };
   }
 }

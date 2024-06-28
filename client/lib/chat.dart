@@ -4,6 +4,7 @@ import 'chat/sidebar.dart';
 import 'chat/content.dart';
 import 'package:client/chat/chatcontroller.dart';
 import 'package:get/get.dart';
+import 'package:client/chat/messagenotifier.dart';
 
 class Chat extends StatefulWidget {
   const Chat({super.key});
@@ -16,6 +17,7 @@ class _ChatState extends State<Chat> {
   bool _chatFocus = false; //mobile toggle option
   double? _lastWidth;
   final ChatController currentChatController = Get.put(ChatController());
+  final MessageNotifier messageNotifier = MessageNotifier();
 
   @override
   Widget build(BuildContext context) {
@@ -91,13 +93,13 @@ class _ChatState extends State<Chat> {
             Builder(
               builder: (context) {
                 return !_chatFocus || MediaQuery.of(context).size.width > 600
-                    ? Expanded(child: Sidebar(currentChatController: currentChatController,))
+                    ? Expanded(child: Sidebar(currentChatController: currentChatController, messageNotifier: messageNotifier,))
                     : const SizedBox(width: 0);
               },
             ),
             Builder(builder: (context) {
               return _chatFocus || MediaQuery.of(context).size.width > 600
-                  ? Expanded(child: Content(currentChatController: currentChatController,))
+                  ? Expanded(child: Content(currentChatController: currentChatController, messageNotifier: messageNotifier,))
                   : const SizedBox(width: 0);
             }),
           ],

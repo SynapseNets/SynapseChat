@@ -5,13 +5,16 @@ import 'package:get/get.dart';
 import 'message.dart';
 import 'package:client/utils/db.dart';
 import 'package:client/chat/chatcontroller.dart';
+import 'package:client/chat/messagenotifier.dart';
 
 class Content extends StatefulWidget {
   final ChatController currentChatController;
+  final MessageNotifier messageNotifier;
 
   const Content({
     super.key,
     required this.currentChatController,
+    required this.messageNotifier
   });
 
   @override
@@ -167,6 +170,9 @@ class _ContentState extends State<Content> {
                                   });
                               return;
                           }
+
+                          //call for sidebar rebuild
+                          widget.messageNotifier.notifyMessage();
 
                           await insertMessage(Message(
                               text: _message.text,
