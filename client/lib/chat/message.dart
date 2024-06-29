@@ -51,6 +51,7 @@ enum MessageType {
   video,
   audio,
   file,
+  date,
 }
 
 enum MessageStatus {

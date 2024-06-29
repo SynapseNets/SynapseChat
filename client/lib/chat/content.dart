@@ -130,6 +130,8 @@ class _ContentState extends State<Content> {
                           delivered: message.status == MessageStatus.delivered,
                           seen: message.status == MessageStatus.seen,
                         );
+                      case MessageType.date:
+                        return DateChip(date: message.time);
                     }
                   },
                 );
