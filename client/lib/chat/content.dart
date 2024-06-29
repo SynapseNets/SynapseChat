@@ -29,6 +29,48 @@ class _ContentState extends State<Content> {
 
   List<Message> messages = List.empty();
 
+  void _sendMessage() async {
+    if (_message.text.isEmpty || _message.text.trim().isEmpty) {
+      setState(() {
+        _message.clear();
+      });
+      return;
+    }
+
+    //call for sidebar rebuild
+    widget.messageNotifier.notifyMessage();
+
+    if (messages.isNotEmpty &&
+        (messages.last.time.day != DateTime.now().day ||
+            messages.last.time.month != DateTime.now().month ||
+            messages.last.time.year != DateTime.now().year)) {
+      await insertMessage(Message(
+        text: '',
+        time: DateTime.now(),
+        type: MessageType.date,
+        sender: '',
+        name: widget.currentChatController.currentChat,
+      ));
+    }
+
+    await insertMessage(Message(
+      text: _message.text,
+      time: DateTime.now(),
+      type: MessageType.text,
+      sender: 'me',
+      name: widget.currentChatController.currentChat,
+    ));
+
+    setState(() {
+      _message.clear();
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.fastEaseInToSlowEaseOut,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -71,22 +113,23 @@ class _ContentState extends State<Content> {
                           delivered: message.status == MessageStatus.delivered,
                           seen: message.status == MessageStatus.seen,
                         );
-                      case MessageType.image || MessageType.video:
+                      case MessageType.image:
+                      case MessageType.video:
                         return SizedBox(
-                            height: 256,
-                            child: BubbleNormalImage(
-                              id: message.text,
-                              image: Image.asset('images/default_profile.png'),
-                              isSender: message.sender == 'me',
-                              color: message.sender == 'me'
-                                  ? const Color(0xff3b28cc)
-                                  : const Color(0xff1b2a41),
-                              tail: true,
-                              sent: message.status == MessageStatus.sent,
-                              delivered:
-                                  message.status == MessageStatus.delivered,
-                              seen: message.status == MessageStatus.seen,
-                            ));
+                          height: 256,
+                          child: BubbleNormalImage(
+                            id: message.text,
+                            image: Image.asset('images/default_profile.png'),
+                            isSender: message.sender == 'me',
+                            color: message.sender == 'me'
+                                ? const Color(0xff3b28cc)
+                                : const Color(0xff1b2a41),
+                            tail: true,
+                            sent: message.status == MessageStatus.sent,
+                            delivered: message.status == MessageStatus.delivered,
+                            seen: message.status == MessageStatus.seen,
+                          ),
+                        );
                       case MessageType.audio:
                         return BubbleNormalAudio(
                           constraints: BoxConstraints(
@@ -166,46 +209,14 @@ class _ContentState extends State<Content> {
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
                               ),
+                              onSubmitted: (value) {
+                                _sendMessage();
+                              },
                             ),
                           ),
                           IconButton(
                             onPressed: () async {
-                              if (_message.text.isEmpty ||
-                                  _message.text.trim().isEmpty) {
-                                setState(() {
-                                  _message.clear();
-                                });
-                                return;
-                              }
-
-                              //call for sidebar rebuild
-                              widget.messageNotifier.notifyMessage();
-
-                              if (messages.last.time.day != DateTime.now().day || messages.last.time.month != DateTime.now().month || messages.last.time.year != DateTime.now().year){
-                                await insertMessage(Message(
-                                  text: '',
-                                  time: DateTime.now(),
-                                  type: MessageType.date,
-                                  sender: '',
-                                  name: widget.currentChatController.currentChat,
-                                ));
-                              }
-
-                              await insertMessage(Message(
-                                text: _message.text,
-                                time: DateTime.now(),
-                                type: MessageType.text,
-                                sender: 'me',
-                                name: widget.currentChatController.currentChat,
-                              ));
-
-                              setState(() {
-                                _message.clear();
-                                _scrollController.animateTo(
-                                    _scrollController.position.maxScrollExtent,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.fastEaseInToSlowEaseOut);
-                              });
+                              _sendMessage();
                             },
                             icon: const Icon(Icons.send),
                           ),
