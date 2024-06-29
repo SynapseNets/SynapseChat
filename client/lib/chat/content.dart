@@ -29,7 +29,7 @@ class _ContentState extends State<Content> {
 
   List<Message> messages = List.empty();
 
-  void _sendMessage() async {
+  Future<void> _sendMessage() async {
     if (_message.text.isEmpty || _message.text.trim().isEmpty) {
       setState(() {
         _message.clear();
@@ -64,9 +64,9 @@ class _ContentState extends State<Content> {
     setState(() {
       _message.clear();
       _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.fastEaseInToSlowEaseOut,
+        _scrollController.position.maxScrollExtent + 100,
+        duration: const Duration(milliseconds: 10),
+        curve: Curves.easeIn,
       );
     });
   }
@@ -76,6 +76,7 @@ class _ContentState extends State<Content> {
     return Obx(() {
       print(widget.currentChatController.currentChat);
       return Stack(children: [
+        
         FutureBuilder<List<Message>>(
             future: retrieveMessage(widget.currentChatController.currentChat),
             builder: (context, snapshot) {
@@ -89,7 +90,7 @@ class _ContentState extends State<Content> {
                   itemCount: messages.length + 1,
                   itemBuilder: (context, index) {
                     if (index == messages.length) {
-                      return const SizedBox(height: 100);
+                      return const SizedBox(height: 125);
                     }
 
                     Message message = messages[index];
@@ -209,14 +210,14 @@ class _ContentState extends State<Content> {
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
                               ),
-                              onSubmitted: (value) {
-                                _sendMessage();
+                              onSubmitted: (value) async {
+                                await _sendMessage();
                               },
                             ),
                           ),
                           IconButton(
                             onPressed: () async {
-                              _sendMessage();
+                              await _sendMessage();
                             },
                             icon: const Icon(Icons.send),
                           ),
@@ -224,7 +225,17 @@ class _ContentState extends State<Content> {
                       ))),
             );
           }
-        })
+        }),
+        Builder(builder: (context){
+          if(widget.currentChatController.currentChat == ''){ return const SizedBox(width: 0,);}
+          else{
+            return SizedBox(
+              height: 50,
+              child: AppBar(
+                automaticallyImplyLeading: false,
+                title: Text(widget.currentChatController.currentChat),
+            ));
+        }}),
       ]);
     });
   }
