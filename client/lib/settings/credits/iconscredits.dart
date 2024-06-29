@@ -9,7 +9,7 @@ class Iconscredits extends StatefulWidget {
 }
 
 class _IconscreditsState extends State<Iconscredits> {
-  void LaunchUrl(String url) async {
+  void startUrl(String url) async {
     Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.inAppWebView);
@@ -23,7 +23,7 @@ class _IconscreditsState extends State<Iconscredits> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         InkWell(
-          onTap: () => LaunchUrl(url),
+          onTap: () => startUrl(url),
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
             child: Row(

@@ -78,7 +78,6 @@ class _DeveloperscreditsState extends State<Developerscredits> {
         title: const Text(
           'Developers Credits',
           style: TextStyle(
-            color: Color(0xff3b28cc),
             fontSize: 26,
             fontWeight: FontWeight.bold,
           ),
