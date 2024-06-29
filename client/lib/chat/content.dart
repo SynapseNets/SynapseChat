@@ -181,6 +181,16 @@ class _ContentState extends State<Content> {
                               //call for sidebar rebuild
                               widget.messageNotifier.notifyMessage();
 
+                              if (messages.last.time.day != DateTime.now().day || messages.last.time.month != DateTime.now().month || messages.last.time.year != DateTime.now().year){
+                                await insertMessage(Message(
+                                  text: '',
+                                  time: DateTime.now(),
+                                  type: MessageType.date,
+                                  sender: '',
+                                  name: widget.currentChatController.currentChat,
+                                ));
+                              }
+
                               await insertMessage(Message(
                                 text: _message.text,
                                 time: DateTime.now(),
