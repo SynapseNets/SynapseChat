@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Developerscredits extends StatefulWidget {
-  const Developerscredits({Key? key}) : super(key: key);
+  const Developerscredits({super.key});
 
   @override
   State<Developerscredits> createState() => _DeveloperscreditsState();
@@ -18,7 +18,7 @@ class _DeveloperscreditsState extends State<Developerscredits> {
     }
   }
 
-  Widget buildGitHubProfile(String url, String imageUrl, String githubName, String name, String additionalText) {
+  Widget buildGitHubProfile(String url, String imageUrl, String githubName, String name, String role) {
     return InkWell(
       onTap: () {
         _launchURL(url);
@@ -42,7 +42,7 @@ class _DeveloperscreditsState extends State<Developerscredits> {
                       githubName,
                       style: const TextStyle(
                         color: Color(0xff3b28cc),
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -50,14 +50,14 @@ class _DeveloperscreditsState extends State<Developerscredits> {
                       name,
                       style: const TextStyle(
                         color: Color(0xff3b28cc),
-                        fontSize: 20,
+                        fontSize: 16,
                       ),
                     ),
                     Text(
-                      additionalText,
+                      role,
                       style: const TextStyle(
                         color: Color(0xff3b28cc),
-                        fontSize: 20,
+                        fontSize: 16,
                       ),
                     ),
                   ],
@@ -65,6 +65,7 @@ class _DeveloperscreditsState extends State<Developerscredits> {
               ),
             ],
           ),
+          const Divider(color: Color(0xff1b2a41), thickness: 2),
         ],
       ),
     );
@@ -92,9 +93,8 @@ class _DeveloperscreditsState extends State<Developerscredits> {
               'https://avatars.githubusercontent.com/u/88632271?v=4',
               'AlBovo',
               'Alan Davide Bovo',
-              'Server Developer'
+              'Frontend and Backend Developer for Client'
             ),
-            const Divider(color: Color(0xff1b2a41), thickness: 2),
             buildGitHubProfile(
               'https://github.com/Mark-74',
               'https://avatars.githubusercontent.com/u/110310114?v=4',
@@ -102,31 +102,27 @@ class _DeveloperscreditsState extends State<Developerscredits> {
               'Marco Balducci',
               'Frontend and Backend Developer for Client'
             ),
-            const Divider(color: Color(0xff1b2a41), thickness: 2),
             buildGitHubProfile(
               'https://github.com/MattiaCincotta',
               'https://avatars.githubusercontent.com/u/146827826?s=400&u=9407e6239be9581eefe639ae41138c053fc4d11c&v=4',
               'MattiaCincotta',
               'Mattia Cincotta',
-              'Frontend Developer for Client'
+              'Frontend and Backend Developer for Client'
             ),
-            const Divider(color: Color(0xff1b2a41), thickness: 2),
             buildGitHubProfile(
               'https://github.com/Lorii0',
               'https://avatars.githubusercontent.com/u/146861747?v=4',
               'Lorii0',
               'Lorenzo Shani',
-              'Frontend Developer for Client'
+              'Frontend and Backend Developer for Client'
             ),
-            const Divider(color: Color(0xff1b2a41), thickness: 2),
             buildGitHubProfile(
               'https://github.com/Antostarwars/Antostarwars',
               'https://avatars.githubusercontent.com/u/67382924?v=4',
               'Antostarwars',
               'Antonio De Rosa',
-              'Additional text for Antonio De Rosa'
+              'Frontend and Backend Developer for Client'
             ),
-            const Divider(color: Color(0xff1b2a41), thickness: 2),
           ],
         ),
       ),
