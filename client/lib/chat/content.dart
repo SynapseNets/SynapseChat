@@ -6,6 +6,7 @@ import 'message.dart';
 import 'package:client/utils/db.dart';
 import 'package:client/chat/chatcontroller.dart';
 import 'package:client/chat/messagenotifier.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class Content extends StatefulWidget {
   final ChatController currentChatController;
@@ -23,6 +24,8 @@ class Content extends StatefulWidget {
 class _ContentState extends State<Content> {
   Duration duration = const Duration(seconds: 30);
   Duration position = const Duration(seconds: 0);
+
+  double _currentSliderValue = 100;
 
   final TextEditingController _message = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -64,7 +67,7 @@ class _ContentState extends State<Content> {
     setState(() {
       _message.clear();
       _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent + 100,
+        _scrollController.position.maxScrollExtent + _currentSliderValue,
         duration: const Duration(milliseconds: 10),
         curve: Curves.easeIn,
       );
@@ -89,8 +92,14 @@ class _ContentState extends State<Content> {
                   physics: const BouncingScrollPhysics(),
                   itemCount: messages.length + 1,
                   itemBuilder: (context, index) {
+
                     if (index == messages.length) {
-                      return const SizedBox(height: 125);
+                      return VisibilityDetector(
+                        key: Key('Bottom'),
+                        child: const SizedBox(height: 125),
+                        onVisibilityChanged: (info) {
+                          _currentSliderValue = info.visibleFraction == 0 ? 125 : 10;
+                        });
                     }
 
                     Message message = messages[index];
