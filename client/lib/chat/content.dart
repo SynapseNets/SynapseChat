@@ -11,11 +11,10 @@ class Content extends StatefulWidget {
   final ChatController currentChatController;
   final MessageNotifier messageNotifier;
 
-  const Content({
-    super.key,
-    required this.currentChatController,
-    required this.messageNotifier
-  });
+  const Content(
+      {super.key,
+      required this.currentChatController,
+      required this.messageNotifier});
 
   @override
   State<Content> createState() => _ContentState();
@@ -140,61 +139,69 @@ class _ContentState extends State<Content> {
                 return const Text("Error");
               }
             }),
-        Container(
-          // Bottom bar
-          alignment: Alignment.bottomCenter,
-          child: SizedBox(
-              child: Container(
-                  color: Theme.of(context).colorScheme.surface,
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: _message,
-                          decoration: const InputDecoration(
-                            hintText: 'Type a message',
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+        Builder(builder: (context) {
+          if (widget.currentChatController.currentChat == '') {
+            return const Center(
+              child: Text('Select a chat to start messaging'),
+            );
+          } else {
+            return Container(
+              // Bottom bar
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                  child: Container(
+                      color: Theme.of(context).colorScheme.surface,
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: _message,
+                              decoration: const InputDecoration(
+                                hintText: 'Type a message',
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          if (_message.text.isEmpty ||
-                                _message.text.trim().isEmpty) {
-                                  setState(() {
-                                    _message.clear();
-                                  });
-                              return;
-                          }
+                          IconButton(
+                            onPressed: () async {
+                              if (_message.text.isEmpty ||
+                                  _message.text.trim().isEmpty) {
+                                setState(() {
+                                  _message.clear();
+                                });
+                                return;
+                              }
 
-                          //call for sidebar rebuild
-                          widget.messageNotifier.notifyMessage();
+                              //call for sidebar rebuild
+                              widget.messageNotifier.notifyMessage();
 
-                          await insertMessage(Message(
-                              text: _message.text,
-                              time: DateTime.now(),
-                              type: MessageType.text,
-                              sender: 'me',
-                              name: widget.currentChatController.currentChat,
-                            ));
+                              await insertMessage(Message(
+                                text: _message.text,
+                                time: DateTime.now(),
+                                type: MessageType.text,
+                                sender: 'me',
+                                name: widget.currentChatController.currentChat,
+                              ));
 
-                          setState(() {                
-                            _message.clear();
-                            _scrollController.animateTo(
-                                _scrollController.position.maxScrollExtent,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.fastEaseInToSlowEaseOut);
-                          });
-                        },
-                        icon: const Icon(Icons.send),
-                      ),
-                    ],
-                  ))),
-        )
+                              setState(() {
+                                _message.clear();
+                                _scrollController.animateTo(
+                                    _scrollController.position.maxScrollExtent,
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.fastEaseInToSlowEaseOut);
+                              });
+                            },
+                            icon: const Icon(Icons.send),
+                          ),
+                        ],
+                      ))),
+            );
+          }
+        })
       ]);
     });
   }
