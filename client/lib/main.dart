@@ -23,6 +23,9 @@ import 'settings/profileinfo.dart';
 import 'settings/chat_preferences.dart';
 import 'settings/languagespage.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:client/l10n/app_localizations.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -42,26 +45,38 @@ class SynapseNetsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.indigoAccent,
-            brightness: Brightness.dark,
-          ),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigoAccent,
+          brightness: Brightness.dark,
         ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const SynapseNetsAppHomepage(),
-          '/login': (context) => const LoginPage(),
-          '/registration': (context) => const Registrationpage(),
-          '/chat': (context) => const Chat(),
-          '/settings': (context) => const SettingsPage(),
-          '/profileinfo': (context) => const Profileinfo(),
-          '/serverconnect': (context) => const Serverconnectpage(),
-          '/chatsettings': (context) => const ChatPreferencesPage(),
-          '/languagesettings': (context) => const ChatLanguagesPage(),
-          '/credits': (context) => const Creditspage(),
-          '/developerscredits': (context) => const Developerscredits(),
-          '/iconscredits': (context) => const Iconscredits(),
-        });
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SynapseNetsAppHomepage(),
+        '/login': (context) => const LoginPage(),
+        '/registration': (context) => const Registrationpage(),
+        '/chat': (context) => const Chat(),
+        '/settings': (context) => const SettingsPage(),
+        '/profileinfo': (context) => const Profileinfo(),
+        '/serverconnect': (context) => const Serverconnectpage(),
+        '/chatsettings': (context) => const ChatPreferencesPage(),
+        '/languagesettings': (context) => const ChatLanguagesPage(),
+        '/credits': (context) => const Creditspage(),
+        '/developerscredits': (context) => const Developerscredits(),
+        '/iconscredits': (context) => const Iconscredits(),
+      },
+      localizationsDelegates: const [
+        AppLocalizations.delegate, 
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'), // English
+        Locale('es'), // Spanish
+        Locale('it'), // Italian
+      ],
+    );
   }
 }

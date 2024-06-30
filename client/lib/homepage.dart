@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 const List<String> languages = <String>['English', 'Italiano', 'Español'];
 
@@ -22,16 +23,17 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
               width: 256,
               height: 256,
             ),
-            const Text(
-              'Welcome to SynapseChat',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Text(
+              AppLocalizations.of(context).homepage_title,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+            
             const SizedBox(height: 10),
-            const Text('The most secure messaging service available.'),
+            Text(AppLocalizations.of(context).homepage_description),
             const SizedBox(height: 50),
-            const Text(
-              'Select your language',
-              style: TextStyle(fontSize: 20),
+            Text(
+              AppLocalizations.of(context).homepage_selectLanguage,
+              style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 16),
             const LanguageDropDown(),
@@ -43,7 +45,7 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');
                 },
-                child: const Text('Continue', style: TextStyle(fontSize: 20)),
+                child: Text(AppLocalizations.of(context).homepage_continue, style: const TextStyle(fontSize: 20)),
               ),
             ),
           ],
@@ -76,7 +78,7 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
           iconSize: 24,
           elevation: 16,
           decoration: InputDecoration(
-            labelText: 'Options',
+            labelText: AppLocalizations.of(context).homepage_options,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
