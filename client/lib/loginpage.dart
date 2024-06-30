@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).loginPage_title),
+        title: Text(AppLocalizations.of(context).loginPageTitle),
       ),
       body: Center(
         child: Padding(
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 30.0),
               Text(
-                AppLocalizations.of(context).loginPage_description,
+                AppLocalizations.of(context).loginPageDescription,
                 style: const TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                           });
                       },
                     ),
-                      Text(AppLocalizations.of(context).loginPage_remeberMe),
+                      Text(AppLocalizations.of(context).loginPageRememberMe),
                     ],
                     ),
                     SizedBox(
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.pushNamed(context, '/registration');
                         },
                         child: Text(
-                          AppLocalizations.of(context).loginPage_signUp,
+                          AppLocalizations.of(context).loginPageSignUp,
                           style: const TextStyle(fontSize: 16.0),
                         ),
                       ),
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                   _login() ?  Navigator.pushNamed(context, '/chat'): print("access denied");
                   },
                   child: Text(
-                    AppLocalizations.of(context).loginPage_Login,
+                    AppLocalizations.of(context).loginPageLogin,
                     style: const TextStyle(
                       fontSize: 18.0,
                     ),

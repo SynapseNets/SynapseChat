@@ -5,44 +5,74 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get homepage_title => '¡Bienvenido a SynapseChat!';
+  String get homepageTitle => '¡Bienvenido a SynapseChat!';
 
   @override
-  String get homepage_description => '¡Bienvenido a SynapseChat!';
+  String get homepageDescription => '¡Bienvenido a SynapseChat!';
 
   @override
-  String get homepage_selectLanguage => '¡Bienvenido a SynapseChat!';
+  String get homepageSelectLanguage => '¡Bienvenido a SynapseChat!';
 
   @override
-  String get homepage_continue => '¡Bienvenido a SynapseChat!';
+  String get homepageContinue => '¡Bienvenido a SynapseChat!';
 
   @override
-  String get homepage_options => '¡Bienvenido a SynapseChat!';
+  String get homepageOptions => '¡Bienvenido a SynapseChat!';
 
   @override
-  String get loginPage_title => 'Login';
+  String get loginPageTitle => 'Login';
 
   @override
-  String get loginPage_description => 'Login to SynapseChat';
+  String get loginPageDescription => 'Login to SynapseChat';
 
   @override
-  String get loginPage_remeberMe => 'Remember me';
+  String get loginPageRememberMe => 'Remember me';
 
   @override
-  String get loginPage_signUp => 'Sign Up';
+  String get loginPageSignUp => 'Sign Up';
 
   @override
-  String get loginPage_Login => 'Login';
+  String get loginPageLogin => 'Login';
 
   @override
-  String get registrationPage_title => 'Registrazione';
+  String get registrationPageTitle => 'Registrazione';
 
   @override
-  String get registrationPage_description => 'Registrati a SynapseChat';
+  String get registrationPageDescription => 'Registrati a SynapseChat';
 
   @override
-  String get registrationPage_repeatPw => 'Ripeti Password';
+  String get registrationPageRepeatPw => 'Ripeti Password';
 
   @override
-  String get registrationPage_registration => 'Registrati';
+  String get registrationPageRegistration => 'Registrati';
+
+  @override
+  String get serverConnectPageTitle => 'Connessione al server';
+
+  @override
+  String get serverConnectPageDescription => 'Connettiti ad un nuovo server';
+
+  @override
+  String get serverConnectPageIp => 'IP del server';
+
+  @override
+  String get serverConnectPageConnect => 'Connettiti';
+
+  @override
+  String get settingsPageTitle => 'Impostazioni';
+
+  @override
+  String get settingsPageUsername => 'Nome';
+
+  @override
+  String get settingsPageDescription => 'Biografia';
+
+  @override
+  String get settingsPageChatSettings => 'Impostazioni chat';
+
+  @override
+  String get settingsPageLanguages => 'Lingua';
+
+  @override
+  String get settingsPageCredits => 'riconoscimenti';
 }

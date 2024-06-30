@@ -1,20 +1,30 @@
 {
-    "homepage_title": "¡Bienvenido a SynapseChat!",
-    "homepage_description":"¡Bienvenido a SynapseChat!",
-    "homepage_selectLanguage":"¡Bienvenido a SynapseChat!",
-    "homepage_continue":"¡Bienvenido a SynapseChat!",
-    "homepage_options":"¡Bienvenido a SynapseChat!",
+    "homepageTitle": "¡Bienvenido a SynapseChat!",
+    "homepageDescription": "¡Bienvenido a SynapseChat!",
+    "homepageSelectLanguage": "¡Bienvenido a SynapseChat!",
+    "homepageContinue": "¡Bienvenido a SynapseChat!",
+    "homepageOptions": "¡Bienvenido a SynapseChat!",
 
+    "loginPageTitle": "Login",
+    "loginPageDescription": "Login to SynapseChat",
+    "loginPageRememberMe": "Remember me",
+    "loginPageSignUp": "Sign Up",
+    "loginPageLogin": "Login",
 
-    "loginPage_title":"Login",
-    "loginPage_description":"Login to SynapseChat",
-    "loginPage_remeberMe":"Remember me",
-    "loginPage_signUp":"Sign Up",
-    "loginPage_Login":"Login",
+    "registrationPageTitle": "Registrazione",
+    "registrationPageDescription": "Registrati a SynapseChat",
+    "registrationPageRepeatPw": "Ripeti Password",
+    "registrationPageRegistration": "Registrati",
 
-    "registrationPage_title":"Registrazione",
-    "registrationPage_description":"Registrati a SynapseChat",
-    "registrationPage_repeatPw":"Ripeti Password",
-    "registrationPage_registration":"Registrati"
+    "serverConnectPageTitle": "Connessione al server",
+    "serverConnectPageDescription": "Connettiti ad un nuovo server",
+    "serverConnectPageIp": "IP del server",
+    "serverConnectPageConnect": "Connettiti",
 
+    "settingsPageTitle": "Impostazioni",
+    "settingsPageUsername": "Nome",
+    "settingsPageDescription": "Biografia",
+    "settingsPageChatSettings": "Impostazioni chat",
+    "settingsPageLanguages": "Lingua",
+    "settingsPageCredits": "riconoscimenti"
 }

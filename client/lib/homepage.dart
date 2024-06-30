@@ -25,14 +25,14 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
               height: 256,
             ),
             Text(
-              AppLocalizations.of(context).homepage_title,
+              AppLocalizations.of(context).homepageTitle,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            Text(AppLocalizations.of(context).homepage_description),
+            Text(AppLocalizations.of(context).homepageDescription),
             const SizedBox(height: 50),
             Text(
-              AppLocalizations.of(context).homepage_selectLanguage,
+              AppLocalizations.of(context).homepageSelectLanguage,
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 16),
@@ -45,7 +45,7 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');
                 },
-                child: Text(AppLocalizations.of(context).homepage_continue,
+                child: Text(AppLocalizations.of(context).homepageContinue,
                     style: const TextStyle(fontSize: 20)),
               ),
             ),
@@ -79,7 +79,7 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
           iconSize: 24,
           elevation: 16,
           decoration: InputDecoration(
-            labelText: AppLocalizations.of(context).homepage_options,
+            labelText: AppLocalizations.of(context).homepageOptions,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),

@@ -95,89 +95,149 @@ abstract class AppLocalizations {
     Locale('it')
   ];
 
-  /// No description provided for @homepage_title.
+  /// No description provided for @homepageTitle.
   ///
   /// In en, this message translates to:
   /// **'Welcome to SynapseChat'**
-  String get homepage_title;
+  String get homepageTitle;
 
-  /// No description provided for @homepage_description.
+  /// No description provided for @homepageDescription.
   ///
   /// In en, this message translates to:
   /// **'The most secure messaging service available'**
-  String get homepage_description;
+  String get homepageDescription;
 
-  /// No description provided for @homepage_selectLanguage.
+  /// No description provided for @homepageSelectLanguage.
   ///
   /// In en, this message translates to:
-  /// **'Select your langauge'**
-  String get homepage_selectLanguage;
+  /// **'Select your language'**
+  String get homepageSelectLanguage;
 
-  /// No description provided for @homepage_continue.
+  /// No description provided for @homepageContinue.
   ///
   /// In en, this message translates to:
   /// **'Continue'**
-  String get homepage_continue;
+  String get homepageContinue;
 
-  /// No description provided for @homepage_options.
+  /// No description provided for @homepageOptions.
   ///
   /// In en, this message translates to:
   /// **'Options'**
-  String get homepage_options;
+  String get homepageOptions;
 
-  /// No description provided for @loginPage_title.
+  /// No description provided for @loginPageTitle.
   ///
   /// In en, this message translates to:
   /// **'Login'**
-  String get loginPage_title;
+  String get loginPageTitle;
 
-  /// No description provided for @loginPage_description.
+  /// No description provided for @loginPageDescription.
   ///
   /// In en, this message translates to:
   /// **'Login to SynapseChat'**
-  String get loginPage_description;
+  String get loginPageDescription;
 
-  /// No description provided for @loginPage_remeberMe.
+  /// No description provided for @loginPageRememberMe.
   ///
   /// In en, this message translates to:
   /// **'Remember me'**
-  String get loginPage_remeberMe;
+  String get loginPageRememberMe;
 
-  /// No description provided for @loginPage_signUp.
+  /// No description provided for @loginPageSignUp.
   ///
   /// In en, this message translates to:
   /// **'Sign Up'**
-  String get loginPage_signUp;
+  String get loginPageSignUp;
 
-  /// No description provided for @loginPage_Login.
+  /// No description provided for @loginPageLogin.
   ///
   /// In en, this message translates to:
   /// **'Login'**
-  String get loginPage_Login;
+  String get loginPageLogin;
 
-  /// No description provided for @registrationPage_title.
+  /// No description provided for @registrationPageTitle.
   ///
   /// In en, this message translates to:
   /// **'Registration'**
-  String get registrationPage_title;
+  String get registrationPageTitle;
 
-  /// No description provided for @registrationPage_description.
+  /// No description provided for @registrationPageDescription.
   ///
   /// In en, this message translates to:
   /// **'Signup to SynapseChat'**
-  String get registrationPage_description;
+  String get registrationPageDescription;
 
-  /// No description provided for @registrationPage_repeatPw.
+  /// No description provided for @registrationPageRepeatPw.
   ///
   /// In en, this message translates to:
   /// **'Repeat Password'**
-  String get registrationPage_repeatPw;
+  String get registrationPageRepeatPw;
 
-  /// No description provided for @registrationPage_registration.
+  /// No description provided for @registrationPageRegistration.
   ///
   /// In en, this message translates to:
   /// **'Register'**
-  String get registrationPage_registration;
+  String get registrationPageRegistration;
+
+  /// No description provided for @serverConnectPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to a server'**
+  String get serverConnectPageTitle;
+
+  /// No description provided for @serverConnectPageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to a new server'**
+  String get serverConnectPageDescription;
+
+  /// No description provided for @serverConnectPageIp.
+  ///
+  /// In en, this message translates to:
+  /// **'Server IP'**
+  String get serverConnectPageIp;
+
+  /// No description provided for @serverConnectPageConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect'**
+  String get serverConnectPageConnect;
+
+  /// No description provided for @settingsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsPageTitle;
+
+  /// No description provided for @settingsPageUsername.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get settingsPageUsername;
+
+  /// No description provided for @settingsPageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Biography'**
+  String get settingsPageDescription;
+
+  /// No description provided for @settingsPageChatSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat settings'**
+  String get settingsPageChatSettings;
+
+  /// No description provided for @settingsPageLanguages.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsPageLanguages;
+
+  /// No description provided for @settingsPageCredits.
+  ///
+  /// In en, this message translates to:
+  /// **'Credits'**
+  String get settingsPageCredits;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

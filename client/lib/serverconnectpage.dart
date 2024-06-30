@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class Serverconnectpage extends StatefulWidget {
   const Serverconnectpage({super.key});
@@ -21,7 +22,7 @@ class _RegistrationpageState extends State<Serverconnectpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Connect to a server'),
+        title: Text(AppLocalizations.of(context).serverConnectPageTitle),
       ),
       body: Center(
         child: Column(
@@ -33,9 +34,9 @@ class _RegistrationpageState extends State<Serverconnectpage> {
               height: 140,
             ),
             const SizedBox(height: 30),
-            const Text(
-              'Connect to a server',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context).serverConnectPageDescription,
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -45,9 +46,9 @@ class _RegistrationpageState extends State<Serverconnectpage> {
               width: 300.0,
               child: TextField(
                 controller: _serverIP,
-                decoration: const InputDecoration(
-                  labelText: 'server IP',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).serverConnectPageIp,
+                  border: const OutlineInputBorder(),
                 ),
               ),
             ),
@@ -72,9 +73,9 @@ class _RegistrationpageState extends State<Serverconnectpage> {
                       ? Navigator.pushNamed(context, '/chat')
                       : print("connection to server denied");
                 },
-                child: const Text(
-                  'Connect',
-                  style: TextStyle(
+                child: Text(
+                   AppLocalizations.of(context).serverConnectPageConnect,
+                  style: const TextStyle(
                     fontSize: 18.0,
                   ),
                 ),

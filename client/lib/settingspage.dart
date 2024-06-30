@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -12,7 +13,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(AppLocalizations.of(context).settingsPageTitle),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -37,33 +38,33 @@ class _SettingsPageState extends State<SettingsPage> {
         Navigator.pushNamed(context, '/profileinfo');
       },
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(
-                color: const Color.fromARGB(255, 255, 255, 255)!, width: 0.25),
+                color:  Color.fromARGB(255, 255, 255, 255), width: 0.25),
             bottom: BorderSide(
-                color: const Color.fromARGB(255, 255, 255, 255)!, width: 0.25),
+                color: Color.fromARGB(255, 255, 255, 255), width: 0.25),
           ),
         ),
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-        child: const Row(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            CircleAvatar(
+            const CircleAvatar(
                 radius: 40,
                 backgroundImage: AssetImage('images/default_profile.png')),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Nome Utente',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  AppLocalizations.of(context).settingsPageUsername,
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
-                  'Descrizione Utente',
-                  style: TextStyle(fontSize: 18),
+                  AppLocalizations.of(context).settingsPageDescription,
+                  style: const TextStyle(fontSize: 18),
                 ),
               ],
             ),
@@ -82,16 +83,16 @@ class _SettingsPageState extends State<SettingsPage> {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-        child: const Row(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            CircleAvatar(
+            const CircleAvatar(
                 radius: 23,
-                backgroundImage: AssetImage('images/chat_settings.png')),
-            SizedBox(width: 12),
+                backgroundImage:  AssetImage('images/chat_settings.png')),
+            const SizedBox(width: 12),
             Text(
-              'Chat settings',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              AppLocalizations.of(context).settingsPageChatSettings,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -108,15 +109,15 @@ class _SettingsPageState extends State<SettingsPage> {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-        child: const Row(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            CircleAvatar(
+            const CircleAvatar(
                 radius: 23, backgroundImage: AssetImage('images/language.png')),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Text(
-              'Languages',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              AppLocalizations.of(context).settingsPageLanguages,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -133,15 +134,15 @@ class _SettingsPageState extends State<SettingsPage> {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-        child: const Row(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            CircleAvatar(
+            const CircleAvatar(
                 radius: 23, backgroundImage: AssetImage('images/info.png')),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Text(
-              'Credits',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              AppLocalizations.of(context).settingsPageCredits,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
         ),

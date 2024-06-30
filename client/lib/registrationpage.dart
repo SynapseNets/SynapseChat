@@ -16,8 +16,8 @@ class _RegistrationpageState extends State<Registrationpage> {
 
   bool _register() {
     String username = _username.text;
-    String first_password = _password1.text;
-    String second_password = _password2.text;
+    String firstPassword = _password1.text;
+    String secondPassword = _password2.text;
 
     return true;
     //logica per la registrazione
@@ -27,7 +27,7 @@ class _RegistrationpageState extends State<Registrationpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).registrationPage_title),
+        title: Text(AppLocalizations.of(context).registrationPageTitle),
       ),
       body: Center(
         child: Column(
@@ -40,7 +40,7 @@ class _RegistrationpageState extends State<Registrationpage> {
             ),
             const SizedBox(height: 40),
             Text(
-              AppLocalizations.of(context).registrationPage_description,
+              AppLocalizations.of(context).registrationPageDescription,
               style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
@@ -86,7 +86,7 @@ class _RegistrationpageState extends State<Registrationpage> {
                 obscureText: _isObscure,
                 controller: _password2,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context).registrationPage_repeatPw,
+                  labelText: AppLocalizations.of(context).registrationPageRepeatPw,
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -110,7 +110,7 @@ class _RegistrationpageState extends State<Registrationpage> {
                    _register() ?  Navigator.pushNamed(context, '/login') : print("registration denied");
                   },
                 child: Text(
-                  AppLocalizations.of(context).registrationPage_registration,
+                  AppLocalizations.of(context).registrationPageRegistration,
                   style: const TextStyle(
                     fontSize: 18.0,
                   ),

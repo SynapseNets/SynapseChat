@@ -1,20 +1,30 @@
 {
-    "homepage_title": "Benvenuto in SynapseChat",
-    "homepage_description":"Il servizio di messaggistica più sicuro al mondo",
-    "homepage_selectLanguage":"Seleziona la lingua",
-    "homepage_continue":"Continua",
-    "homepage_options":"Opzioni",
+    "homepageTitle": "Benvenuto in SynapseChat",
+    "homepageDescription": "Il servizio di messaggistica più sicuro al mondo",
+    "homepageSelectLanguage": "Seleziona la lingua",
+    "homepageContinue": "Continua",
+    "homepageOptions": "Opzioni",
 
+    "loginPageTitle": "Accesso",
+    "loginPageDescription": "Accedi a SynapseChat",
+    "loginPageRememberMe": "Ricordami",
+    "loginPageSignUp": "Registrati",
+    "loginPageLogin": "Accedi",
 
-    "loginPage_title":"Accesso",
-    "loginPage_description":"Accedi a SynapseChat",
-    "loginPage_remeberMe":"Ricordami",
-    "loginPage_signUp":"Registrati",
-    "loginPage_Login":"Accedi",
+    "registrationPageTitle": "Registrazione",
+    "registrationPageDescription": "Registrati a SynapseChat",
+    "registrationPageRepeatPw": "Ripeti Password",
+    "registrationPageRegistration": "Registrati",
 
+    "serverConnectPageTitle": "Connessione al server",
+    "serverConnectPageDescription": "Connettiti ad un nuovo server",
+    "serverConnectPageIp": "IP del server",
+    "serverConnectPageConnect": "Connettiti",
 
-    "registrationPage_title":"Registrazione",
-    "registrationPage_description":"Registrati a SynapseChat",
-    "registrationPage_repeatPw":"Ripeti Password",
-    "registrationPage_registration":"Registrati"
+    "settingsPageTitle": "Impostazioni",
+    "settingsPageUsername": "Nome",
+    "settingsPageDescription": "Biografia",
+    "settingsPageChatSettings": "Impostazioni chat",
+    "settingsPageLanguages": "Lingua",
+    "settingsPageCredits": "Riconoscimenti"
 }
