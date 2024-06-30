@@ -39,8 +39,27 @@ void main() async {
   runApp(const SynapseNetsApp());
 }
 
-class SynapseNetsApp extends StatelessWidget {
+class SynapseNetsApp extends StatefulWidget {
   const SynapseNetsApp({super.key});
+
+  static void setLocale(BuildContext context, Locale newLocale) async {
+    _SynapseNetsAppState? state =
+        context.findAncestorStateOfType<_SynapseNetsAppState>();
+    state!.changeLanguage(newLocale);
+  }
+
+  @override
+  State<SynapseNetsApp> createState() => _SynapseNetsAppState();
+}
+
+class _SynapseNetsAppState extends State<SynapseNetsApp> {
+  Locale _locale = const Locale('en');
+
+  changeLanguage(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +85,9 @@ class SynapseNetsApp extends StatelessWidget {
         '/developerscredits': (context) => const Developerscredits(),
         '/iconscredits': (context) => const Iconscredits(),
       },
+      locale: _locale,
       localizationsDelegates: const [
-        AppLocalizations.delegate, 
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

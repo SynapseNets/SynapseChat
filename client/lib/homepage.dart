@@ -1,3 +1,4 @@
+import 'package:client/main.dart';
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
 
@@ -27,7 +28,6 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
               AppLocalizations.of(context).homepage_title,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            
             const SizedBox(height: 10),
             Text(AppLocalizations.of(context).homepage_description),
             const SizedBox(height: 50),
@@ -45,7 +45,8 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');
                 },
-                child: Text(AppLocalizations.of(context).homepage_continue, style: const TextStyle(fontSize: 20)),
+                child: Text(AppLocalizations.of(context).homepage_continue,
+                    style: const TextStyle(fontSize: 20)),
               ),
             ),
           ],
@@ -85,6 +86,10 @@ class _LanguageDropDownState extends State<LanguageDropDown> {
           ),
           onChanged: (String? newValue) {
             setState(() {
+              SynapseNetsApp.setLocale(
+                  context,
+                  Locale.fromSubtags(
+                      languageCode: newValue!.substring(0, 2).toLowerCase()));
               dropDownValue = newValue;
             });
           },
