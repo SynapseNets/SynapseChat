@@ -140,7 +140,7 @@ class _ContentState extends State<Content> {
                       case MessageType.text:
                         return BubbleNormal(
                           padding: const EdgeInsets.all(4),
-                          text: format(message.text),
+                          text: MediaQuery.of(context).size.width > 730 ? format(message.text) : message.text,
                           isSender: message.sender == 'me',
                           color: message.sender == 'me'
                               ? const Color(0xff3b28cc)
