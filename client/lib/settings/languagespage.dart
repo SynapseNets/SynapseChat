@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:client/main.dart';
 
 class RoundCheckbox extends StatelessWidget {
   final bool value;
@@ -51,13 +52,18 @@ class _ChatLanguagesPageState extends State<ChatLanguagesPage> {
   int _selectedCheckboxIndex = -1; // -1 means no checkbox is selected
 
   // Function to create a row with checkbox, texts, and extra text
-  Widget _buildCheckboxRow(int index, String primaryText, String secondaryText, String extraText) {
+  Widget _buildCheckboxRow(
+      int index, String primaryText, String secondaryText, String extraText) {
     return Row(
       children: [
         RoundCheckbox(
           value: _selectedCheckboxIndex == index,
           onChanged: (bool? value) {
             setState(() {
+              SynapseNetsApp.setLocale(
+                  context,
+                  Locale.fromSubtags(
+                      languageCode: primaryText.substring(0, 2).toLowerCase()));
               _selectedCheckboxIndex = value! ? index : -1;
             });
           },
@@ -104,11 +110,14 @@ class _ChatLanguagesPageState extends State<ChatLanguagesPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            _buildCheckboxRow(0, 'Italiano', 'Italian', 'Il sole splende alto nel cielo'),
+            _buildCheckboxRow(
+                0, 'Italiano', 'Italian', 'Il sole splende alto nel cielo'),
             const SizedBox(height: 25),
-            _buildCheckboxRow(1, 'English', 'English', 'The sun shines high in the sky'),
+            _buildCheckboxRow(
+                1, 'English', 'English', 'The sun shines high in the sky'),
             const SizedBox(height: 25),
-            _buildCheckboxRow(2, 'Español', 'Spanish', 'El sol brilla alto en el cielo'),
+            _buildCheckboxRow(
+                2, 'Español', 'Spanish', 'El sol brilla alto en el cielo'),
           ],
         ),
       ),
