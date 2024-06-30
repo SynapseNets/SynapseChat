@@ -3,6 +3,12 @@
     "homepage_description":"Il servizio di messaggistica più sicuro al mondo",
     "homepage_selectLanguage":"Seleziona la lingua",
     "homepage_continue":"Continua",
-    "homepage_options":"Opzioni"
+    "homepage_options":"Opzioni",
 
+
+    "loginPage_title":"Accedi",
+    "loginPage_description":"Accedi a SynapseChat",
+    "loginPage_remeberMe":"Ricordami",
+    "loginPage_signUp":"Registrati",
+    "loginPage_Login":"Accedi"
 }

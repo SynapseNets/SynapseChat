@@ -3,6 +3,13 @@
     "homepage_description":"¡Bienvenido a SynapseChat!",
     "homepage_selectLanguage":"¡Bienvenido a SynapseChat!",
     "homepage_continue":"¡Bienvenido a SynapseChat!",
-    "homepage_options":"¡Bienvenido a SynapseChat!"
+    "homepage_options":"¡Bienvenido a SynapseChat!",
+
+
+    "loginPage_title":"Login",
+    "loginPage_description":"Login to SynapseChat",
+    "loginPage_remeberMe":"Remember me",
+    "loginPage_signUp":"Sign Up",
+    "loginPage_Login":"Login"
 
 }

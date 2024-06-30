@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text(AppLocalizations.of(context).loginPage_title),
       ),
       body: Center(
         child: Padding(
@@ -44,9 +45,9 @@ class _LoginPageState extends State<LoginPage> {
               height: 180
               ),
               const SizedBox(height: 30.0),
-              const Text(
-                'Login to SynapseChat',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context).loginPage_description,
+                style: const TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -101,19 +102,19 @@ class _LoginPageState extends State<LoginPage> {
                           });
                       },
                     ),
-                      const Text('Remember Me',),
+                      Text(AppLocalizations.of(context).loginPage_remeberMe),
                     ],
                     ),
                     SizedBox(
-                      width: 90.0,
+                      width: 100.0,
                       height: 45.0,
                       child: TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/registration');
                         },
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(fontSize: 16.0),
+                        child: Text(
+                          AppLocalizations.of(context).loginPage_signUp,
+                          style: const TextStyle(fontSize: 16.0),
                         ),
                       ),
                     ),
@@ -128,9 +129,9 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: (){
                   _login() ?  Navigator.pushNamed(context, '/chat'): print("access denied");
                   },
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context).loginPage_Login,
+                    style: const TextStyle(
                       fontSize: 18.0,
                     ),
                   ),

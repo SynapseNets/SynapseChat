@@ -3,6 +3,12 @@
   "homepage_description":"The most secure messaging service available",
   "homepage_selectLanguage":"Select your langauge",
   "homepage_continue":"Continue",
-  "homepage_options":"Options"
+  "homepage_options":"Options",
+  
 
+  "loginPage_title":"Login",
+  "loginPage_description":"Login to SynapseChat",
+  "loginPage_remeberMe":"Remember me",
+  "loginPage_signUp":"Sign Up",
+  "loginPage_Login":"Login"
 }

@@ -18,4 +18,19 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homepage_options => '¡Bienvenido a SynapseChat!';
+
+  @override
+  String get loginPage_title => 'Login';
+
+  @override
+  String get loginPage_description => 'Login to SynapseChat';
+
+  @override
+  String get loginPage_remeberMe => 'Remember me';
+
+  @override
+  String get loginPage_signUp => 'Sign Up';
+
+  @override
+  String get loginPage_Login => 'Login';
 }

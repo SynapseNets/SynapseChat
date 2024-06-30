@@ -18,4 +18,19 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get homepage_options => 'Opzioni';
+
+  @override
+  String get loginPage_title => 'Accedi';
+
+  @override
+  String get loginPage_description => 'Accedi a SynapseChat';
+
+  @override
+  String get loginPage_remeberMe => 'Ricordami';
+
+  @override
+  String get loginPage_signUp => 'Registrati';
+
+  @override
+  String get loginPage_Login => 'Accedi';
 }

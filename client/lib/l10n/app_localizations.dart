@@ -124,6 +124,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Options'**
   String get homepage_options;
+
+  /// No description provided for @loginPage_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get loginPage_title;
+
+  /// No description provided for @loginPage_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to SynapseChat'**
+  String get loginPage_description;
+
+  /// No description provided for @loginPage_remeberMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me'**
+  String get loginPage_remeberMe;
+
+  /// No description provided for @loginPage_signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get loginPage_signUp;
+
+  /// No description provided for @loginPage_Login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get loginPage_Login;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
