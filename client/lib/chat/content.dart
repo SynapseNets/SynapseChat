@@ -74,6 +74,39 @@ class _ContentState extends State<Content> {
     });
   }
 
+  String format(String text){
+    if (text.length > 34){
+      List<String> words = text.split(' ');
+
+      String result = '';
+      String tmp = '';
+
+      words.forEach((element){
+          if(tmp.length + element.length > 34){
+            //case element is longer than 34
+            if(element.length > 34){
+              result += tmp.isNotEmpty ? "$tmp\n" : "";
+              while(element.length > 34){
+                result += "${element.substring(0, 34)}\n";
+                element = element.substring(34);
+              }
+              tmp = element;
+          } else {
+            //case element is shorter than 34
+            result += "$tmp\n";
+            tmp = element;
+          }
+        } else {
+            tmp += ' $element';
+          }
+      });
+
+      result += tmp;
+      return result;
+
+    } else {return text;}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -95,7 +128,7 @@ class _ContentState extends State<Content> {
 
                     if (index == messages.length) {
                       return VisibilityDetector(
-                        key: Key('Bottom'),
+                        key: const Key('Bottom'),
                         child: const SizedBox(height: 125),
                         onVisibilityChanged: (info) {
                           _currentSliderValue = info.visibleFraction == 0 ? 125 : 10;
@@ -107,7 +140,7 @@ class _ContentState extends State<Content> {
                       case MessageType.text:
                         return BubbleNormal(
                           padding: const EdgeInsets.all(4),
-                          text: message.text,
+                          text: format(message.text),
                           isSender: message.sender == 'me',
                           color: message.sender == 'me'
                               ? const Color(0xff3b28cc)

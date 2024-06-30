@@ -103,7 +103,7 @@ class _ChatState extends State<Chat> {
                     Builder(
                       builder: (context) {
                         return !_chatFocus.chatFocus ||
-                                MediaQuery.of(context).size.width > 600
+                                MediaQuery.of(context).size.width > 730
                             ? Expanded(
                                 child: Sidebar(
                                 currentChatController: currentChatController,
@@ -115,7 +115,7 @@ class _ChatState extends State<Chat> {
                     ),
                     Builder(builder: (context) {
                       return _chatFocus.chatFocus ||
-                              MediaQuery.of(context).size.width > 600
+                              MediaQuery.of(context).size.width > 730
                           ? Expanded(
                               child: Content(
                               currentChatController: currentChatController,
