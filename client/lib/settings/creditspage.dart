@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class Creditspage extends StatefulWidget {
   const Creditspage({super.key});
@@ -12,15 +13,15 @@ class _CreditspageState extends State<Creditspage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Credits'),
+        title: Text(AppLocalizations.of(context).creditsPageTitle),
       ),
       body: Center(
         child: Column(
           children: [
             const SizedBox(height: 50),
-            const Text(
-              "Credits",
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context).creditsPageDescription,
+              style: const TextStyle(
                   color: Color(0xff3b28cc),
                   fontSize: 60,
                   fontWeight: FontWeight.bold),
@@ -39,10 +40,10 @@ class _CreditspageState extends State<Creditspage> {
                     width: 2,
                   ),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'Developers credits',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    AppLocalizations.of(context).creditsPageDeveloperCreditsButton,
+                    style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -61,10 +62,10 @@ class _CreditspageState extends State<Creditspage> {
                     width: 2,
                   ),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'Icons credits',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    AppLocalizations.of(context).creditsPageIconsCreditsButton,
+                    style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

@@ -26,5 +26,38 @@
   "settingsPageDescription": "Biography",
   "settingsPageChatSettings": "Chat settings",
   "settingsPageLanguages": "Language",
-  "settingsPageCredits": "Credits"
+  "settingsPageCredits": "Credits",
+  
+  
+  "profilePageTitle": "Profile",
+  "profilePageChangePicture": "Change profile picture",
+  "profilePageName": "Name",
+  "profilePageDescriptionName": "This is the name your contacts will see \nIs not related to your login username",
+  "profilePageBiography": "Biography",
+  "profilePageDescriptionBiography": "Describe yourself briefly",
+
+
+  "chatPreferencesTitle": "Chat Settings",
+  "chatPreferencesFontSize": "Font Size",
+  "chatPreferencesFirstText": "Hi there!",
+  "chatPreferencesSecondText": "Hello! How are you?",
+  "chatPreferencesThirdText": "I'm good, thanks! And you?",
+  "chatPreferencesBackground": "Change Background Color",
+  "chatPreferencesTextDialogBackground": "Choose Background Color",
+  "chatPreferencesTextColor": "Change Text Color",
+  "chatPreferencesTextDialogColor": "Choose Text Color",
+  "chatPreferencesLightTheme": "Light Theme",
+  "chatPreferencesDarkTheme": "Dark Theme",
+
+
+  "languagesPageTitle": "Languages",
+
+
+  "creditsPageTitle": "Credits",
+  "creditsPageDescription": "Credits",
+  "creditsPageDeveloperCreditsButton": "Developers credits",
+  "creditsPageIconsCreditsButton": "Icons credits"
+
+
+
 }

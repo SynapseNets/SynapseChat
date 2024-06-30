@@ -75,4 +75,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsPageCredits => 'Credits';
+
+  @override
+  String get profilePageTitle => 'Profile';
+
+  @override
+  String get profilePageChangePicture => 'Change profile picture';
+
+  @override
+  String get profilePageName => 'Name';
+
+  @override
+  String get profilePageDescriptionName => 'This is the name your contacts will see \nIs not related to your login username';
+
+  @override
+  String get profilePageBiography => 'Biography';
+
+  @override
+  String get profilePageDescriptionBiography => 'Describe yourself briefly';
+
+  @override
+  String get chatPreferencesTitle => 'Chat Settings';
+
+  @override
+  String get chatPreferencesFontSize => 'Font Size';
+
+  @override
+  String get chatPreferencesFirstText => 'Hi there!';
+
+  @override
+  String get chatPreferencesSecondText => 'Hello! How are you?';
+
+  @override
+  String get chatPreferencesThirdText => 'I\'m good, thanks! And you?';
+
+  @override
+  String get chatPreferencesBackground => 'Change Background Color';
+
+  @override
+  String get chatPreferencesTextDialogBackground => 'Choose Background Color';
+
+  @override
+  String get chatPreferencesTextColor => 'Change Text Color';
+
+  @override
+  String get chatPreferencesTextDialogColor => 'Choose Text Color';
+
+  @override
+  String get chatPreferencesLightTheme => 'Light Theme';
+
+  @override
+  String get chatPreferencesDarkTheme => 'Dark Theme';
+
+  @override
+  String get languagesPageTitle => 'Languages';
+
+  @override
+  String get creditsPageTitle => 'Credits';
+
+  @override
+  String get creditsPageDescription => 'Credits';
+
+  @override
+  String get creditsPageDeveloperCreditsButton => 'Developers credits';
+
+  @override
+  String get creditsPageIconsCreditsButton => 'Icons credits';
 }

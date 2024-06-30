@@ -238,6 +238,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Credits'**
   String get settingsPageCredits;
+
+  /// No description provided for @profilePageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profilePageTitle;
+
+  /// No description provided for @profilePageChangePicture.
+  ///
+  /// In en, this message translates to:
+  /// **'Change profile picture'**
+  String get profilePageChangePicture;
+
+  /// No description provided for @profilePageName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get profilePageName;
+
+  /// No description provided for @profilePageDescriptionName.
+  ///
+  /// In en, this message translates to:
+  /// **'This is the name your contacts will see \nIs not related to your login username'**
+  String get profilePageDescriptionName;
+
+  /// No description provided for @profilePageBiography.
+  ///
+  /// In en, this message translates to:
+  /// **'Biography'**
+  String get profilePageBiography;
+
+  /// No description provided for @profilePageDescriptionBiography.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe yourself briefly'**
+  String get profilePageDescriptionBiography;
+
+  /// No description provided for @chatPreferencesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat Settings'**
+  String get chatPreferencesTitle;
+
+  /// No description provided for @chatPreferencesFontSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Font Size'**
+  String get chatPreferencesFontSize;
+
+  /// No description provided for @chatPreferencesFirstText.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi there!'**
+  String get chatPreferencesFirstText;
+
+  /// No description provided for @chatPreferencesSecondText.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello! How are you?'**
+  String get chatPreferencesSecondText;
+
+  /// No description provided for @chatPreferencesThirdText.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m good, thanks! And you?'**
+  String get chatPreferencesThirdText;
+
+  /// No description provided for @chatPreferencesBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Background Color'**
+  String get chatPreferencesBackground;
+
+  /// No description provided for @chatPreferencesTextDialogBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Background Color'**
+  String get chatPreferencesTextDialogBackground;
+
+  /// No description provided for @chatPreferencesTextColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Text Color'**
+  String get chatPreferencesTextColor;
+
+  /// No description provided for @chatPreferencesTextDialogColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Text Color'**
+  String get chatPreferencesTextDialogColor;
+
+  /// No description provided for @chatPreferencesLightTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Light Theme'**
+  String get chatPreferencesLightTheme;
+
+  /// No description provided for @chatPreferencesDarkTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Theme'**
+  String get chatPreferencesDarkTheme;
+
+  /// No description provided for @languagesPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Languages'**
+  String get languagesPageTitle;
+
+  /// No description provided for @creditsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Credits'**
+  String get creditsPageTitle;
+
+  /// No description provided for @creditsPageDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Credits'**
+  String get creditsPageDescription;
+
+  /// No description provided for @creditsPageDeveloperCreditsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Developers credits'**
+  String get creditsPageDeveloperCreditsButton;
+
+  /// No description provided for @creditsPageIconsCreditsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Icons credits'**
+  String get creditsPageIconsCreditsButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:client/main.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class RoundCheckbox extends StatelessWidget {
   final bool value;
@@ -104,7 +105,7 @@ class _ChatLanguagesPageState extends State<ChatLanguagesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Languages'),
+        title: Text(AppLocalizations.of(context).languagesPageTitle),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

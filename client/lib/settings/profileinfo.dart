@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:client/l10n/app_localizations.dart';
 
 class Profileinfo extends StatefulWidget {
   const Profileinfo({super.key});
@@ -23,7 +24,7 @@ class _ProfileinfoState extends State<Profileinfo> {
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
-      title: const Text('Profile'),
+      title: Text(AppLocalizations.of(context).profilePageTitle),
     ),
     body: Center(
       child: Column(
@@ -40,47 +41,47 @@ Widget build(BuildContext context) {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: _pickImage,
-            child: const Text('Change Profile Picture'),
+            child: Text(AppLocalizations.of(context).profilePageChangePicture),
           ),
           const SizedBox(height: 70),
-          const SizedBox(
+          SizedBox(
             width: 250.0,
             child: TextField(
               decoration: InputDecoration(
-                labelText: 'Name',
-                border: OutlineInputBorder(),
+                labelText: AppLocalizations.of(context).profilePageName,
+                border: const OutlineInputBorder(),
               ),
             ),
           ),
           const SizedBox(height: 8),
-          const SizedBox(
+          SizedBox(
             width: 250.0,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'This is the name your contacts will see \nIs not related to your login username',
-                style: TextStyle(fontSize: 13),
+                AppLocalizations.of(context).profilePageDescriptionName,
+                style: const TextStyle(fontSize: 13),
               ),
             ),
           ),
           const SizedBox(height: 50),
-          const SizedBox(
+          SizedBox(
             width: 250.0,
             child: TextField(
               decoration: InputDecoration(
-                labelText: 'Info',
-                border: OutlineInputBorder(),
+                labelText: AppLocalizations.of(context).profilePageBiography,
+                border: const OutlineInputBorder(),
               ),
             ),
           ),
           const SizedBox(height: 8),
-          const SizedBox(
+          SizedBox(
             width: 250.0,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Describe yourself briefly',
-                style: TextStyle(fontSize: 13),
+                AppLocalizations.of(context).profilePageDescriptionBiography,
+                style: const TextStyle(fontSize: 13),
               ),
             ),
           ),

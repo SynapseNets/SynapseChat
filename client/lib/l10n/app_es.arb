@@ -26,5 +26,34 @@
     "settingsPageDescription": "Biografia",
     "settingsPageChatSettings": "Impostazioni chat",
     "settingsPageLanguages": "Lingua",
-    "settingsPageCredits": "riconoscimenti"
+    "settingsPageCredits": "riconoscimenti",
+
+
+    "profilePageTitle": "Profilo",
+    "profilePageChangePicture": "Cambia l'immagine profilo",
+    "profilePageName": "Nome",
+    "profilePageDescriptionName": "Questo è il nome che vedranno i tuoi contatti \nNon è correlata con lo username per il login",
+    "profilePageBiography": "Biografia",
+    "profilePageDescriptionBiography": "Descriviti brevemente",
+
+
+    "chatPreferencesTitle": "Impostazioni Chat",
+    "chatPreferencesFontSize": "Grandezza Caratteri",
+    "chatPreferencesFirstText": "Ciao!",
+    "chatPreferencesSecondText": "Ciao! Come stai?",
+    "chatPreferencesThirdText": "Sto bene, grazie! E tu?",
+    "chatPreferencesBackground": "Cambia il colore dello sfondo",
+    "chatPreferencesTextColor": "Cambia il colore dei caratteri",
+    "chatPreferencesLightTheme": "Tema chiaro",
+    "chatPreferencesLightTheme": "Tema scuro",
+
+
+    "languagesPageTitle": "Languages",
+
+
+    "creditsPageTitle": "Crediti",
+    "creditsPageDescription": "Crediti",
+    "creditsPageDeveloperCreditsButton": "Crediti Sviluppatori",
+    "creditsPageIconsCreditsButton": "Crediti Icone"
+
 }

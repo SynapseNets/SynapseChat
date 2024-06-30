@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class ChatPreferencesPage extends StatefulWidget {
   const ChatPreferencesPage({super.key});
@@ -55,7 +56,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
       theme: isDarkTheme ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Chat Settings'),
+          title: Text(AppLocalizations.of(context).chatPreferencesTitle),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -72,9 +73,9 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Font Size',
-                      style: TextStyle(fontSize: 20),
+                    Text(
+                      AppLocalizations.of(context).chatPreferencesFontSize,
+                      style: const TextStyle(fontSize: 20),
                     ),
                     Text(
                       sizeChar.toInt().toString(),
@@ -118,7 +119,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            'Hi there!',
+                           AppLocalizations.of(context).chatPreferencesFirstText,
                             style: TextStyle(fontSize: sizeChar, color: textColor),
                           ),
                         ),
@@ -133,7 +134,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            'Hello! How are you?',
+                            AppLocalizations.of(context).chatPreferencesSecondText,
                             style: TextStyle(fontSize: sizeChar, color: textColor),
                           ),
                         ),
@@ -148,7 +149,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            'I\'m good, thanks! And you?',
+                            AppLocalizations.of(context).chatPreferencesThirdText,
                             style: TextStyle(fontSize: sizeChar, color: textColor),
                           ),
                         ),
@@ -164,7 +165,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: const Text('Choose Background Color'),
+                          title: Text(AppLocalizations.of(context).chatPreferencesTextDialogBackground),
                           content: SingleChildScrollView(
                             child: BlockPicker(
                               pickerColor: backgroundColor,
@@ -188,9 +189,9 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                         height: 40,
                       ),
                       const SizedBox(width: 10),
-                      const Text(
-                        'Change Background Color',
-                        style: TextStyle(fontSize: 18),
+                      Text(
+                        AppLocalizations.of(context).chatPreferencesBackground,
+                        style: const TextStyle(fontSize: 18),
                       ),
                     ],
                   ),
@@ -203,7 +204,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: const Text('Choose Text Color'),
+                          title: Text(AppLocalizations.of(context).chatPreferencesTextDialogColor),
                           content: SingleChildScrollView(
                             child: BlockPicker(
                               pickerColor: textColor,
@@ -227,16 +228,16 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                         color: textColor,
                       ),
                       const SizedBox(width: 10),
-                      const Text(
-                        'Change Text Color',
-                        style: TextStyle(fontSize: 18),
+                      Text(
+                        AppLocalizations.of(context).chatPreferencesTextColor,
+                        style: const TextStyle(fontSize: 18),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 20),
                 CheckboxListTile(
-                  title: const Text('Light Theme'),
+                  title: Text(AppLocalizations.of(context).chatPreferencesLightTheme),
                   value: lightThemeSelected,
                   onChanged: (bool? value) {
                     if (value != null && value) {
@@ -245,7 +246,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                   },
                 ),
                 CheckboxListTile(
-                  title: const Text('Dark Theme'),
+                  title: Text(AppLocalizations.of(context).chatPreferencesDarkTheme),
                   value: darkThemeSelected,
                   onChanged: (bool? value) {
                     if (value != null && value) {
