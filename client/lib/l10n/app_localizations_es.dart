@@ -33,4 +33,16 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get loginPage_Login => 'Login';
+
+  @override
+  String get registrationPage_title => 'Registrazione';
+
+  @override
+  String get registrationPage_description => 'Registrati a SynapseChat';
+
+  @override
+  String get registrationPage_repeatPw => 'Ripeti Password';
+
+  @override
+  String get registrationPage_registration => 'Registrati';
 }

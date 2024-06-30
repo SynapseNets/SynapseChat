@@ -20,7 +20,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get homepage_options => 'Opzioni';
 
   @override
-  String get loginPage_title => 'Accedi';
+  String get loginPage_title => 'Accesso';
 
   @override
   String get loginPage_description => 'Accedi a SynapseChat';
@@ -33,4 +33,16 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get loginPage_Login => 'Accedi';
+
+  @override
+  String get registrationPage_title => 'Registrazione';
+
+  @override
+  String get registrationPage_description => 'Registrati a SynapseChat';
+
+  @override
+  String get registrationPage_repeatPw => 'Ripeti Password';
+
+  @override
+  String get registrationPage_registration => 'Registrati';
 }

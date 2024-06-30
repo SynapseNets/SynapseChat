@@ -6,9 +6,15 @@
     "homepage_options":"Opzioni",
 
 
-    "loginPage_title":"Accedi",
+    "loginPage_title":"Accesso",
     "loginPage_description":"Accedi a SynapseChat",
     "loginPage_remeberMe":"Ricordami",
     "loginPage_signUp":"Registrati",
-    "loginPage_Login":"Accedi"
+    "loginPage_Login":"Accedi",
+
+
+    "registrationPage_title":"Registrazione",
+    "registrationPage_description":"Registrati a SynapseChat",
+    "registrationPage_repeatPw":"Ripeti Password",
+    "registrationPage_registration":"Registrati"
 }

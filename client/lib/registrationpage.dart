@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class Registrationpage extends StatefulWidget {
   const Registrationpage({super.key});
@@ -26,7 +27,7 @@ class _RegistrationpageState extends State<Registrationpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registration'),
+        title: Text(AppLocalizations.of(context).registrationPage_title),
       ),
       body: Center(
         child: Column(
@@ -38,9 +39,9 @@ class _RegistrationpageState extends State<Registrationpage> {
               height: 140,
             ),
             const SizedBox(height: 40),
-            const Text(
-              'Signup to SynapseChat',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context).registrationPage_description,
+              style: const TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -85,7 +86,7 @@ class _RegistrationpageState extends State<Registrationpage> {
                 obscureText: _isObscure,
                 controller: _password2,
                 decoration: InputDecoration(
-                  labelText: 'Repeat Password',
+                  labelText: AppLocalizations.of(context).registrationPage_repeatPw,
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -108,9 +109,9 @@ class _RegistrationpageState extends State<Registrationpage> {
                 onPressed: (){
                    _register() ?  Navigator.pushNamed(context, '/login') : print("registration denied");
                   },
-                child: const Text(
-                  'Register',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context).registrationPage_registration,
+                  style: const TextStyle(
                     fontSize: 18.0,
                   ),
                 ),

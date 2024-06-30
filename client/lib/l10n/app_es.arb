@@ -10,6 +10,11 @@
     "loginPage_description":"Login to SynapseChat",
     "loginPage_remeberMe":"Remember me",
     "loginPage_signUp":"Sign Up",
-    "loginPage_Login":"Login"
+    "loginPage_Login":"Login",
+
+    "registrationPage_title":"Registrazione",
+    "registrationPage_description":"Registrati a SynapseChat",
+    "registrationPage_repeatPw":"Ripeti Password",
+    "registrationPage_registration":"Registrati"
 
 }

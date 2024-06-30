@@ -154,6 +154,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Login'**
   String get loginPage_Login;
+
+  /// No description provided for @registrationPage_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration'**
+  String get registrationPage_title;
+
+  /// No description provided for @registrationPage_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Signup to SynapseChat'**
+  String get registrationPage_description;
+
+  /// No description provided for @registrationPage_repeatPw.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat Password'**
+  String get registrationPage_repeatPw;
+
+  /// No description provided for @registrationPage_registration.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get registrationPage_registration;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
