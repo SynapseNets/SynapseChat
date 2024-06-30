@@ -41,7 +41,7 @@ class _SidebarState extends State<Sidebar> {
                       Conversation conversation = conversations[index];
                       return ChatButton(
                           title: conversation.receiver,
-                          lastMessage: conversation.lastMessage,
+                          lastMessage: conversation.lastMessage.length > 20 ? "${conversation.lastMessage.substring(0, 20)}..." : conversation.lastMessage,
                           time: conversation.lastMessageTime.toString().substring(0, 19),
                           onPressed: () {
                             widget.chatFocus.toggleChatFocus();
