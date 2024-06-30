@@ -1,18 +1,41 @@
+from flask_socketio import SocketIO, join_room, leave_room, emit, rooms
 from werkzeug.security import generate_password_hash
+from utils.decorators import token_socket
 from flask import Flask
-from flask_socketio import SocketIO
 from utils.db import get_db_path
-from utils.models import db, UserPanel
+from utils.models import *
 from utils import login
 import ssl, os, time
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 context.load_cert_chain('server_cert.pem', 'server_key.pem')
 app = Flask(__name__)
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins='*')
 app.config['SQLALCHEMY_DATABASE_URI'] = get_db_path()
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.secret_key = os.urandom(32).hex()
+
+@socketio.on('connect')
+def connect():
+    emit('connected', {'status': 'ok'})
+
+@socketio.on('send')
+@token_socket
+def send_message(message: dict, user_id: int):
+    text = message.get('text')
+    group = message.get('group')
+    timestamp = message.get('time')
+    
+    group: Group = Group.query.filter_by(id=group).first()
+    if not group:
+        emit('error', {'message': 'Group not found'})
+        return
+           
+    user: User = User.query.filter_by(id=user_id).first()
+    msg = Messages(user_id=user.id, group_id=group, username=user.username, message=text, time=timestamp)
+    db.session.add(msg)
+    db.session.commit()
+    emit('message', {'text': text, 'time': timestamp, 'user': user.username}, room=group.id)
     
 if __name__ == '__main__':
     from routes import main

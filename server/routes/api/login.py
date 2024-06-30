@@ -1,9 +1,9 @@
 from werkzeug.security import generate_password_hash
 from flask import request, jsonify
-from utils.models import User
-import asyncio, os, pyotp
+from utils.models import User, Session, db
+import asyncio, os, pyotp, datetime
 
-async def login():
+def login():
     data = request.get_json()
     if not isinstance(data, dict):
         return jsonify({'message': 'Invalid JSON'}), 400
@@ -21,8 +21,15 @@ async def login():
     if not user:
         return jsonify({'message': 'User not found'}), 404
 
-    await asyncio.sleep(0.5) # TODO: remove this if tool anti-DDoS is enabled
+    # TODO: add tool anti-DDoS
     if pyotp.TOTP(user.otp_secret, name=user.username, issuer=os.getenv('ISSUER')).verify(otp):
-        return jsonify({'auth': generate_password_hash(os.urandom(20).hex())}), 200 # token of user
+        session = Session(
+            user_id=user.id,
+            token=(token := generate_password_hash(os.urandom(20).hex())),
+            expiration=datetime.datetime.now().timestamp() + (3600 * 24) # 1 day
+        )
+        db.session.add(session)
+        db.session.commit()
+        return jsonify({'auth': token}), 200 # token of user
     else:
         return jsonify({'message': 'Invalid OTP'}), 403

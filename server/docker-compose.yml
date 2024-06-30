@@ -20,3 +20,8 @@ services:
       retries: 30
     env_file:
       - .env
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:

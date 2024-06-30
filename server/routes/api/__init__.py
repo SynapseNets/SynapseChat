@@ -7,7 +7,6 @@ from . import join_group
 from . import leave_group
 from . import login
 from . import register
-from . import send_message
 
 apibp = Blueprint('api', __name__)
 
@@ -18,4 +17,3 @@ apibp.route('/join_group', methods=['POST'])(token_required(join_group.join_grou
 apibp.route('/leave_group', methods=['POST'])(token_required(leave_group.leave_group))
 apibp.route('/login', methods=['POST'])(login.login)
 apibp.route('/register', methods=['POST'])(register.register)
-apibp.route('/send_message', methods=['POST'])(token_required(send_message.send_message))
