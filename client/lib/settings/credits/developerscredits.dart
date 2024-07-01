@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class Developerscredits extends StatefulWidget {
   const Developerscredits({super.key});
@@ -75,9 +76,9 @@ class _DeveloperscreditsState extends State<Developerscredits> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Developers Credits',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context).developerscreditsPageTitle,
+          style: const TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.bold,
           ),
@@ -92,35 +93,35 @@ class _DeveloperscreditsState extends State<Developerscredits> {
               'https://avatars.githubusercontent.com/u/88632271?v=4',
               'AlBovo',
               'Alan Davide Bovo',
-              'Frontend and Backend Developer for Client'
+              AppLocalizations.of(context).developerscreditsPageDescriptionAlBovo
             ),
             buildGitHubProfile(
               'https://github.com/Mark-74',
               'https://avatars.githubusercontent.com/u/110310114?v=4',
               'Mark-74',
               'Marco Balducci',
-              'Frontend and Backend Developer for Client'
+              AppLocalizations.of(context).developerscreditsPageDescriptionMark74
             ),
             buildGitHubProfile(
               'https://github.com/MattiaCincotta',
               'https://avatars.githubusercontent.com/u/146827826?s=400&u=9407e6239be9581eefe639ae41138c053fc4d11c&v=4',
               'MattiaCincotta',
               'Mattia Cincotta',
-              'Frontend and Backend Developer for Client'
+              AppLocalizations.of(context).developerscreditsPageDescriptionMattiaCincotta
             ),
             buildGitHubProfile(
               'https://github.com/Lorii0',
               'https://avatars.githubusercontent.com/u/146861747?v=4',
               'Lorii0',
               'Lorenzo Shani',
-              'Frontend and Backend Developer for Client'
+              AppLocalizations.of(context).developerscreditsPageDescriptionLorii0
             ),
             buildGitHubProfile(
               'https://github.com/Antostarwars/Antostarwars',
               'https://avatars.githubusercontent.com/u/67382924?v=4',
               'Antostarwars',
               'Antonio De Rosa',
-              'Frontend and Backend Developer for Client'
+              AppLocalizations.of(context).developerscreditsPageDescriptionAntostarwars
             ),
           ],
         ),

@@ -47,6 +47,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get registrationPageRegistration => 'Registrati';
 
   @override
+  String get contentPageSelectChatText => 'Seleziona una chat per iniziare a messaggiare';
+
+  @override
   String get serverConnectPageTitle => 'Connessione al server';
 
   @override
@@ -141,4 +144,46 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get creditsPageIconsCreditsButton => 'Crediti Icone';
+
+  @override
+  String get developerscreditsPageTitle => 'Crediti Sviluppatori';
+
+  @override
+  String get developerscreditsPageDescriptionAlBovo => 'Sviluppo lato server';
+
+  @override
+  String get developerscreditsPageDescriptionMark74 => 'Sviluppo frontend e backend del client';
+
+  @override
+  String get developerscreditsPageDescriptionMattiaCincotta => 'Sviluppo frontend';
+
+  @override
+  String get developerscreditsPageDescriptionLorii0 => 'Sviluppo frontend';
+
+  @override
+  String get developerscreditsPageDescriptionAntostarwars => 'Sviluppo frontend e backend del client';
+
+  @override
+  String get iconscreditsPageTitle => 'Crediti Icone';
+
+  @override
+  String get iconscreditsPageInfoIcon => 'Icona informazioni creata da Anggara - Flaticon';
+
+  @override
+  String get iconscreditsPageMessageIcon => 'Icona messaggio creata da Fathema Khanom - Flaticon';
+
+  @override
+  String get iconscreditsPageGalleryIcon => 'Icona galleria creata da adrianadam - Flaticon';
+
+  @override
+  String get iconscreditsPageAddDatabaseIcon => 'Icona aggiungi database creata da Arafat Uddin - Flaticon';
+
+  @override
+  String get iconscreditsPageProfileImageIcon => 'Icona immagine profilo creata da Md Tanvirul Haque - Flaticon';
+
+  @override
+  String get iconscreditsPageUserIcon => 'Icone utente create da Freepik - Flaticon';
+
+  @override
+  String get iconscreditsPageEarthGlobeIcon => 'Icona globo terrestre creata da Freepik - Flaticon';
 }

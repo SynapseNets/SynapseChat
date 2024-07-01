@@ -16,6 +16,10 @@
     "registrationPageRepeatPw": "Ripeti Password",
     "registrationPageRegistration": "Registrati",
 
+
+    "contentPageSelectChatText":"Select a chat to start messaging",
+
+
     "serverConnectPageTitle": "Connessione al server",
     "serverConnectPageDescription": "Connettiti ad un nuovo server",
     "serverConnectPageIp": "IP del server",
@@ -54,6 +58,25 @@
     "creditsPageTitle": "Crediti",
     "creditsPageDescription": "Crediti",
     "creditsPageDeveloperCreditsButton": "Crediti Sviluppatori",
-    "creditsPageIconsCreditsButton": "Crediti Icone"
+    "creditsPageIconsCreditsButton": "Crediti Icone",
+
+
+    "developerscreditsPageTitle": "Developers Credits",
+    "developerscreditsPageDescriptionAlBovo": "Server-side development",
+    "developerscreditsPageDescriptionMark74": "Frontend and client-side backend development",
+    "developerscreditsPageDescriptionMattiaCincotta": "Frontend development",
+    "developerscreditsPageDescriptionLorii0": "Frontend development",
+    "developerscreditsPageDescriptionAntostarwars": "Frontend and client-side backend development",
+
+
+    "iconscreditsPageTitle":"Icons Credits",
+    "iconscreditsPageInfoIcon":"  Info icon created by Anggara - Flaticon",
+    "iconscreditsPageMessageIcon":"   Message icon created by Fathema Khanom - Flaticon",
+    "iconscreditsPageGalleryIcon":"   Gallery icon created by adrianadam - Flaticon",
+    "iconscreditsPageAddDatabaseIcon":"   Add database icon created by Arafat Uddin - Flaticon",
+    "iconscreditsPageProfileImageIcon":"   Profile image icon created by Md Tanvirul Haque - Flaticon",
+    "iconscreditsPageUserIcon":"   User icons created by Freepik - Flaticon",
+    "iconscreditsPageEarthGlobeIcon":"   Earth globe icon created by Freepik - Flaticon"
+
 
 }

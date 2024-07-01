@@ -7,6 +7,7 @@ import 'package:client/utils/db.dart';
 import 'package:client/chat/chatcontroller.dart';
 import 'package:client/chat/messagenotifier.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class Content extends StatefulWidget {
   final ChatController currentChatController;
@@ -229,8 +230,8 @@ class _ContentState extends State<Content> {
             }),
         Builder(builder: (context) {
           if (widget.currentChatController.currentChat == '') {
-            return const Center(
-              child: Text('Select a chat to start messaging'),
+            return Center(
+              child: Text(AppLocalizations.of(context).contentPageSelectChatText),
             );
           } else {
             return Container(

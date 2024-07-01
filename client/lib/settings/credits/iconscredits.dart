@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:client/l10n/app_localizations.dart';
 
 class Iconscredits extends StatefulWidget {
   const Iconscredits({super.key});
@@ -72,9 +73,9 @@ class _IconscreditsState extends State<Iconscredits> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Icons credits',
-          style: TextStyle(
+        title: Text(
+          AppLocalizations.of(context).iconscreditsPageTitle,
+          style: const TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.bold,
           ),
@@ -84,13 +85,13 @@ class _IconscreditsState extends State<Iconscredits> {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
         child: Column(
           children: [
-            buildIconCredit('images/info.png', 'Info icons created by Anggara - Flaticon', 'https://www.flaticon.com/authors/anggara'),
-            buildIconCredit('images/chat_settings.png', '   Message icons created by Fathema Khanom - Flaticon', 'https://www.flaticon.com/authors/fathema-khanom'),
-            buildIconCredit('images/background.png', '   Gallery icons created by adrianadam - Flaticon', 'https://www.flaticon.com/authors/adrianadam'),
-            buildIconCredit('images/add_server.png', '   Add database icons created by Arafat Uddin - Flaticon', 'https://www.flaticon.com/authors/arafat-uddin'),
-            buildIconCredit('images/default_profile.png', '   User icons created by Freepik - Flaticon', 'https://www.flaticon.com/authors/freepik'),
-            buildIconCredit('images/user.png', '   Profile image icons created by Md Tanvirul Haque - Flaticon', 'https://www.flaticon.com/authors/md-tanvirul-haque'),
-            buildIconCredit('images/language.png', '   Earth globe icons created by Freepik - Flaticon', 'https://www.flaticon.com/authors/freepik'),
+            buildIconCredit('images/info.png',AppLocalizations.of(context).iconscreditsPageInfoIcon, 'https://www.flaticon.com/authors/anggara'),
+            buildIconCredit('images/chat_settings.png',AppLocalizations.of(context).iconscreditsPageMessageIcon, 'https://www.flaticon.com/authors/fathema-khanom'),
+            buildIconCredit('images/background.png',AppLocalizations.of(context).iconscreditsPageGalleryIcon, 'https://www.flaticon.com/authors/adrianadam'),
+            buildIconCredit('images/add_server.png',AppLocalizations.of(context).iconscreditsPageAddDatabaseIcon, 'https://www.flaticon.com/authors/arafat-uddin'),
+            buildIconCredit('images/default_profile.png',AppLocalizations.of(context).iconscreditsPageProfileImageIcon, 'https://www.flaticon.com/authors/freepik'),
+            buildIconCredit('images/user.png',AppLocalizations.of(context).iconscreditsPageUserIcon, 'https://www.flaticon.com/authors/md-tanvirul-haque'),
+            buildIconCredit('images/language.png',AppLocalizations.of(context).iconscreditsPageEarthGlobeIcon, 'https://www.flaticon.com/authors/freepik'),
           ],
         ),
       ),

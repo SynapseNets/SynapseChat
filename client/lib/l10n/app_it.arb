@@ -16,6 +16,10 @@
     "registrationPageRepeatPw": "Ripeti Password",
     "registrationPageRegistration": "Registrati",
 
+
+    "contentPageSelectChatText":"Seleziona una chat per iniziare a messaggiare",
+
+
     "serverConnectPageTitle": "Connessione al server",
     "serverConnectPageDescription": "Connettiti ad un nuovo server",
     "serverConnectPageIp": "IP del server",
@@ -55,6 +59,23 @@
     "creditsPageTitle": "Crediti",
     "creditsPageDescription": "Crediti",
     "creditsPageDeveloperCreditsButton": "Crediti Sviluppatori",
-    "creditsPageIconsCreditsButton": "Crediti Icone"
+    "creditsPageIconsCreditsButton": "Crediti Icone",
 
+
+    "developerscreditsPageTitle": "Crediti Sviluppatori",
+    "developerscreditsPageDescriptionAlBovo": "Sviluppo lato server",
+    "developerscreditsPageDescriptionMark74": "Sviluppo frontend e backend del client",
+    "developerscreditsPageDescriptionMattiaCincotta": "Sviluppo frontend",
+    "developerscreditsPageDescriptionLorii0": "Sviluppo frontend",
+    "developerscreditsPageDescriptionAntostarwars": "Sviluppo frontend e backend del client",
+
+
+    "iconscreditsPageTitle":"Crediti Icone",
+    "iconscreditsPageInfoIcon": "Icona informazioni creata da Anggara - Flaticon",
+    "iconscreditsPageMessageIcon": "Icona messaggio creata da Fathema Khanom - Flaticon",
+    "iconscreditsPageGalleryIcon": "Icona galleria creata da adrianadam - Flaticon",
+    "iconscreditsPageAddDatabaseIcon": "Icona aggiungi database creata da Arafat Uddin - Flaticon",
+    "iconscreditsPageProfileImageIcon": "Icona immagine profilo creata da Md Tanvirul Haque - Flaticon",
+    "iconscreditsPageUserIcon": "Icone utente create da Freepik - Flaticon",
+    "iconscreditsPageEarthGlobeIcon": "Icona globo terrestre creata da Freepik - Flaticon"
 }

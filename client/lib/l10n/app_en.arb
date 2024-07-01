@@ -16,6 +16,10 @@
   "registrationPageRepeatPw": "Repeat Password",
   "registrationPageRegistration": "Register",
 
+
+  "contentPageSelectChatText":"Select a chat to start messaging",
+
+
   "serverConnectPageTitle": "Connect to a server",
   "serverConnectPageDescription": "Connect to a new server",
   "serverConnectPageIp": "Server IP",
@@ -56,8 +60,25 @@
   "creditsPageTitle": "Credits",
   "creditsPageDescription": "Credits",
   "creditsPageDeveloperCreditsButton": "Developers credits",
-  "creditsPageIconsCreditsButton": "Icons credits"
+  "creditsPageIconsCreditsButton": "Icons credits",
 
+
+  "developerscreditsPageTitle": "Developers Credits",
+  "developerscreditsPageDescriptionAlBovo": "Server-side development",
+  "developerscreditsPageDescriptionMark74": "Frontend and client-side backend development",
+  "developerscreditsPageDescriptionMattiaCincotta": "Frontend development",
+  "developerscreditsPageDescriptionLorii0": "Frontend development",
+  "developerscreditsPageDescriptionAntostarwars": "Frontend and client-side backend development",
+
+
+  "iconscreditsPageTitle":"Icons Credits",
+  "iconscreditsPageInfoIcon":"  Info icon created by Anggara - Flaticon",
+  "iconscreditsPageMessageIcon":"   Message icon created by Fathema Khanom - Flaticon",
+  "iconscreditsPageGalleryIcon":"   Gallery icon created by adrianadam - Flaticon",
+  "iconscreditsPageAddDatabaseIcon":"   Add database icon created by Arafat Uddin - Flaticon",
+  "iconscreditsPageProfileImageIcon":"   Profile image icon created by Md Tanvirul Haque - Flaticon",
+  "iconscreditsPageUserIcon":"   User icons created by Freepik - Flaticon",
+  "iconscreditsPageEarthGlobeIcon":"   Earth globe icon created by Freepik - Flaticon"
 
 
 }

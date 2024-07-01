@@ -179,6 +179,12 @@ abstract class AppLocalizations {
   /// **'Register'**
   String get registrationPageRegistration;
 
+  /// No description provided for @contentPageSelectChatText.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a chat to start messaging'**
+  String get contentPageSelectChatText;
+
   /// No description provided for @serverConnectPageTitle.
   ///
   /// In en, this message translates to:
@@ -370,6 +376,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Icons credits'**
   String get creditsPageIconsCreditsButton;
+
+  /// No description provided for @developerscreditsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Developers Credits'**
+  String get developerscreditsPageTitle;
+
+  /// No description provided for @developerscreditsPageDescriptionAlBovo.
+  ///
+  /// In en, this message translates to:
+  /// **'Server-side development'**
+  String get developerscreditsPageDescriptionAlBovo;
+
+  /// No description provided for @developerscreditsPageDescriptionMark74.
+  ///
+  /// In en, this message translates to:
+  /// **'Frontend and client-side backend development'**
+  String get developerscreditsPageDescriptionMark74;
+
+  /// No description provided for @developerscreditsPageDescriptionMattiaCincotta.
+  ///
+  /// In en, this message translates to:
+  /// **'Frontend development'**
+  String get developerscreditsPageDescriptionMattiaCincotta;
+
+  /// No description provided for @developerscreditsPageDescriptionLorii0.
+  ///
+  /// In en, this message translates to:
+  /// **'Frontend development'**
+  String get developerscreditsPageDescriptionLorii0;
+
+  /// No description provided for @developerscreditsPageDescriptionAntostarwars.
+  ///
+  /// In en, this message translates to:
+  /// **'Frontend and client-side backend development'**
+  String get developerscreditsPageDescriptionAntostarwars;
+
+  /// No description provided for @iconscreditsPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Icons Credits'**
+  String get iconscreditsPageTitle;
+
+  /// No description provided for @iconscreditsPageInfoIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'  Info icon created by Anggara - Flaticon'**
+  String get iconscreditsPageInfoIcon;
+
+  /// No description provided for @iconscreditsPageMessageIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'   Message icon created by Fathema Khanom - Flaticon'**
+  String get iconscreditsPageMessageIcon;
+
+  /// No description provided for @iconscreditsPageGalleryIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'   Gallery icon created by adrianadam - Flaticon'**
+  String get iconscreditsPageGalleryIcon;
+
+  /// No description provided for @iconscreditsPageAddDatabaseIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'   Add database icon created by Arafat Uddin - Flaticon'**
+  String get iconscreditsPageAddDatabaseIcon;
+
+  /// No description provided for @iconscreditsPageProfileImageIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'   Profile image icon created by Md Tanvirul Haque - Flaticon'**
+  String get iconscreditsPageProfileImageIcon;
+
+  /// No description provided for @iconscreditsPageUserIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'   User icons created by Freepik - Flaticon'**
+  String get iconscreditsPageUserIcon;
+
+  /// No description provided for @iconscreditsPageEarthGlobeIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'   Earth globe icon created by Freepik - Flaticon'**
+  String get iconscreditsPageEarthGlobeIcon;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
