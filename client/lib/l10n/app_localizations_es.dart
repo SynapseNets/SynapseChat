@@ -5,185 +5,185 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get homepageTitle => '¡Bienvenido a SynapseChat!';
+  String get homepageTitle => 'Bienvenido a SynapseChat';
 
   @override
-  String get homepageDescription => '¡Bienvenido a SynapseChat!';
+  String get homepageDescription => 'El servicio de mensajería más seguro del mundo';
 
   @override
-  String get homepageSelectLanguage => '¡Bienvenido a SynapseChat!';
+  String get homepageSelectLanguage => 'Selecciona el idioma';
 
   @override
-  String get homepageContinue => '¡Bienvenido a SynapseChat!';
+  String get homepageContinue => 'Continuar';
 
   @override
-  String get homepageOptions => '¡Bienvenido a SynapseChat!';
+  String get homepageOptions => 'Opciones';
 
   @override
-  String get loginPageTitle => 'Login';
+  String get loginPageTitle => 'Acceso';
 
   @override
-  String get loginPageDescription => 'Login to SynapseChat';
+  String get loginPageDescription => 'Accede a SynapseChat';
 
   @override
-  String get loginPageRememberMe => 'Remember me';
+  String get loginPageRememberMe => 'Recuérdame';
 
   @override
-  String get loginPageSignUp => 'Sign Up';
+  String get loginPageSignUp => 'Regístrate';
 
   @override
-  String get loginPageLogin => 'Login';
+  String get loginPageLogin => 'Acceder';
 
   @override
-  String get registrationPageTitle => 'Registrazione';
+  String get registrationPageTitle => 'Registro';
 
   @override
-  String get registrationPageDescription => 'Registrati a SynapseChat';
+  String get registrationPageDescription => 'Regístrate en SynapseChat';
 
   @override
-  String get registrationPageRepeatPw => 'Ripeti Password';
+  String get registrationPageRepeatPw => 'Repite la contraseña';
 
   @override
-  String get registrationPageRegistration => 'Registrati';
+  String get registrationPageRegistration => 'Registrarse';
 
   @override
-  String get contentPageSelectChatText => 'Select a chat to start messaging';
+  String get contentPageSelectChatText => 'Selecciona un chat para comenzar a mensajear';
 
   @override
-  String get serverConnectPageTitle => 'Connessione al server';
+  String get serverConnectPageTitle => 'Conexión al servidor';
 
   @override
-  String get serverConnectPageDescription => 'Connettiti ad un nuovo server';
+  String get serverConnectPageDescription => 'Conéctate a un nuevo servidor';
 
   @override
-  String get serverConnectPageIp => 'IP del server';
+  String get serverConnectPageIp => 'IP del servidor';
 
   @override
-  String get serverConnectPageConnect => 'Connettiti';
+  String get serverConnectPageConnect => 'Conectar';
 
   @override
-  String get settingsPageTitle => 'Impostazioni';
+  String get settingsPageTitle => 'Configuración';
 
   @override
-  String get settingsPageUsername => 'Nome';
+  String get settingsPageUsername => 'Nombre';
 
   @override
-  String get settingsPageDescription => 'Biografia';
+  String get settingsPageDescription => 'Biografía';
 
   @override
-  String get settingsPageChatSettings => 'Impostazioni chat';
+  String get settingsPageChatSettings => 'Configuración de chat';
 
   @override
-  String get settingsPageLanguages => 'Lingua';
+  String get settingsPageLanguages => 'Idioma';
 
   @override
-  String get settingsPageCredits => 'riconoscimenti';
+  String get settingsPageCredits => 'Créditos';
 
   @override
-  String get profilePageTitle => 'Profilo';
+  String get profilePageTitle => 'Perfil';
 
   @override
-  String get profilePageChangePicture => 'Cambia l\'immagine profilo';
+  String get profilePageChangePicture => 'Cambiar la imagen del perfil';
 
   @override
-  String get profilePageName => 'Nome';
+  String get profilePageName => 'Nombre';
 
   @override
-  String get profilePageDescriptionName => 'Questo è il nome che vedranno i tuoi contatti \nNon è correlata con lo username per il login';
+  String get profilePageDescriptionName => 'Nombre visible para los contactos. \nNo está vinculado al nombre de usuario de inicio de sesión';
 
   @override
-  String get profilePageBiography => 'Biografia';
+  String get profilePageBiography => 'Biografía';
 
   @override
-  String get profilePageDescriptionBiography => 'Descriviti brevemente';
+  String get profilePageDescriptionBiography => 'Descríbete brevemente';
 
   @override
-  String get chatPreferencesTitle => 'Impostazioni Chat';
+  String get chatPreferencesTitle => 'Configuración del chat';
 
   @override
-  String get chatPreferencesFontSize => 'Grandezza Caratteri';
+  String get chatPreferencesFontSize => 'Tamaño de fuente';
 
   @override
-  String get chatPreferencesFirstText => 'Ciao!';
+  String get chatPreferencesFirstText => '¡Hola!';
 
   @override
-  String get chatPreferencesSecondText => 'Ciao! Come stai?';
+  String get chatPreferencesSecondText => '¡Hola! ¿Cómo estás?';
 
   @override
-  String get chatPreferencesThirdText => 'Sto bene, grazie! E tu?';
+  String get chatPreferencesThirdText => 'Estoy bien, gracias. ¿Y tú?';
 
   @override
-  String get chatPreferencesBackground => 'Cambia il colore dello sfondo';
+  String get chatPreferencesBackground => 'Cambiar el color de fondo';
 
   @override
-  String get chatPreferencesTextDialogBackground => 'Choose Background Color';
+  String get chatPreferencesTextDialogBackground => 'Elige el color de fondo';
 
   @override
-  String get chatPreferencesTextColor => 'Cambia il colore dei caratteri';
+  String get chatPreferencesTextColor => 'Cambiar el color del texto';
 
   @override
-  String get chatPreferencesTextDialogColor => 'Choose Text Color';
+  String get chatPreferencesTextDialogColor => 'Elige el color del texto';
 
   @override
-  String get chatPreferencesLightTheme => 'Tema scuro';
+  String get chatPreferencesLightTheme => 'Tema claro';
 
   @override
-  String get chatPreferencesDarkTheme => 'Dark Theme';
+  String get chatPreferencesDarkTheme => 'Tema oscuro';
 
   @override
-  String get languagesPageTitle => 'Languages';
+  String get languagesPageTitle => 'Idiomas';
 
   @override
-  String get creditsPageTitle => 'Crediti';
+  String get creditsPageTitle => 'Créditos';
 
   @override
-  String get creditsPageDescription => 'Crediti';
+  String get creditsPageDescription => 'Créditos';
 
   @override
-  String get creditsPageDeveloperCreditsButton => 'Crediti Sviluppatori';
+  String get creditsPageDeveloperCreditsButton => 'Créditos de Desarrolladores';
 
   @override
-  String get creditsPageIconsCreditsButton => 'Crediti Icone';
+  String get creditsPageIconsCreditsButton => 'Créditos de Iconos';
 
   @override
-  String get developerscreditsPageTitle => 'Developers Credits';
+  String get developerscreditsPageTitle => 'Créditos de Desarrolladores';
 
   @override
-  String get developerscreditsPageDescriptionAlBovo => 'Server-side development';
+  String get developerscreditsPageDescriptionAlBovo => 'Desarrollo del servidor';
 
   @override
-  String get developerscreditsPageDescriptionMark74 => 'Frontend and client-side backend development';
+  String get developerscreditsPageDescriptionMark74 => 'Desarrollo frontend y backend del cliente';
 
   @override
-  String get developerscreditsPageDescriptionMattiaCincotta => 'Frontend development';
+  String get developerscreditsPageDescriptionMattiaCincotta => 'Desarrollo frontend';
 
   @override
-  String get developerscreditsPageDescriptionLorii0 => 'Frontend development';
+  String get developerscreditsPageDescriptionLorii0 => 'Desarrollo frontend';
 
   @override
-  String get developerscreditsPageDescriptionAntostarwars => 'Frontend and client-side backend development';
+  String get developerscreditsPageDescriptionAntostarwars => 'Desarrollo frontend y backend del cliente';
 
   @override
-  String get iconscreditsPageTitle => 'Icons Credits';
+  String get iconscreditsPageTitle => 'Créditos de Iconos';
 
   @override
-  String get iconscreditsPageInfoIcon => '  Info icon created by Anggara - Flaticon';
+  String get iconscreditsPageInfoIcon => 'Icono de información creado por Anggara - Flaticon';
 
   @override
-  String get iconscreditsPageMessageIcon => '   Message icon created by Fathema Khanom - Flaticon';
+  String get iconscreditsPageMessageIcon => 'Icono de mensaje creado por Fathema Khanom - Flaticon';
 
   @override
-  String get iconscreditsPageGalleryIcon => '   Gallery icon created by adrianadam - Flaticon';
+  String get iconscreditsPageGalleryIcon => 'Icono de galería creado por adrianadam - Flaticon';
 
   @override
-  String get iconscreditsPageAddDatabaseIcon => '   Add database icon created by Arafat Uddin - Flaticon';
+  String get iconscreditsPageAddDatabaseIcon => 'Icono de añadir base de datos creado por Arafat Uddin - Flaticon';
 
   @override
-  String get iconscreditsPageProfileImageIcon => '   Profile image icon created by Md Tanvirul Haque - Flaticon';
+  String get iconscreditsPageProfileImageIcon => 'Icono de imagen de perfil creado por Md Tanvirul Haque - Flaticon';
 
   @override
-  String get iconscreditsPageUserIcon => '   User icons created by Freepik - Flaticon';
+  String get iconscreditsPageUserIcon => 'Iconos de usuario creados por Freepik - Flaticon';
 
   @override
-  String get iconscreditsPageEarthGlobeIcon => '   Earth globe icon created by Freepik - Flaticon';
+  String get iconscreditsPageEarthGlobeIcon => 'Icono de globo terráqueo creado por Freepik - Flaticon';
 }
