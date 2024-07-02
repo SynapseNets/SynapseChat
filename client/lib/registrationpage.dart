@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 class Registrationpage extends StatefulWidget {
   const Registrationpage({super.key});
@@ -14,13 +17,20 @@ class _RegistrationpageState extends State<Registrationpage> {
   final TextEditingController _password2 = TextEditingController();
   bool _isObscure = true;
 
-  bool _register() {
-    String username = _username.text;
-    String firstPassword = _password1.text;
-    String secondPassword = _password2.text;
+  Future<bool> _register() async {
+    if(_password1.text != _password2.text){
+      return false;
+    }
+
+    List<int> bytes = utf8.encode(_password1.text);
+    String hash = sha256.convert(bytes).toString();
+
+    const storage = FlutterSecureStorage();
+    await storage.write(key: 'username', value: _username.text);
+    await storage.write(key: 'password', value: hash);
 
     return true;
-    //logica per la registrazione
+    //registration logic
   }
 
   @override
@@ -106,8 +116,8 @@ class _RegistrationpageState extends State<Registrationpage> {
               width: 180.0,
               height: 55.0,
               child: ElevatedButton(
-                onPressed: (){
-                   _register() ?  Navigator.pushNamed(context, '/login') : print("registration denied");
+                onPressed: () async {
+                    await _register() ?  Navigator.pushNamed(context, '/login') : print("registration denied"); //TODO: add popup for failed signup
                   },
                 child: Text(
                   AppLocalizations.of(context).registrationPageRegistration,

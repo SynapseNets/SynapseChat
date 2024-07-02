@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,18 +17,14 @@ class _LoginPageState extends State<LoginPage> {
   bool _isChecked = false; // Variabile di stato per la checkbox
   bool _isObscure = true; // Variabile di stato per la passwordField
 
-  bool _login() {
-    // Logica di autenticazione va qui
-    String username = _usernameController.text;
-    String password = _passwordController.text;
-    bool rememberMe = _isChecked;
-    // Stampa a console (solo per debug)
-    print('Username: $username');
-    print('Password: $password');
-    print('Remember Me: $rememberMe');
+  Future<bool> _login() async {
+    
+    const storage = FlutterSecureStorage();
 
-    return true;
-    // Puoi aggiungere qui la logica di autenticazione con il backend
+    List<int> bytes = utf8.encode(_passwordController.text);
+    String hash = sha256.convert(bytes).toString();
+
+    return (await storage.read(key: 'username') == _usernameController.text) && (hash == await storage.read(key: 'password'));
   }
 
   @override
@@ -126,8 +125,8 @@ class _LoginPageState extends State<LoginPage> {
                 width: 180.0,
                 height: 55.0,
                 child: ElevatedButton(
-                  onPressed: (){
-                  _login() ?  Navigator.pushNamed(context, '/chat'): print("access denied");
+                  onPressed: () async{
+                  await _login() ?  Navigator.pushNamed(context, '/chat'): print("access denied"); //TODO: add popup for failed login
                   },
                   child: Text(
                     AppLocalizations.of(context).loginPageLogin,
