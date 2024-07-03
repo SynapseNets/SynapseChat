@@ -36,6 +36,9 @@ void main() async {
     databaseFactory = databaseFactoryFfi;
   }
 
+  //setup Database
+  await getDb();
+  
   runApp(const SynapseNetsApp());
 }
 
