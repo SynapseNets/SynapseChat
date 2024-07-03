@@ -6,6 +6,7 @@ import 'package:client/settings/credits/developerscredits.dart';
 import 'package:client/settings/credits/iconscredits.dart';
 import 'package:client/settings/creditspage.dart';
 import 'package:client/utils/db.dart';
+import 'package:client/utils/encrypt.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:client/chat/message.dart';
@@ -32,14 +33,26 @@ void main() async {
   if (!(Platform.isAndroid || Platform.isIOS)) {
     await windowManager.ensureInitialized();
     await WindowManager.instance.setMinimumSize(const Size(450, 800));
+
+    WindowManager.instance.addListener(MyWindowListener());
+
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
 
-  //setup Database
+  // Setup Database
   await getDb();
-  
+
   runApp(const SynapseNetsApp());
+}
+
+class MyWindowListener extends WindowListener {
+  //TODO: fix android version
+  @override
+  void onWindowClose() async {
+    //add code to execute on app closure
+    await WindowManager.instance.destroy();
+  }
 }
 
 class SynapseNetsApp extends StatefulWidget {
@@ -58,7 +71,7 @@ class SynapseNetsApp extends StatefulWidget {
 class _SynapseNetsAppState extends State<SynapseNetsApp> {
   Locale _locale = const Locale('en');
 
-  changeLanguage(Locale locale) {
+  void changeLanguage(Locale locale) {
     setState(() {
       _locale = locale;
     });
