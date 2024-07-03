@@ -10,11 +10,17 @@
   "loginPageRememberMe": "Remember me",
   "loginPageSignUp": "Sign Up",
   "loginPageLogin": "Login",
+  "loginPageSnackbarError": "Incorrect username or password",
+
 
   "registrationPageTitle": "Registration",
   "registrationPageDescription": "Signup to SynapseChat",
   "registrationPageRepeatPw": "Repeat Password",
   "registrationPageRegistration": "Register",
+  "registrationPageUsernameError": "Username must not be empty",
+  "registrationPageFirstPasswordError": "Password must be 8 characters long\n with numbers and special characters",
+  "registrationPageSecondPasswordError": "Passwords do not match",
+  "registrationPageSnackbarError": "Access denied: Correct the errors in the fields above",
 
 
   "contentPageSelectChatText":"Select a chat to start messaging",

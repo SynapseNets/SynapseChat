@@ -155,6 +155,12 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get loginPageLogin;
 
+  /// No description provided for @loginPageSnackbarError.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect username or password'**
+  String get loginPageSnackbarError;
+
   /// No description provided for @registrationPageTitle.
   ///
   /// In en, this message translates to:
@@ -178,6 +184,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Register'**
   String get registrationPageRegistration;
+
+  /// No description provided for @registrationPageUsernameError.
+  ///
+  /// In en, this message translates to:
+  /// **'Username must not be empty'**
+  String get registrationPageUsernameError;
+
+  /// No description provided for @registrationPageFirstPasswordError.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be 8 characters long\n with numbers and special characters'**
+  String get registrationPageFirstPasswordError;
+
+  /// No description provided for @registrationPageSecondPasswordError.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get registrationPageSecondPasswordError;
+
+  /// No description provided for @registrationPageSnackbarError.
+  ///
+  /// In en, this message translates to:
+  /// **'Access denied: Correct the errors in the fields above'**
+  String get registrationPageSnackbarError;
 
   /// No description provided for @contentPageSelectChatText.
   ///

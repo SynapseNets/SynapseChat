@@ -35,6 +35,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginPageLogin => 'Login';
 
   @override
+  String get loginPageSnackbarError => 'Incorrect username or password';
+
+  @override
   String get registrationPageTitle => 'Registration';
 
   @override
@@ -45,6 +48,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registrationPageRegistration => 'Register';
+
+  @override
+  String get registrationPageUsernameError => 'Username must not be empty';
+
+  @override
+  String get registrationPageFirstPasswordError => 'Password must be 8 characters long\n with numbers and special characters';
+
+  @override
+  String get registrationPageSecondPasswordError => 'Passwords do not match';
+
+  @override
+  String get registrationPageSnackbarError => 'Access denied: Correct the errors in the fields above';
 
   @override
   String get contentPageSelectChatText => 'Select a chat to start messaging';

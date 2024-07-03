@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:client/l10n/app_localizations.dart';
+import 'package:flutter/services.dart'; // Aggiunto per usare TextInputFormatter
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
+import 'package:client/l10n/app_localizations.dart';
 
 class Registrationpage extends StatefulWidget {
-  const Registrationpage({super.key});
+  const Registrationpage({Key? key}) : super(key: key);
 
   @override
   State<Registrationpage> createState() => _RegistrationpageState();
@@ -16,32 +17,55 @@ class _RegistrationpageState extends State<Registrationpage> {
   final TextEditingController _password1 = TextEditingController();
   final TextEditingController _password2 = TextEditingController();
   bool _isObscure = true;
-  bool _isPasswordValid = false;
-  bool _isUsernameValid = false;
-  String _passwordError = '';
-  String _usernameError = '';
-  String _password2Error = '';
-  String _registrationStatus = '';
+  bool _isUsernameNotEmpty = false;
+  bool _isUsernameInteracted = false; // Stato per verificare se l'utente ha interagito con lo username
+  bool _isPassword1Valid = false; // Stato per verificare se la password1 è valida
+  bool _isPassword1Interacted = false; // Stato per verificare se l'utente ha interagito con la password1
+  bool _isPassword2Interacted = false; // Stato per verificare se l'utente ha interagito con la password2
 
   @override
   void initState() {
     super.initState();
-    _password2.addListener(_validatePassword2);
+    _isUsernameNotEmpty = _username.text.isNotEmpty;
+    _isPassword1Valid = _validatePassword1(_password1.text);
+    _username.addListener(_onUsernameChange);
+    _password1.addListener(_onPassword1Change);
+    _password2.addListener(_onPassword2Change);
   }
 
   @override
   void dispose() {
-    _password2.removeListener(_validatePassword2);
+    _username.removeListener(_onUsernameChange);
+    _password1.removeListener(_onPassword1Change);
+    _password2.removeListener(_onPassword2Change);
     super.dispose();
+  }
+
+  void _onUsernameChange() {
+    setState(() {
+      _isUsernameInteracted = true;
+      _isUsernameNotEmpty = _username.text.isNotEmpty;
+    });
+  }
+
+  void _onPassword1Change() {
+    setState(() {
+      _isPassword1Interacted = true;
+      _isPassword1Valid = _validatePassword1(_password1.text);
+    });
+  }
+
+  void _onPassword2Change() {
+    setState(() {
+      _isPassword2Interacted = true;
+    });
   }
 
   Future<void> _register() async {
     bool isValid = _validateInputs();
 
     if (!isValid) {
-      setState(() {
-        _registrationStatus = 'Accesso negato: Correggere gli errori nei campi sopra.';
-      });
+      _showSnackBar(AppLocalizations.of(context).registrationPageSnackbarError);
       return;
     }
 
@@ -52,64 +76,41 @@ class _RegistrationpageState extends State<Registrationpage> {
     await storage.write(key: 'username', value: _username.text);
     await storage.write(key: 'password', value: hash);
 
-    setState(() {
-      _registrationStatus = 'Registrazione completata!';
-    });
-
     Navigator.pushNamed(context, '/login');
   }
 
   bool _validateInputs() {
     bool isUsernameValid = _validateUsername(_username.text);
-    bool isPasswordValid = _validatePassword(_password1.text);
+    bool isPassword1Valid = _validatePassword1(_password1.text);
     bool isPassword2Valid = _validatePassword2();
 
-    return isUsernameValid && isPasswordValid && isPassword2Valid;
+    return isUsernameValid && isPassword1Valid && isPassword2Valid;
   }
 
   bool _validateUsername(String username) {
-    setState(() {
-      if (username.isEmpty) {
-        _usernameError = 'Lo username non deve essere vuoto';
-        _isUsernameValid = false;
-      } else {
-        _usernameError = '';
-        _isUsernameValid = true;
-      }
-    });
-    return _isUsernameValid;
+    return username.isNotEmpty;
   }
 
-  bool _validatePassword(String password) {
-    setState(() {
-      final regex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
-      if (!regex.hasMatch(password)) {
-        _passwordError = 'La password deve essere lunga almeno 8 caratteri e\nincludere un numero e un carattere speciale.';
-        _isPasswordValid = false;
-      } else {
-        _passwordError = '';
-        _isPasswordValid = true;
-      }
-    });
-    return _isPasswordValid;
+  bool _validatePassword1(String password) {
+    final regex =
+        RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
+    bool isValid = regex.hasMatch(password);
+    return isValid;
   }
 
   bool _validatePassword2() {
-  bool isValid = true;
+    return _password1.text == _password2.text;
+  }
 
-  setState(() {
-    if (_password1.text != _password2.text) {
-      _password2Error = 'Le password non coincidono';
-      isValid = false;
-    } else {
-      _password2Error = '';
-      isValid = true;
-    }
-  });
 
-  return isValid;
-}
-
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,11 +145,23 @@ class _RegistrationpageState extends State<Registrationpage> {
                   width: 300.0,
                   child: TextField(
                     controller: _username,
-                    onChanged: _validateUsername,
-                    decoration: InputDecoration(
+                    onChanged: (value) {
+                      _validateUsername(value);
+                    },
+                    decoration: const InputDecoration(
                       labelText: 'Username',
-                      border: const OutlineInputBorder(),
-                      errorText: _usernameError.isEmpty ? null : _usernameError,
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Visibility(
+                  visible: _isUsernameInteracted && !_isUsernameNotEmpty,
+                  child: Text(
+                    AppLocalizations.of(context).registrationPageUsernameError,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 14,
                     ),
                   ),
                 ),
@@ -158,14 +171,19 @@ class _RegistrationpageState extends State<Registrationpage> {
                   child: TextField(
                     obscureText: _isObscure,
                     controller: _password1,
-                    onChanged: _validatePassword,
+                    onChanged: (_) {
+                      setState(() {
+                        _isPassword1Interacted = true;
+                      });
+                    },
                     decoration: InputDecoration(
                       labelText: 'Password',
                       border: const OutlineInputBorder(),
-                      errorText: _passwordError.isEmpty ? null : _passwordError,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                          _isObscure
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -173,6 +191,17 @@ class _RegistrationpageState extends State<Registrationpage> {
                           });
                         },
                       ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Visibility(
+                  visible: _isPassword1Interacted && (!_isPassword1Valid || !_isObscure),
+                  child: Text(
+                    AppLocalizations.of(context).registrationPageFirstPasswordError,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 14,
                     ),
                   ),
                 ),
@@ -183,15 +212,18 @@ class _RegistrationpageState extends State<Registrationpage> {
                     obscureText: _isObscure,
                     controller: _password2,
                     onChanged: (_) {
-                      _validatePassword2();
+                      setState(() {
+                        _isPassword2Interacted = true;
+                      });
                     },
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context).registrationPageRepeatPw,
                       border: const OutlineInputBorder(),
-                      errorText: _password2Error.isEmpty ? null : _password2Error,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                          _isObscure
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -202,6 +234,17 @@ class _RegistrationpageState extends State<Registrationpage> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 10),
+                Visibility(
+                  visible: _isPassword2Interacted && _password1.text != _password2.text,
+                  child: Text(
+                    AppLocalizations.of(context).registrationPageSecondPasswordError,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 30),
                 SizedBox(
                   width: 180.0,
@@ -209,13 +252,6 @@ class _RegistrationpageState extends State<Registrationpage> {
                   child: ElevatedButton(
                     onPressed: () async {
                       await _register();
-                      if (_registrationStatus.isNotEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(_registrationStatus),
-                          ),
-                        );
-                      }
                     },
                     child: Text(
                       AppLocalizations.of(context).registrationPageRegistration,

@@ -3,7 +3,6 @@ import 'package:client/l10n/app_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
-import 'package:client/utils/encrypt.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -34,16 +33,14 @@ class _LoginPageState extends State<LoginPage> {
 
   void _handleLogin() async {
     bool loginSuccess = await _login();
-    if (loginSuccess) {
-      Cryptography _crypt = Cryptography(_passwordController.text);
-      //await _crypt.encryptFile();
-
-      Navigator.pushNamed(context, '/chat');
-    } else {
-      _errorMessage = 'Nome utente o password sbagliati';
-      _showSnackBar();
-    }
-    setState(() {});
+    setState(() {
+      if (loginSuccess) {
+        Navigator.pushNamed(context, '/chat');
+      } else {
+        _errorMessage = AppLocalizations.of(context).loginPageSnackbarError;
+        _showSnackBar();
+      }
+    });
   }
 
   void _showSnackBar() {

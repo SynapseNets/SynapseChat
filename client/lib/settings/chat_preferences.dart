@@ -35,7 +35,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
   void initState() {
     super.initState();
     // Initialize theme based on system theme
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       var brightness = MediaQuery.of(context).platformBrightness;
       setState(() {
         isDarkTheme = brightness == Brightness.dark;

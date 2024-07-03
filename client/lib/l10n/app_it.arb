@@ -10,11 +10,17 @@
     "loginPageRememberMe": "Ricordami",
     "loginPageSignUp": "Registrati",
     "loginPageLogin": "Accedi",
+    "loginPageSnackbarError": "Nome utente o password sbagliati",
 
     "registrationPageTitle": "Registrazione",
     "registrationPageDescription": "Registrati a SynapseChat",
     "registrationPageRepeatPw": "Ripeti Password",
     "registrationPageRegistration": "Registrati",
+    "registrationPageUsernameError": "Lo username non deve essere vuoto",
+    "registrationPageFirstPasswordError": "La password deve essere di almeno 8 caratteri\n              con numeri e caratteri speciali",
+    "registrationPageSecondPasswordError": "Le password non coincidono",
+    "registrationPageSnackbarError": "Accesso negato: Correggere gli errori nei campi sopra",
+
 
 
     "contentPageSelectChatText":"Seleziona una chat per iniziare a messaggiare",
