@@ -18,7 +18,6 @@ class _RegistrationpageState extends State<Registrationpage> {
   bool _isObscure = true;
   bool _isPasswordValid = false;
   bool _isUsernameValid = false;
-  bool _isPassword2NonEmpty = false;
   String _passwordError = '';
   String _usernameError = '';
   String _password2Error = '';
@@ -36,12 +35,14 @@ class _RegistrationpageState extends State<Registrationpage> {
     super.dispose();
   }
 
-  Future<bool> _register() async {
-    if (_password1.text != _password2.text) {
+  Future<void> _register() async {
+    bool isValid = _validateInputs();
+
+    if (!isValid) {
       setState(() {
-        _registrationStatus = 'Accesso negato: Le password non coincidono.';
+        _registrationStatus = 'Accesso negato: Correggere gli errori nei campi sopra.';
       });
-      return false;
+      return;
     }
 
     List<int> bytes = utf8.encode(_password1.text);
@@ -52,26 +53,21 @@ class _RegistrationpageState extends State<Registrationpage> {
     await storage.write(key: 'password', value: hash);
 
     setState(() {
-      _registrationStatus = 'Registration completata!';
+      _registrationStatus = 'Registrazione completata!';
     });
-    return true;
+
+    Navigator.pushNamed(context, '/login');
   }
 
-  void _validatePassword(String password) {
-    setState(() {
-      final regex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
-      if (!regex.hasMatch(password)) {
-        _passwordError = 'La password deve essere lunga almeno 8 caratteri e includere\nun numero e un carattere speciale.';
-        _isPasswordValid = false;
-      } else {
-        _passwordError = '';
-        _isPasswordValid = true;
-      }
-      _updateRegisterButton();
-    });
+  bool _validateInputs() {
+    bool isUsernameValid = _validateUsername(_username.text);
+    bool isPasswordValid = _validatePassword(_password1.text);
+    bool isPassword2Valid = _validatePassword2();
+
+    return isUsernameValid && isPasswordValid && isPassword2Valid;
   }
 
-  void _validateUsername(String username) {
+  bool _validateUsername(String username) {
     setState(() {
       if (username.isEmpty) {
         _usernameError = 'Lo username non deve essere vuoto';
@@ -80,31 +76,40 @@ class _RegistrationpageState extends State<Registrationpage> {
         _usernameError = '';
         _isUsernameValid = true;
       }
-      _updateRegisterButton();
     });
+    return _isUsernameValid;
   }
 
-  void _validatePassword2() {
+  bool _validatePassword(String password) {
     setState(() {
-      _isPassword2NonEmpty = _password2.text.isNotEmpty;
-      if (_password1.text != _password2.text) {
-        _password2Error = 'Le password non coincidono';
+      final regex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$');
+      if (!regex.hasMatch(password)) {
+        _passwordError = 'La password deve essere lunga almeno 8 caratteri e\nincludere un numero e un carattere speciale.';
+        _isPasswordValid = false;
       } else {
-        _password2Error = '';
+        _passwordError = '';
+        _isPasswordValid = true;
       }
-      _updateRegisterButton();
     });
+    return _isPasswordValid;
   }
 
-  void _updateRegisterButton() {
-    setState(() {
-      if (_isUsernameValid && _isPasswordValid && _isPassword2NonEmpty && _password1.text == _password2.text) {
-        _registrationStatus = '';
-      } else {
-        _registrationStatus = 'Correggere gli errori nei campi sopra.';
-      }
-    });
-  }
+  bool _validatePassword2() {
+  bool isValid = true;
+
+  setState(() {
+    if (_password1.text != _password2.text) {
+      _password2Error = 'Le password non coincidono';
+      isValid = false;
+    } else {
+      _password2Error = '';
+      isValid = true;
+    }
+  });
+
+  return isValid;
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -202,19 +207,16 @@ class _RegistrationpageState extends State<Registrationpage> {
                   width: 180.0,
                   height: 55.0,
                   child: ElevatedButton(
-                    onPressed: _isUsernameValid && _isPasswordValid && _isPassword2NonEmpty && _password1.text == _password2.text
-                        ? () async {
-                            if (await _register()) {
-                              Navigator.pushNamed(context, '/login');
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(_registrationStatus),
-                                ),
-                              );
-                            }
-                          }
-                        : null,
+                    onPressed: () async {
+                      await _register();
+                      if (_registrationStatus.isNotEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(_registrationStatus),
+                          ),
+                        );
+                      }
+                    },
                     child: Text(
                       AppLocalizations.of(context).registrationPageRegistration,
                       style: const TextStyle(

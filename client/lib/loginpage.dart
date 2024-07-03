@@ -16,21 +16,58 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool _isChecked = false; // Variabile di stato per la checkbox
   bool _isObscure = true; // Variabile di stato per la passwordField
+  String _errorMessage = ''; // Variabile di stato per il messaggio di errore
+  bool _isSnackBarActive = false; // Stato per gestire la visibilità del SnackBar
 
   Future<bool> _login() async {
-    
     const storage = FlutterSecureStorage();
 
     List<int> bytes = utf8.encode(_passwordController.text);
     String hash = sha256.convert(bytes).toString();
 
-    return (await storage.read(key: 'username') == _usernameController.text) && (hash == await storage.read(key: 'password'));
+    bool isValid = (await storage.read(key: 'username') == _usernameController.text) &&
+                   (hash == await storage.read(key: 'password'));
+
+    return isValid;
+  }
+
+  void _handleLogin() async {
+    bool loginSuccess = await _login();
+    setState(() {
+      if (loginSuccess) {
+        Navigator.pushNamed(context, '/chat');
+      } else {
+        _errorMessage = 'Nome utente o password sbagliati';
+        _showSnackBar();
+      }
+    });
+  }
+
+  void _showSnackBar() {
+    if (!_isSnackBarActive && _errorMessage.isNotEmpty) {
+      _isSnackBarActive = true;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_errorMessage),
+          duration: const Duration(seconds: 2),
+          onVisible: () {
+            Future.delayed(const Duration(seconds: 2), () {
+              setState(() {
+                _isSnackBarActive = false;
+                _errorMessage = ''; // Resetta il messaggio di errore
+              });
+            });
+          },
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(AppLocalizations.of(context).loginPageTitle),
       ),
       body: Center(
@@ -125,9 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: 180.0,
                 height: 55.0,
                 child: ElevatedButton(
-                  onPressed: () async{
-                  await _login() ?  Navigator.pushNamed(context, '/chat'): print("access denied"); //TODO: add popup for failed login
-                  },
+                  onPressed: _handleLogin,
                   child: Text(
                     AppLocalizations.of(context).loginPageLogin,
                     style: const TextStyle(
