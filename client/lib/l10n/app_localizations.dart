@@ -490,6 +490,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'   Earth globe icon created by Freepik - Flaticon'**
   String get iconscreditsPageEarthGlobeIcon;
+
+  /// No description provided for @contentPageTextbar.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a message'**
+  String get contentPageTextbar;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

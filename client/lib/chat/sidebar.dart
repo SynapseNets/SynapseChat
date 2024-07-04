@@ -39,15 +39,27 @@ class _SidebarState extends State<Sidebar> {
                     itemCount: conversations.length,
                     itemBuilder: (context, index) {
                       Conversation conversation = conversations[index];
-                      return ChatButton(
-                          title: conversation.receiver,
-                          lastMessage: conversation.lastMessage.length > 20 ? "${conversation.lastMessage.substring(0, 20)}..." : conversation.lastMessage,
-                          time: conversation.lastMessageTime.toString().substring(0, 19),
-                          onPressed: () {
-                            widget.chatFocus.toggleChatFocus();
-                            widget.currentChatController
-                                .change(conversation.receiver);
-                          });
+                      return Column(
+                        children: [
+                          ChatButton(
+                              title: conversation.receiver,
+                              lastMessage: conversation.lastMessage.length > 20
+                                  ? "${conversation.lastMessage.substring(0, 20)}..."
+                                  : conversation.lastMessage,
+                              time: conversation.lastMessageTime
+                                  .toString()
+                                  .substring(0, 19),
+                              onPressed: () {
+                                widget.chatFocus.toggleChatFocus();
+                                widget.currentChatController
+                                    .change(conversation.receiver);
+                              }),
+                          const Divider(
+                            color: Color(0xff1b2a41),
+                            thickness: 0.5,
+                          ),
+                        ],
+                      );
                     },
                   );
                 } else {

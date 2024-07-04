@@ -14,6 +14,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
   Color backgroundColor = const Color.fromARGB(255, 134, 120, 235);
   Color textColor = Colors.white;
   bool isDarkTheme = false;
+  ImageProvider<Object> backgroundImage = const AssetImage('images/background_chat.png'); // Immagine doodle
 
   void toggleTheme(bool value) {
     setState(() {
@@ -98,12 +99,16 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                 const SizedBox(height: 20),
                 Container(
                   decoration: BoxDecoration(
-                    color: backgroundColor,
                     border: Border.all(
                       color: Colors.grey,
                       width: 3,
                     ),
                     borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: backgroundImage,
+                      colorFilter: ColorFilter.mode(backgroundColor, BlendMode.color), // Applica il colore dello sfondo
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   child: ListView(
                     shrinkWrap: true,
@@ -115,11 +120,11 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                           padding: const EdgeInsets.all(10),
                           margin: const EdgeInsets.symmetric(vertical: 5),
                           decoration: BoxDecoration(
-                            color: const Color(0xff1b2a41),
+                            color: const Color(0xff1b2a41).withOpacity(0.6), // Opacità del colore
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                           AppLocalizations.of(context).chatPreferencesFirstText,
+                            AppLocalizations.of(context).chatPreferencesFirstText,
                             style: TextStyle(fontSize: sizeChar, color: textColor),
                           ),
                         ),
@@ -130,7 +135,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                           padding: const EdgeInsets.all(10),
                           margin: const EdgeInsets.symmetric(vertical: 5),
                           decoration: BoxDecoration(
-                            color: const Color(0xff3b28cc),
+                            color: const Color(0xff3b28cc).withOpacity(0.6), // Opacità del colore
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
@@ -145,7 +150,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                           padding: const EdgeInsets.all(10),
                           margin: const EdgeInsets.symmetric(vertical: 5),
                           decoration: BoxDecoration(
-                            color: const Color(0xff1b2a41),
+                            color: const Color(0xff1b2a41).withOpacity(0.6), // Opacità del colore
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(

@@ -201,4 +201,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get iconscreditsPageEarthGlobeIcon => 'Icona globo terrestre creata da Freepik - Flaticon';
+
+  @override
+  String get contentPageTextbar => 'Type a message';
 }

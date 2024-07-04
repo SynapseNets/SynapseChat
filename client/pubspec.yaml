@@ -84,6 +84,7 @@ flutter:
     - images/language.png
     - images/background.png
     - images/info.png
+    - images/background_chat.png
     # - images/a_dot_burr.jpeg
     #- images/a_dot_ham.jpeg
 

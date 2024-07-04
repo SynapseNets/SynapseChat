@@ -22,7 +22,7 @@ class ChatButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
+          color: const Color(0xFF121212),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -33,7 +33,7 @@ class ChatButton extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(color: Color.fromARGB(255, 233, 233, 233), fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Text(
@@ -45,7 +45,7 @@ class ChatButton extends StatelessWidget {
             const SizedBox(height: 5),
             Text(
               lastMessage,
-              style: const TextStyle(color: Colors.white, fontSize: 14),
+              style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ],
         ),

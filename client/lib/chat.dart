@@ -1,4 +1,3 @@
-import 'package:client/utils/db.dart';
 import 'package:flutter/material.dart';
 import 'chat/sidebar.dart';
 import 'chat/content.dart';
@@ -26,30 +25,32 @@ class _ChatState extends State<Chat> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0x00000000),
         // App bar title
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ListenableBuilder(
-                listenable: _chatFocus,
-                builder: (context, child){
-              return _chatFocus.chatFocus &&
-                      MediaQuery.of(context).size.width <= 600
-                  ? IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _chatFocus.toggleChatFocus();
-                        });
-                      },
-                      icon: const Icon(Icons.menu),
-                    )
-                  : const SizedBox(
-                      width: 0,
-                    );
-            }),
+              listenable: _chatFocus,
+              builder: (context, child) {
+                return _chatFocus.chatFocus &&
+                        MediaQuery.of(context).size.width <= 600
+                    ? IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _chatFocus.toggleChatFocus();
+                          });
+                        },
+                        icon: const Icon(Icons.menu),
+                      )
+                    : const SizedBox(
+                        width: 0,
+                      );
+              },
+            ),
             const Text(
               'SynapseChat',
-              style: TextStyle(fontSize: 30, color: Color(0xff3b28cc)),
+              style: TextStyle(fontSize: 30, color: Color(0xff191970)),
             ), // Text on the left
           ],
         ),
@@ -87,45 +88,62 @@ class _ChatState extends State<Chat> {
         automaticallyImplyLeading: false,
       ),
       body: NotificationListener<SizeChangedLayoutNotification>(
-          onNotification: (notification) {
-            if (MediaQuery.of(context).size.width != _lastWidth) {
-              _lastWidth = MediaQuery.of(context).size.width;
-              setState(() {});
-            }
-            return true;
-          },
-          child: ListenableBuilder(
-              listenable: _chatFocus,
-              builder: (context, child) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Builder(
-                      builder: (context) {
-                        return !_chatFocus.chatFocus ||
-                                MediaQuery.of(context).size.width > 730
-                            ? Expanded(
-                                child: Sidebar(
+        onNotification: (notification) {
+          if (MediaQuery.of(context).size.width != _lastWidth) {
+            _lastWidth = MediaQuery.of(context).size.width;
+            setState(() {});
+          }
+          return true;
+        },
+        child: ListenableBuilder(
+          listenable: _chatFocus,
+          builder: (context, child) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Builder(
+                  builder: (context) {
+                    return !_chatFocus.chatFocus ||
+                            MediaQuery.of(context).size.width > 730
+                        ? Expanded(
+                            child: Container(
+                              color: const Color(0xFF121212), // Colore di sfondo della sidebar
+                              child: Sidebar(
                                 currentChatController: currentChatController,
                                 messageNotifier: messageNotifier,
                                 chatFocus: _chatFocus,
-                              ))
-                            : const SizedBox(width: 0);
-                      },
-                    ),
-                    Builder(builder: (context) {
-                      return _chatFocus.chatFocus ||
-                              MediaQuery.of(context).size.width > 730
-                          ? Expanded(
+                              ),
+                            ),
+                          )
+                        : const SizedBox(width: 0);
+                  },
+                ),
+                Builder(
+                  builder: (context) {
+                    return _chatFocus.chatFocus ||
+                            MediaQuery.of(context).size.width > 730
+                        ? Expanded(
+                            child: Container(
+                              decoration:const  BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('images/background_chat.png'), 
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                               child: Content(
-                              currentChatController: currentChatController,
-                              messageNotifier: messageNotifier,
-                            ))
-                          : const SizedBox(width: 0);
-                    }),
-                  ],
-                );
-              })),
+                                currentChatController: currentChatController,
+                                messageNotifier: messageNotifier,
+                              ),
+                            ),
+                          )
+                        : const SizedBox(width: 0);
+                  },
+                ),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 }

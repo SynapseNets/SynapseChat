@@ -275,6 +275,7 @@ class _ContentState extends State<Content> {
             return SizedBox(
               height: 50,
               child: AppBar(
+                backgroundColor: const Color(0xFF001529),
                 automaticallyImplyLeading: false,
                 title: Text(widget.currentChatController.currentChat),
             ));
