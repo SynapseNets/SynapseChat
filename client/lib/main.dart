@@ -50,7 +50,12 @@ class MyWindowListener extends WindowListener {
   //TODO: fix android version
   @override
   void onWindowClose() async {
-    //add code to execute on app closure
+    debugPrint('Window closed');
+    if(File(await Cryptography.getDatabaseFile()).existsSync()){
+      debugPrint('encrypting file');
+      await Cryptography().encryptFile();
+      debugPrint('encryped file');
+    }
     await WindowManager.instance.destroy();
   }
 }

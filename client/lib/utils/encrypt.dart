@@ -7,10 +7,10 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Cryptography{
-  static late List<int> _key;
+  static late Key _key;
   
   static setUpKey(String key){
-     _key = md5.convert(utf8.encode(key)).bytes;
+     _key = Key.fromUtf8(md5.convert(utf8.encode(key)).toString());
   }
 
   static Future<String> getDatabaseFile() async{
@@ -24,24 +24,22 @@ class Cryptography{
   Future<void> encryptFile() async {
     File inFile = File(await getDatabaseFile());
     File outFile = File(await getEncryptedFile());
+    print(inFile.path);
 
-    bool outFileExists = await outFile.exists();
+    bool outFileExists = outFile.existsSync();
 
     if(!outFileExists){
-      await outFile.create();
+      outFile.createSync();
     }
 
     final fileContents = inFile.readAsStringSync(encoding: latin1);
 
-    final key = Key.fromUtf8(md5.convert(_key).toString());
+    final encrypter = Encrypter(AES(_key, mode: AESMode.ecb));
 
-    final encrypter = Encrypter(AES(key, mode: AESMode.ecb));
-
-    
     final encrypted = encrypter.encrypt(fileContents);
-    await outFile.writeAsBytes(encrypted.bytes);
+    outFile.writeAsBytesSync(encrypted.bytes);
 
-    await inFile.delete();
+    inFile.deleteSync();
   }
 
   Future<void> decryptFile() async {
@@ -56,9 +54,7 @@ class Cryptography{
 
     final videoFileContents = inFile.readAsBytesSync();
 
-    final key = Key.fromUtf8(md5.convert(_key).toString());
-
-    final encrypter = Encrypter(AES(key, mode: AESMode.ecb));
+    final encrypter = Encrypter(AES(_key, mode: AESMode.ecb));
 
     final encryptedFile = Encrypted(videoFileContents);
     final decrypted = encrypter.decrypt(encryptedFile);
