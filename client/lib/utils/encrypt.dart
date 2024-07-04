@@ -46,10 +46,10 @@ class Cryptography{
     File inFile = File(await getEncryptedFile());
     File outFile = File("databasedec.db");
 
-    bool outFileExists = await outFile.exists();
+    bool outFileExists = outFile.existsSync();
 
     if(!outFileExists){
-      await outFile.create();
+      outFile.createSync();
     }
 
     final videoFileContents = inFile.readAsBytesSync();
@@ -60,8 +60,8 @@ class Cryptography{
     final decrypted = encrypter.decrypt(encryptedFile);
 
     final decryptedBytes = latin1.encode(decrypted);
-    await outFile.writeAsBytes(decryptedBytes);
+    outFile.writeAsBytesSync(decryptedBytes);
 
-    await inFile.delete();
+    inFile.deleteSync();
   }
 }
