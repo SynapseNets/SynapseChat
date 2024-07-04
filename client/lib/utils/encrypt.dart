@@ -7,9 +7,10 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Cryptography{
-  late List<int> _key;
-  Cryptography(String key){
-    _key = md5.convert(utf8.encode(key)).bytes;
+  static late List<int> _key;
+  
+  static setUpKey(String key){
+     _key = md5.convert(utf8.encode(key)).bytes;
   }
 
   static Future<String> getDatabaseFile() async{
