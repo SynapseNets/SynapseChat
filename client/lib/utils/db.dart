@@ -8,9 +8,10 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 Future<Database> getDb() async {
-  final database = openDatabase(
+  final database = await openDatabase(
     join(await getDatabasesPath(), 'database.db'),
     onCreate: (db, version) {
+      print('ricreando il db');
       db.execute(
           'CREATE TABLE IF NOT EXISTS messages(id AUTO_INCREMENT INTEGER PRIMARY KEY, text TEXT, type INTEGER, status INTEGER, sender TEXT, name TEXT, time TEXT, audio TEXT, image TEXT)');
       db.execute(

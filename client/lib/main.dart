@@ -41,7 +41,7 @@ void main() async {
   }
 
   // Setup Database
-  await getDb();
+  //await getDb();
 
   runApp(const SynapseNetsApp());
 }
@@ -51,7 +51,7 @@ class MyWindowListener extends WindowListener {
   @override
   void onWindowClose() async {
     debugPrint('Window closed');
-    if(File(await Cryptography.getDatabaseFile()).existsSync()){
+    if(File(await Cryptography.getDatabaseFile()).existsSync() && Cryptography.key != null){
       debugPrint('encrypting file');
       await Cryptography().encryptFile();
       debugPrint('encryped file');

@@ -8,6 +8,8 @@ import 'package:sqflite/sqflite.dart';
 
 class Cryptography{
   static late Key _key;
+
+  static Key get key => _key;
   
   static setUpKey(String key){
      _key = Key.fromUtf8(md5.convert(utf8.encode(key)).toString());
@@ -44,7 +46,7 @@ class Cryptography{
 
   Future<void> decryptFile() async {
     File inFile = File(await getEncryptedFile());
-    File outFile = File("databasedec.db");
+    File outFile = File(await getDatabaseFile());
 
     bool outFileExists = outFile.existsSync();
 

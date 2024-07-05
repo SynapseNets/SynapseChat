@@ -8,6 +8,7 @@ import 'package:client/chat/chatcontroller.dart';
 import 'package:client/chat/messagenotifier.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:client/chat/graphicmessages.dart';
 
 class Content extends StatefulWidget {
   final ChatController currentChatController;
@@ -139,23 +140,12 @@ class _ContentState extends State<Content> {
                     Message message = messages[index];
                     switch (message.type) {
                       case MessageType.text:
-                        return BubbleNormal(
-                          padding: const EdgeInsets.all(4),
-                          text: MediaQuery.of(context).size.width > 730 ? format(message.text) : message.text,
-                          isSender: message.sender == 'me',
-                          color: message.sender == 'me'
+                        return GraphicMessages.normalMessage(
+                          format(message.text),
+                          message.sender == 'me'
                               ? const Color(0xff3b28cc)
                               : const Color(0xff1b2a41),
-                          textStyle: TextStyle(
-                            fontSize: 16,
-                            color: message.sender == 'me'
-                                ? Colors.black
-                                : Colors.white,
-                          ),
-                          tail: true,
-                          sent: message.status == MessageStatus.sent,
-                          delivered: message.status == MessageStatus.delivered,
-                          seen: message.status == MessageStatus.seen,
+                          const TextStyle(color: Colors.white),
                         );
                       case MessageType.image:
                       case MessageType.video:

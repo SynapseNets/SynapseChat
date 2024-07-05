@@ -6,6 +6,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:client/utils/encrypt.dart';
+import 'package:client/utils/db.dart';
+import 'package:client/chat/conversation.dart';
+import 'package:client/chat/message.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -42,6 +45,50 @@ class _LoginPageState extends State<LoginPage> {
         await Cryptography().decryptFile();
       }
     }
+
+    /*
+    final List<Conversation> conversations = [
+    Conversation(
+      receiver: 'John Doe',
+      lastMessage: 'Hello, how are you?',
+      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100)
+    ),
+    Conversation(
+      receiver: 'Jane Doe',
+      lastMessage: 'I am fine, thank you.',
+      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100),
+    ),
+    Conversation(
+      receiver: 'John Dingo',
+      lastMessage: 'What are you doing?',
+      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100),
+    ),
+    Conversation(
+      receiver: 'Jane Dingo',
+      lastMessage: 'I am working on a project.',
+      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100),
+    ),
+    Conversation(
+      receiver: 'Al Doe',
+      lastMessage: 'Can I help you?',
+      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100),
+    ),
+    Conversation(
+      receiver: 'Moe Rou',
+      lastMessage: 'No, thank you.',
+      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100)
+    ),
+];
+  
+  conversations.forEach((element) async {
+    await insertConversation(element);
+  });
+
+  var x = await getConversations();
+  x.forEach((element) async {
+    await insertMessage(Message(text: '', time: DateTime(2016, 3, 2, 13, 15, 27, 11, 100), type: MessageType.date, sender: '', name: element.receiver));
+    await insertMessage(Message(text: 'Hi', time: DateTime(2016, 3, 2, 13, 15, 27, 11, 100), type: MessageType.text, sender: 'not me', name: element.receiver));
+  }); */
     setState(() {
       if (loginSuccess) {
         Navigator.pushNamed(context, '/chat');
