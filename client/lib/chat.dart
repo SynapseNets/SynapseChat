@@ -146,12 +146,14 @@ class _ChatState extends State<Chat> {
                                   AppBar(
                                     toolbarHeight: 60,
                                     backgroundColor: const Color(0xFF0A121D),
-                                    title: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Builder(builder: (context){
+                                    title: Text(
+                                          currentChatController.currentChat,
+                                          style: const TextStyle(fontSize: 30, color: Color(0xFFFFFFFF)),
+                                        ),
+                                    actions: [
+                                       Builder(builder: (context){
                                           if(_chatFocus.chatFocus &&
-                                                MediaQuery.of(context).size.width <= 600){
+                                                MediaQuery.of(context).size.width <= 730){
                                             return IconButton(
                                               onPressed: () {
                                                 setState(() {
@@ -163,12 +165,7 @@ class _ChatState extends State<Chat> {
                                         } else {return const SizedBox(width: 0,);}
                                           
                                         }),
-                                        Text(
-                                          currentChatController.currentChat,
-                                          style: const TextStyle(fontSize: 30, color: Color(0xFF232A80)),
-                                        ),
-                                      ],
-                                    ),  
+                                    ],
                                     automaticallyImplyLeading: false,
                                   ),
                                   Expanded(
