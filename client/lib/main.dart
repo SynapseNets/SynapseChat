@@ -26,6 +26,7 @@ import 'settings/languagespage.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:client/utils/settings_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,8 +43,11 @@ void main() async {
 
   // Setup Database
   //await getDb();
+  final bool isDarkMode = await SettingsPreferences.getDarkMode();
 
-  runApp(const SynapseNetsApp());
+  runApp(SynapseNetsApp(
+    isDarkMode: isDarkMode,
+  ));
 }
 
 class MyWindowListener extends WindowListener {
@@ -51,7 +55,8 @@ class MyWindowListener extends WindowListener {
   @override
   void onWindowClose() async {
     debugPrint('Window closed');
-    if(File(await Cryptography.getDatabaseFile()).existsSync() && Cryptography.key != null){
+    if (File(await Cryptography.getDatabaseFile()).existsSync() &&
+        Cryptography.key != null) {
       debugPrint('encrypting file');
       await Cryptography().encryptFile();
       debugPrint('encryped file');
@@ -61,12 +66,19 @@ class MyWindowListener extends WindowListener {
 }
 
 class SynapseNetsApp extends StatefulWidget {
-  const SynapseNetsApp({super.key});
+  bool isDarkMode;
+  SynapseNetsApp({super.key, required this.isDarkMode});
 
   static void setLocale(BuildContext context, Locale newLocale) async {
     _SynapseNetsAppState? state =
         context.findAncestorStateOfType<_SynapseNetsAppState>();
     state!.changeLanguage(newLocale);
+  }
+
+  static void setTheme(BuildContext context, bool isDarkMode) async {
+    _SynapseNetsAppState? state =
+        context.findAncestorStateOfType<_SynapseNetsAppState>();
+    state!.changeTheme(isDarkMode);
   }
 
   @override
@@ -82,15 +94,16 @@ class _SynapseNetsAppState extends State<SynapseNetsApp> {
     });
   }
 
+  void changeTheme(bool isDarkMode) {
+    setState(() {
+      widget.isDarkMode = isDarkMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.indigoAccent,
-          brightness: Brightness.dark,
-        ),
-      ),
+      theme: widget.isDarkMode ? ThemeData.dark() : ThemeData.light(),
       initialRoute: '/',
       routes: {
         '/': (context) => const SynapseNetsAppHomepage(),

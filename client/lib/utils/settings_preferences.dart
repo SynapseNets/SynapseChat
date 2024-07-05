@@ -10,7 +10,7 @@ class SettingsPreferences {
     var storage = const FlutterSecureStorage();
     String? value = await storage.read(key: _keyFontSize);
     return double.parse(value ?? '15.0');
-}
+  }
 
   static Future<void> setFontSize(double value) async {
     var storage = const FlutterSecureStorage();
@@ -22,12 +22,11 @@ class SettingsPreferences {
     var storage = const FlutterSecureStorage();
     String? value = await storage.read(key: _keyBackgroundColor);
     return int.parse(value ?? '4287002859');
-}
+  }
 
   static Future<void> setBackgroundColor(int color) async {
     var storage = const FlutterSecureStorage();
-    await storage.write(
-        key: _keyBackgroundColor, value: color.toString());
+    await storage.write(key: _keyBackgroundColor, value: color.toString());
     return;
   }
 
@@ -46,7 +45,7 @@ class SettingsPreferences {
   static Future<bool> getDarkMode() async {
     var storage = const FlutterSecureStorage();
     String? value = await storage.read(key: _keyDarkMode);
-    return value == 'true';
+    return value == null ? true : value == 'true';
   }
 
   static Future<void> setDarkMode(bool value) async {

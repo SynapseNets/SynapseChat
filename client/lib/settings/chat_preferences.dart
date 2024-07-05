@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:client/l10n/app_localizations.dart';
 import 'package:client/utils/settings_preferences.dart';
+import 'package:client/main.dart';
 
 class ChatPreferencesPage extends StatefulWidget {
   const ChatPreferencesPage({super.key});
@@ -17,19 +18,6 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
   bool isDarkTheme = true;
   ImageProvider<Object> backgroundImage =
       const AssetImage('images/background_chat.png'); // Immagine doodle
-
-  void toggleTheme(bool value) {
-    setState(() {
-      isDarkTheme = value;
-      if (isDarkTheme) {
-        lightThemeSelected = false;
-        darkThemeSelected = true;
-      } else {
-        lightThemeSelected = true;
-        darkThemeSelected = false;
-      }
-    });
-  }
 
   void loadPreferences() {
     Future.wait([
@@ -281,22 +269,28 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
               CheckboxListTile(
                 title: Text(
                     AppLocalizations.of(context).chatPreferencesLightTheme),
-                value: lightThemeSelected,
+                value: !isDarkTheme,
                 onChanged: (bool? value) async {
                   if (value != null && value) {
                     await SettingsPreferences.setDarkMode(false);
-                    toggleTheme(false);
+                    SynapseNetsApp.setTheme(context, false);
+                    setState(() {
+                      isDarkTheme = false;
+                    });
                   }
                 },
               ),
               CheckboxListTile(
                 title:
                     Text(AppLocalizations.of(context).chatPreferencesDarkTheme),
-                value: darkThemeSelected,
+                value: isDarkTheme,
                 onChanged: (bool? value) async {
                   if (value != null && value) {
                     await SettingsPreferences.setDarkMode(true);
-                    toggleTheme(true);
+                    SynapseNetsApp.setTheme(context, true);
+                    setState(() {
+                      isDarkTheme = true;
+                    });
                   }
                 },
               ),
