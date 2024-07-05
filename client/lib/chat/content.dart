@@ -9,6 +9,7 @@ import 'package:client/chat/chatcontroller.dart';
 import 'package:client/chat/messagenotifier.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:client/utils/settings_preferences.dart';
 
 class Content extends StatefulWidget {
   final ChatController currentChatController;
@@ -34,12 +35,34 @@ class _ContentState extends State<Content> {
 
   List<Message> messages = List.empty();
 
+  // Settings Variable
+  double? fontSize;
+  Color? backgroundColor;
+  Color? textColor;
+
+  void loadPreferences() {
+    Future.wait([
+      SettingsPreferences.getFontSize(),
+      SettingsPreferences.getBackgroundColor(),
+      SettingsPreferences.getTextColor(),
+    ]).then((values) {
+      setState(() {
+        fontSize = values[0] as double;
+        backgroundColor = Color(values[1] as int);
+        textColor = Color(values[2] as int);
+      });
+    }).catchError((error) {
+      print('Error loading preferences: $error');
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _message.addListener(() {
       setState(() {}); // Update UI when typing
     });
+    loadPreferences();
   }
 
   @override
@@ -157,19 +180,18 @@ class _ContentState extends State<Content> {
                     switch (message.type) {
                       case MessageType.text:
                         return Container(
-                          alignment: message.sender == 'me'
-                              ? Alignment.centerRight
-                              : Alignment.centerLeft,
-                          child:
-                        GraphicMessages.normalMessage(
-                          format(message.text),
-                          message.sender == 'me'
-                              ? const Color(0xff3b28cc)
-                              : const Color(0xff1b2a41),
-                          const TextStyle(color: Colors.white),
-                          message.time,
-                          message.status,
-                        ));
+                            alignment: message.sender == 'me'
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            child: GraphicMessages.normalMessage(
+                              format(message.text),
+                              message.sender == 'me'
+                                  ? const Color(0xff3b28cc)
+                                  : const Color(0xff1b2a41),
+                              TextStyle(color: textColor!, fontSize: fontSize!),
+                              message.time,
+                              message.status,
+                            ));
                       case MessageType.image:
                       case MessageType.video:
                         return SizedBox(
@@ -216,8 +238,7 @@ class _ContentState extends State<Content> {
                               : const Color(0xff1b2a41),
                           tail: true,
                           sent: message.status == MessageStatus.sent,
-                          delivered:
-                              message.status == MessageStatus.delivered,
+                          delivered: message.status == MessageStatus.delivered,
                           seen: message.status == MessageStatus.seen,
                         );
                       case MessageType.file:
@@ -229,8 +250,7 @@ class _ContentState extends State<Content> {
                               : const Color(0xff1b2a41),
                           tail: true,
                           sent: message.status == MessageStatus.sent,
-                          delivered:
-                              message.status == MessageStatus.delivered,
+                          delivered: message.status == MessageStatus.delivered,
                           seen: message.status == MessageStatus.seen,
                         );
                       case MessageType.date:
@@ -252,8 +272,8 @@ class _ContentState extends State<Content> {
             child: Builder(builder: (context) {
               if (widget.currentChatController.currentChat == '') {
                 return Center(
-                  child: Text(AppLocalizations.of(context)
-                      .contentPageSelectChatText),
+                  child: Text(
+                      AppLocalizations.of(context).contentPageSelectChatText),
                 );
               } else {
                 return Container(
