@@ -167,6 +167,8 @@ class _ContentState extends State<Content> {
                               ? const Color(0xff3b28cc)
                               : const Color(0xff1b2a41),
                           const TextStyle(color: Colors.white),
+                          message.time,
+                          message.status,
                         ));
                       case MessageType.image:
                       case MessageType.video:
