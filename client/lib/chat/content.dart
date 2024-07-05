@@ -1,4 +1,4 @@
-import 'package:flutter/gestures.dart';
+import 'package:client/chat/graphicmessages.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:get/get.dart';
@@ -8,7 +8,6 @@ import 'package:client/chat/chatcontroller.dart';
 import 'package:client/chat/messagenotifier.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:client/l10n/app_localizations.dart';
-import 'package:client/chat/graphicmessages.dart';
 
 class Content extends StatefulWidget {
   final ChatController currentChatController;
@@ -33,6 +32,20 @@ class _ContentState extends State<Content> {
   final ScrollController _scrollController = ScrollController();
 
   List<Message> messages = List.empty();
+
+  @override
+  void initState() {
+    super.initState();
+    _message.addListener(() {
+      setState(() {}); // Update UI when typing
+    });
+  }
+
+  @override
+  void dispose() {
+    _message.dispose();
+    super.dispose();
+  }
 
   Future<void> _sendMessage() async {
     if (_message.text.isEmpty || _message.text.trim().isEmpty) {
@@ -76,46 +89,47 @@ class _ContentState extends State<Content> {
     });
   }
 
-  String format(String text){
-    if (text.length > 34){
+  String format(String text) {
+    if (text.length > 34) {
       List<String> words = text.split(' ');
 
       String result = '';
       String tmp = '';
 
-      words.forEach((element){
-          if(tmp.length + element.length > 34){
-            //case element is longer than 34
-            if(element.length > 34){
-              result += tmp.isNotEmpty ? "$tmp\n" : "";
-              while(element.length > 34){
-                result += "${element.substring(0, 34)}\n";
-                element = element.substring(34);
-              }
-              tmp = element;
+      words.forEach((element) {
+        if (tmp.length + element.length > 34) {
+          //case element is longer than 34
+          if (element.length > 34) {
+            result += tmp.isNotEmpty ? "$tmp\n" : "";
+            while (element.length > 34) {
+              result += "${element.substring(0, 34)}\n";
+              element = element.substring(34);
+            }
+            tmp = element;
           } else {
             //case element is shorter than 34
             result += "$tmp\n";
             tmp = element;
           }
         } else {
-            tmp += ' $element';
-          }
+          tmp += ' $element';
+        }
       });
 
       result += tmp;
       return result;
-
-    } else {return text;}
+    } else {
+      return text;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       print(widget.currentChatController.currentChat);
-      return Stack(children: [
-        
-        FutureBuilder<List<Message>>(
+      return Stack(
+        children: [
+          FutureBuilder<List<Message>>(
             future: retrieveMessage(widget.currentChatController.currentChat),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -127,14 +141,15 @@ class _ContentState extends State<Content> {
                   physics: const BouncingScrollPhysics(),
                   itemCount: messages.length + 1,
                   itemBuilder: (context, index) {
-
                     if (index == messages.length) {
                       return VisibilityDetector(
                         key: const Key('Bottom'),
                         child: const SizedBox(height: 125),
                         onVisibilityChanged: (info) {
-                          _currentSliderValue = info.visibleFraction == 0 ? 125 : 10;
-                        });
+                          _currentSliderValue =
+                              info.visibleFraction == 0 ? 125 : 10;
+                        },
+                      );
                     }
 
                     Message message = messages[index];
@@ -160,7 +175,8 @@ class _ContentState extends State<Content> {
                                 : const Color(0xff1b2a41),
                             tail: true,
                             sent: message.status == MessageStatus.sent,
-                            delivered: message.status == MessageStatus.delivered,
+                            delivered:
+                                message.status == MessageStatus.delivered,
                             seen: message.status == MessageStatus.seen,
                           ),
                         );
@@ -192,7 +208,8 @@ class _ContentState extends State<Content> {
                               : const Color(0xff1b2a41),
                           tail: true,
                           sent: message.status == MessageStatus.sent,
-                          delivered: message.status == MessageStatus.delivered,
+                          delivered:
+                              message.status == MessageStatus.delivered,
                           seen: message.status == MessageStatus.seen,
                         );
                       case MessageType.file:
@@ -204,7 +221,8 @@ class _ContentState extends State<Content> {
                               : const Color(0xff1b2a41),
                           tail: true,
                           sent: message.status == MessageStatus.sent,
-                          delivered: message.status == MessageStatus.delivered,
+                          delivered:
+                              message.status == MessageStatus.delivered,
                           seen: message.status == MessageStatus.seen,
                         );
                       case MessageType.date:
@@ -217,18 +235,24 @@ class _ContentState extends State<Content> {
               } else {
                 return const Text("Error");
               }
-            }),
-        Builder(builder: (context) {
-          if (widget.currentChatController.currentChat == '') {
-            return Center(
-              child: Text(AppLocalizations.of(context).contentPageSelectChatText),
-            );
-          } else {
-            return Container(
-              // Bottom bar
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                  child: Container(
+            },
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Builder(builder: (context) {
+              if (widget.currentChatController.currentChat == '') {
+                return Center(
+                  child: Text(AppLocalizations.of(context)
+                      .contentPageSelectChatText),
+                );
+              } else {
+                return Container(
+                  // Bottom bar
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(
+                    child: Container(
                       color: Theme.of(context).colorScheme.surface,
                       padding: const EdgeInsets.all(20),
                       child: Row(
@@ -255,22 +279,15 @@ class _ContentState extends State<Content> {
                             icon: const Icon(Icons.send),
                           ),
                         ],
-                      ))),
-            );
-          }
-        }),
-        Builder(builder: (context){
-          if(widget.currentChatController.currentChat == ''){ return const SizedBox(width: 0,);}
-          else{
-            return SizedBox(
-              height: 50,
-              child: AppBar(
-                backgroundColor: const Color(0xFF001529),
-                automaticallyImplyLeading: false,
-                title: Text(widget.currentChatController.currentChat),
-            ));
-        }}),
-      ]);
+                      ),
+                    ),
+                  ),
+                );
+              }
+            }),
+          ),
+        ],
+      );
     });
   }
 }
