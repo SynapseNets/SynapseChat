@@ -7,11 +7,9 @@ class GraphicMessages{
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(10)
+        borderRadius: BorderRadius.circular(10),
       ),
-      child: Wrap(children: [
-        Text(text, style: style,)
-      ],)
+      child: Text(text, style: style,)
     );
   }
 }

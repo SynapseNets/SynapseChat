@@ -1,6 +1,7 @@
 import 'package:client/chat/graphicmessages.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'message.dart';
 import 'package:client/utils/db.dart';
@@ -155,13 +156,18 @@ class _ContentState extends State<Content> {
                     Message message = messages[index];
                     switch (message.type) {
                       case MessageType.text:
-                        return GraphicMessages.normalMessage(
+                        return Container(
+                          alignment: message.sender == 'me'
+                              ? Alignment.centerRight
+                              : Alignment.centerLeft,
+                          child:
+                        GraphicMessages.normalMessage(
                           format(message.text),
                           message.sender == 'me'
                               ? const Color(0xff3b28cc)
                               : const Color(0xff1b2a41),
                           const TextStyle(color: Colors.white),
-                        );
+                        ));
                       case MessageType.image:
                       case MessageType.video:
                         return SizedBox(
