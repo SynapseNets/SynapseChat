@@ -6,13 +6,15 @@ class ChatButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String lastMessage;
   final String time;
+  final String profileImagePath;
 
   const ChatButton({
     super.key, 
     required this.title, 
     required this.onPressed, 
     required this.lastMessage, 
-    required this.time
+    required this.time,
+    required this.profileImagePath
   });
 
   @override
@@ -29,23 +31,41 @@ class ChatButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Image.asset(
+                  profileImagePath,
+                  width: 60,
+                  height: 60,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(width: 16), // Spazio tra l'immagine e il testo
                 Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(color: Color.fromARGB(255, 233, 233, 233), fontSize: 18, fontWeight: FontWeight.bold),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 233, 233, 233),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4), // Spazio tra title e lastMessage
+                      Text(
+                        lastMessage,
+                        style: const TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ],
                   ),
                 ),
+                const SizedBox(width: 8), // Spazio tra il testo e il tempo
                 Text(
                   time,
                   style: const TextStyle(color: Colors.white70, fontSize: 12),
                 ),
               ],
-            ),
-            const SizedBox(height: 5),
-            Text(
-              lastMessage,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ],
         ),

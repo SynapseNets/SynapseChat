@@ -53,7 +53,9 @@ class _SidebarState extends State<Sidebar> {
                                 widget.chatFocus.toggleChatFocus();
                                 widget.currentChatController
                                     .change(conversation.receiver);
-                              }),
+                              },
+                              profileImagePath: 'images/default_profile.png'
+                              ),
                           const Divider(
                             color: Color(0xff1b2a41),
                             thickness: 0.5,

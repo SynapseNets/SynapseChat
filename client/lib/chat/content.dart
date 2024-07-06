@@ -272,8 +272,17 @@ class _ContentState extends State<Content> {
             child: Builder(builder: (context) {
               if (widget.currentChatController.currentChat == '') {
                 return Center(
-                  child: Text(
-                      AppLocalizations.of(context).contentPageSelectChatText),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 310), // Spazio sopra il testo
+                    child: Text(
+                      AppLocalizations.of(context).contentPageSelectChatText,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 );
               } else {
                 return Container(
