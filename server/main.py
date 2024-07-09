@@ -1,11 +1,11 @@
-from flask_socketio import SocketIO, join_room, leave_room, emit, rooms
+from flask_socketio import SocketIO, join_room, leave_room, emit
 from werkzeug.security import generate_password_hash
 from utils.decorators import token_socket
 from flask import Flask
 from utils.db import get_db_path
 from utils.models import *
 from utils import login
-import ssl, os, time
+import ssl, os, time, re, datetime
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 context.load_cert_chain('server_cert.pem', 'server_key.pem')
@@ -36,7 +36,66 @@ def send_message(message: dict, user_id: int):
     db.session.add(msg)
     db.session.commit()
     emit('message', {'text': text, 'time': timestamp, 'user': user.username}, room=group.id)
+
+@socketio.on('join')
+@token_socket
+def join_group(data: dict, user_id: int):    
+    invite_code = data.get('invite_code')
     
+    if not invite_code:
+        emit('error', {'message': 'Missing invite code'})
+        return
+    if not isinstance(invite_code, str):
+        emit('error', {'message': 'Invalid invite code'})
+        return
+    if not re.match(r'^[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}$', invite_code):
+        emit('error', {'message': 'Invalid invite code format'})
+        return
+    
+    group: Group = Group.query.filter_by(invite_code=invite_code).first()
+    if not group:
+        emit('error', {'message': 'Group not found'})
+        return
+    
+    group_id = group.id
+    user_group = UserGroup(
+        user_id=user_id, 
+        group_id=group_id, 
+        group_name=group.name, 
+        last_time=datetime.now()
+    )
+    
+    db.session.add(user_group)
+    db.session.commit()
+    join_room(group_id)
+    
+    emit('success', {'message': 'Joined group', 'id': group_id})
+    return
+
+@socketio.on('leave')
+@token_socket
+def leave_group(data: dict, user_id: int):    
+    group_id = data.get('group_id')
+    
+    if not group_id:
+        emit('error', {'message': 'Missing group id'})
+        return
+    if not isinstance(group_id, int):
+        emit('error', {'message': 'Invalid group id'})
+        return
+    
+    user_group: Group = UserGroup.query.filter_by(user_id=user_id, group_id=group_id).first()
+    if not user_group:
+        emit('error', {'message': 'User not in group'})
+        return 
+    
+    db.session.delete(user_group)
+    db.session.commit()
+    leave_room(group_id)
+        
+    emit('success', {'message': 'Left group'})
+    return 
+
 if __name__ == '__main__':
     from routes import main
     app.register_blueprint(main.mainbp, url_prefix='/')
