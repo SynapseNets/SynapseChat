@@ -7,9 +7,9 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class Cryptography{
-  static late Key _key;
+  static late Key? _key;
 
-  static Key get key => _key;
+  static Key? get key => _key;
   
   static setUpKey(String key){
      _key = Key.fromUtf8(md5.convert(utf8.encode(key)).toString());

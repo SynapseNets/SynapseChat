@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/home/mattia/Documents/flutter-sdk/flutter
-FLUTTER_APPLICATION_PATH=/home/mattia/Documents/SynapseChat/client
+FLUTTER_ROOT=/home/Mark-74/development/flutter
+FLUTTER_APPLICATION_PATH=/home/Mark-74/development/SynapseChat/client
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_TARGET=lib/main.dart
 FLUTTER_BUILD_DIR=build
