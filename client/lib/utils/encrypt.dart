@@ -36,7 +36,7 @@ class Cryptography{
 
     final fileContents = inFile.readAsStringSync(encoding: latin1);
 
-    final encrypter = Encrypter(AES(_key, mode: AESMode.ecb));
+    final encrypter = Encrypter(AES(_key!, mode: AESMode.ecb));
 
     final encrypted = encrypter.encrypt(fileContents);
     outFile.writeAsBytesSync(encrypted.bytes);
@@ -56,7 +56,7 @@ class Cryptography{
 
     final videoFileContents = inFile.readAsBytesSync();
 
-    final encrypter = Encrypter(AES(_key, mode: AESMode.ecb));
+    final encrypter = Encrypter(AES(_key!, mode: AESMode.ecb));
 
     final encryptedFile = Encrypted(videoFileContents);
     final decrypted = encrypter.decrypt(encryptedFile);

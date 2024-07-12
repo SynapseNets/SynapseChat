@@ -28,6 +28,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:client/l10n/app_localizations.dart';
 import 'package:client/utils/settings_preferences.dart';
 
+import 'package:provider/provider.dart'; // Importa il pacchetto provider
+import 'websocket_provider.dart'; // Importa il WebSocketProvider
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -45,9 +48,16 @@ void main() async {
   //await getDb();
   final bool isDarkMode = await SettingsPreferences.getDarkMode();
 
-  runApp(SynapseNetsApp(
-    isDarkMode: isDarkMode,
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => WebSocketProvider()), // Aggiungi il WebSocketProvider
+      ],
+      child: SynapseNetsApp(
+        isDarkMode: isDarkMode,
+      ),
+    ),
+  );
 }
 
 class MyWindowListener extends WindowListener {

@@ -1,14 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:client/utils/encrypt.dart';
-import 'package:client/utils/db.dart';
-import 'package:client/chat/conversation.dart';
-import 'package:client/chat/message.dart';
+import 'package:provider/provider.dart';
+import 'websocket_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,10 +18,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isChecked = false; // Variabile di stato per la checkbox
-  bool _isObscure = true; // Variabile di stato per la passwordField
-  String _errorMessage = ''; // Variabile di stato per il messaggio di errore
-  bool _isSnackBarActive = false; // Stato per gestire la visibilità del SnackBar
+  bool _isChecked = false;
+  bool _isObscure = true;
+  String _errorMessage = '';
+  bool _isSnackBarActive = false;
 
   Future<bool> _login() async {
     const storage = FlutterSecureStorage();
@@ -39,64 +37,26 @@ class _LoginPageState extends State<LoginPage> {
 
   void _handleLogin() async {
     bool loginSuccess = await _login();
-    if(loginSuccess){
+    if (loginSuccess) {
       Cryptography.setUpKey(_passwordController.text);
-      if(File(await Cryptography.getEncryptedFile()).existsSync()){
+      if (File(await Cryptography.getEncryptedFile()).existsSync()) {
         await Cryptography().decryptFile();
       }
-    }
 
-    /*
-    final List<Conversation> conversations = [
-    Conversation(
-      receiver: 'John Doe',
-      lastMessage: 'Hello, how are you?',
-      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100)
-    ),
-    Conversation(
-      receiver: 'Jane Doe',
-      lastMessage: 'I am fine, thank you.',
-      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100),
-    ),
-    Conversation(
-      receiver: 'John Dingo',
-      lastMessage: 'What are you doing?',
-      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100),
-    ),
-    Conversation(
-      receiver: 'Jane Dingo',
-      lastMessage: 'I am working on a project.',
-      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100),
-    ),
-    Conversation(
-      receiver: 'Al Doe',
-      lastMessage: 'Can I help you?',
-      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100),
-    ),
-    Conversation(
-      receiver: 'Moe Rou',
-      lastMessage: 'No, thank you.',
-      lastMessageTime: DateTime(2016, 3, 2, 13, 15, 27, 11, 100)
-    ),
-];
-  
-  conversations.forEach((element) async {
-    await insertConversation(element);
-  });
+      //WebSocket
+      /*
+      final webSocketProvider = Provider.of<WebSocketProvider>(context, listen: false);
+      webSocketProvider.connect('ws://localhost:8765'); 
+      webSocketProvider.sendMessage('test message');
+      */
 
-  var x = await getConversations();
-  x.forEach((element) async {
-    await insertMessage(Message(text: '', time: DateTime(2016, 3, 2, 13, 15, 27, 11, 100), type: MessageType.date, sender: '', name: element.receiver));
-    await insertMessage(Message(text: 'Hi', time: DateTime(2016, 3, 2, 13, 15, 27, 11, 100), type: MessageType.text, sender: 'not me', name: element.receiver));
-  }); */
-    setState(() {
-      if (loginSuccess) {
-        Navigator.pushNamed(context, '/chat');
-      } else {
+      Navigator.pushNamed(context, '/chat');
+    } else {
+      setState(() {
         _errorMessage = AppLocalizations.of(context).loginPageSnackbarError;
         _showSnackBar();
-      }
-    });
+      });
+    }
   }
 
   void _showSnackBar() {
@@ -110,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             Future.delayed(const Duration(seconds: 2), () {
               setState(() {
                 _isSnackBarActive = false;
-                _errorMessage = ''; // Resetta il messaggio di errore
+                _errorMessage = '';
               });
             });
           },
@@ -132,9 +92,10 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('images/user.png',
-              width: 180, 
-              height: 180
+              Image.asset(
+                'images/user.png',
+                width: 180,
+                height: 180,
               ),
               const SizedBox(height: 30.0),
               Text(
@@ -166,22 +127,21 @@ class _LoginPageState extends State<LoginPage> {
                     border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _isObscure ? Icons.visibility : Icons.visibility_off
+                        _isObscure ? Icons.visibility : Icons.visibility_off,
                       ),
-                      onPressed: (){
+                      onPressed: () {
                         setState(() {
                           _isObscure = !_isObscure;
                         });
                       },
-                    )
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 5.0),
               SizedBox(
                 width: 300.0,
-                child: 
-                Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
@@ -189,13 +149,13 @@ class _LoginPageState extends State<LoginPage> {
                         Checkbox(
                           value: _isChecked,
                           onChanged: (bool? value) {
-                          setState(() {
-                            _isChecked = value!;
-                          });
-                      },
-                    ),
-                      Text(AppLocalizations.of(context).loginPageRememberMe),
-                    ],
+                            setState(() {
+                              _isChecked = value!;
+                            });
+                          },
+                        ),
+                        Text(AppLocalizations.of(context).loginPageRememberMe),
+                      ],
                     ),
                     SizedBox(
                       width: 110.0,
