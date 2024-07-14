@@ -11,12 +11,15 @@ Future<Database> getDb() async {
   final database = await openDatabase(
     join(await getDatabasesPath(), 'database.db'),
     onCreate: (db, version) {
-      print('ricreando il db');
       db.execute(
-          'CREATE TABLE IF NOT EXISTS messages(id AUTO_INCREMENT INTEGER PRIMARY KEY, text TEXT, type INTEGER, status INTEGER, sender TEXT, name TEXT, time TEXT, audio TEXT, image TEXT)');
+          'CREATE TABLE IF NOT EXISTS messages(id AUTO_INCREMENT INTEGER PRIMARY KEY, text TEXT, type INTEGER, status INTEGER, sender TEXT, name TEXT, time TEXT, audio TEXT, image TEXT)'
+          );
       db.execute(
           'CREATE TABLE IF NOT EXISTS conversations(id AUTO_INCREMENT INTEGER PRIMARY KEY, name TEXT)' //name = name
           );
+      db.execute(
+        'CREATE TABLE IF NOT EXISTS servers(id AUTO_INCREMENT INTEGER PRIMARY KEY, ip TEXT, port INTEGER, username TEXT, totp_uri TEXT)',
+      );
     },
     version: 1,
   );
@@ -112,4 +115,24 @@ Future<void> insertConversation(Conversation conversation) async {
     conversation.prepareDb(),
     conflictAlgorithm: ConflictAlgorithm.replace,
   );
+}
+
+Future<bool> addServer(String ip, int port, String username, String totpUri) async {
+  final db = await getDb();
+
+  var result = await db.query('servers', where: 'ip = ? AND port = ? AND username = ?', whereArgs: [ip, port, username]);
+  if(result.isNotEmpty){
+    return false;
+  }
+
+  await db.insert(
+    'servers',
+    {
+      'ip':ip,
+      'port':port,
+      'username':username,
+      'totp_uri':totpUri
+    }
+  );
+  return true;
 }

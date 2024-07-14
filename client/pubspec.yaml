@@ -53,6 +53,7 @@ dependencies:
   intl: any
   flutter_secure_storage: ^4.2.1
   encrypt: ^5.0.3
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:
