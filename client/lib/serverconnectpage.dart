@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -10,6 +11,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'package:client/l10n/app_localizations.dart';
 
 class Serverconnectpage extends StatefulWidget {
   const Serverconnectpage({super.key});
@@ -68,7 +71,8 @@ class _RegistrationpageState extends State<Serverconnectpage> {
               height: Platform.isAndroid || Platform.isIOS ? 475 : 350,
               child: Column(children: [
                 const SizedBox(height: 20),
-                const Text('Add TOTP to your Authenticator'),
+                Text(AppLocalizations.of(context)
+                    .serverConnectPageFirstStringAuthenticatorPopUp),
                 const SizedBox(height: 20),
                 QrImageView(
                   data: totpUri,
@@ -80,16 +84,42 @@ class _RegistrationpageState extends State<Serverconnectpage> {
                     return Column(
                       children: [
                         const SizedBox(height: 20),
-                        const Text('Scan the QR code with your Authenticator'),
+                        Text(AppLocalizations.of(context)
+                            .serverConnectPageSecondStringAuthenticatorPopUp),
                         const SizedBox(height: 20),
-                        const Text('or'),
+                        Text(AppLocalizations.of(context)
+                            .serverConnectPageThirdStringAuthenticatorPopUp),
                         const SizedBox(height: 20),
                         TextButton(
                             onPressed: () async {
                               Uri url = Uri.parse(totpUri);
-                              await launchUrl(url, mode: LaunchMode.externalApplication); //TODO: add popup if not successfull            
+
+                              try {
+                                await launchUrl(url,
+                                    mode: LaunchMode
+                                        .externalApplication); //TODO: add popup if not successfull
+                              } catch (e) {
+                                print('Caught an exception: $e');
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Errore'),
+                                        content: const Text('Errore'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: const Text('OK'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    });
+                              }
                             },
-                            child: const Text('Add to Google Authenticator'))
+                            child: Text(AppLocalizations.of(context)
+                                .serverConnectPageFourthStringAuthenticatorPopUp))
                       ],
                     );
                   } else {
@@ -165,7 +195,45 @@ class _RegistrationpageState extends State<Serverconnectpage> {
               child: ElevatedButton(
                 onPressed: () async {
                   if (!(await connectToServer())) {
-                    //TODO: show error message
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Column(
+                              children: [
+                                SvgPicture.asset(
+                                  'images/error.svg', 
+                                  height: 65, 
+                                  width: 65, 
+                                ), 
+                                const SizedBox(
+                                    height:
+                                        10),
+                                Text(
+                                  AppLocalizations.of(context).serverConnectPageTitleErrorConnectionPopUp,
+                                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red), // Stile personalizzato per il titolo
+                                ),
+                              ],
+                            ),
+                            content: Text(
+                              AppLocalizations.of(context)
+                                  .serverConnectPageContentErrorConnectionPopUp,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text(
+                                  AppLocalizations.of(context)
+                                      .serverConnectPageButtonErrorConnectionPopUp,
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        });
                     print('error');
                   }
                 },

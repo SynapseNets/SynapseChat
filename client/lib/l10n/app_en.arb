@@ -29,7 +29,17 @@
   "serverConnectPageTitle": "Connect to a server",
   "serverConnectPageDescription": "Connect to a new server",
   "serverConnectPageIp": "Server IP",
+  "serverConnectPagePort": "Port",
   "serverConnectPageConnect": "Connect",
+  "serverConnectPageFirstStringAuthenticatorPopUp": "Add TOTP to your Authenticator",
+  "serverConnectPageSecondStringAuthenticatorPopUp": "Scan the QR code with your Authenticator",
+  "serverConnectPageThirdStringAuthenticatorPopUp": "or",
+  "serverConnectPageFourthStringAuthenticatorPopUp": "Add to Google Authenticator",
+  "serverConnectPageTitleErrorConnectionPopUp": "Connection Error",
+  "serverConnectPageContentErrorConnectionPopUp": "The IP address, password, or port might be incorrect",
+  "serverConnectPageButtonErrorConnectionPopUp": "Try Again",
+
+
 
   "settingsPageTitle": "Settings",
   "settingsPageUsername": "Name",

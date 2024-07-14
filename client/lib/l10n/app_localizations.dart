@@ -233,11 +233,59 @@ abstract class AppLocalizations {
   /// **'Server IP'**
   String get serverConnectPageIp;
 
+  /// No description provided for @serverConnectPagePort.
+  ///
+  /// In en, this message translates to:
+  /// **'Port'**
+  String get serverConnectPagePort;
+
   /// No description provided for @serverConnectPageConnect.
   ///
   /// In en, this message translates to:
   /// **'Connect'**
   String get serverConnectPageConnect;
+
+  /// No description provided for @serverConnectPageFirstStringAuthenticatorPopUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Add TOTP to your Authenticator'**
+  String get serverConnectPageFirstStringAuthenticatorPopUp;
+
+  /// No description provided for @serverConnectPageSecondStringAuthenticatorPopUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan the QR code with your Authenticator'**
+  String get serverConnectPageSecondStringAuthenticatorPopUp;
+
+  /// No description provided for @serverConnectPageThirdStringAuthenticatorPopUp.
+  ///
+  /// In en, this message translates to:
+  /// **'or'**
+  String get serverConnectPageThirdStringAuthenticatorPopUp;
+
+  /// No description provided for @serverConnectPageFourthStringAuthenticatorPopUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Google Authenticator'**
+  String get serverConnectPageFourthStringAuthenticatorPopUp;
+
+  /// No description provided for @serverConnectPageTitleErrorConnectionPopUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection Error'**
+  String get serverConnectPageTitleErrorConnectionPopUp;
+
+  /// No description provided for @serverConnectPageContentErrorConnectionPopUp.
+  ///
+  /// In en, this message translates to:
+  /// **'The IP address, password, or port might be incorrect'**
+  String get serverConnectPageContentErrorConnectionPopUp;
+
+  /// No description provided for @serverConnectPageButtonErrorConnectionPopUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get serverConnectPageButtonErrorConnectionPopUp;
 
   /// No description provided for @settingsPageTitle.
   ///

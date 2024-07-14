@@ -74,7 +74,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get serverConnectPageIp => 'Server IP';
 
   @override
+  String get serverConnectPagePort => 'Port';
+
+  @override
   String get serverConnectPageConnect => 'Connect';
+
+  @override
+  String get serverConnectPageFirstStringAuthenticatorPopUp => 'Add TOTP to your Authenticator';
+
+  @override
+  String get serverConnectPageSecondStringAuthenticatorPopUp => 'Scan the QR code with your Authenticator';
+
+  @override
+  String get serverConnectPageThirdStringAuthenticatorPopUp => 'or';
+
+  @override
+  String get serverConnectPageFourthStringAuthenticatorPopUp => 'Add to Google Authenticator';
+
+  @override
+  String get serverConnectPageTitleErrorConnectionPopUp => 'Connection Error';
+
+  @override
+  String get serverConnectPageContentErrorConnectionPopUp => 'The IP address, password, or port might be incorrect';
+
+  @override
+  String get serverConnectPageButtonErrorConnectionPopUp => 'Try Again';
 
   @override
   String get settingsPageTitle => 'Settings';
