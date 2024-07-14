@@ -9,6 +9,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Serverconnectpage extends StatefulWidget {
   const Serverconnectpage({super.key});
@@ -22,11 +23,11 @@ class _RegistrationpageState extends State<Serverconnectpage> {
   final TextEditingController _port = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
-  Future<bool> connectToServer() async{
+  Future<bool> connectToServer() async {
     String serverIP = _serverIP.text;
     int port;
     //String password = _password.text; TODO
-    try{
+    try {
       port = int.parse(_port.text);
     } catch (e) {
       return false;
@@ -42,30 +43,61 @@ class _RegistrationpageState extends State<Serverconnectpage> {
     String? _username = await storage.read(key: 'username');
     var response;
 
-    try{
-      response = await client.post(Uri.parse('https://$serverIP:$port/api/register'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({'username': _username!}));
+    try {
+      response = await client.post(
+          Uri.parse('https://$serverIP:$port/api/register'),
+          headers: {'Content-Type': 'application/json'},
+          body: json.encode({'username': _username!}));
     } catch (e) {
       return false;
     }
-    
-    
-    if(response.statusCode != 201){
+
+    if (response.statusCode != 201) {
       return false;
-    } 
+    }
 
     var body = json.decode(response.body);
     String totpUri = body['auth'];
 
     await addServer(serverIP, port, _username!, totpUri);
-    showDialog(context: context, builder: (context) => Dialog(
-      child: Column(
-        children: [
-          const Text('Server added successfully'),
-          QrImageView(data: totpUri, size: 256, backgroundColor: Colors.white,)
-          ]),
-    ));
+
+    showDialog(
+        context: context,
+        builder: (context) => Dialog(
+                child: SizedBox(
+              height: Platform.isAndroid || Platform.isIOS ? 475 : 350,
+              child: Column(children: [
+                const SizedBox(height: 20),
+                const Text('Add TOTP to your Authenticator'),
+                const SizedBox(height: 20),
+                QrImageView(
+                  data: totpUri,
+                  size: 256,
+                  backgroundColor: Colors.white,
+                ),
+                Builder(builder: (context) {
+                  if (Platform.isAndroid || Platform.isIOS) {
+                    return Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        const Text('Scan the QR code with your Authenticator'),
+                        const SizedBox(height: 20),
+                        const Text('or'),
+                        const SizedBox(height: 20),
+                        TextButton(
+                            onPressed: () async {
+                              Uri url = Uri.parse(totpUri);
+                              launchUrl(url, mode: LaunchMode.externalApplication);                      
+                            },
+                            child: const Text('Add to Google Authenticator'))
+                      ],
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                })
+              ]),
+            )));
 
     return true;
   }
@@ -132,13 +164,13 @@ class _RegistrationpageState extends State<Serverconnectpage> {
               height: 55.0,
               child: ElevatedButton(
                 onPressed: () async {
-                  if(!(await connectToServer())){
+                  if (!(await connectToServer())) {
                     //TODO: show error message
                     print('error');
                   }
                 },
                 child: Text(
-                   AppLocalizations.of(context).serverConnectPageConnect,
+                  AppLocalizations.of(context).serverConnectPageConnect,
                   style: const TextStyle(
                     fontSize: 18.0,
                   ),
