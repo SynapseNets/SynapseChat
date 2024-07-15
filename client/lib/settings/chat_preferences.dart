@@ -3,7 +3,6 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:client/l10n/app_localizations.dart';
 import 'package:client/utils/settings_preferences.dart';
-import 'package:client/main.dart';
 
 class ChatPreferencesPage extends StatefulWidget {
   const ChatPreferencesPage({Key? key}) : super(key: key);
@@ -17,7 +16,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
   Color backgroundColor = const Color.fromARGB(255, 134, 120, 235);
   Color textColor = Colors.white;
   bool isDarkTheme = true;
-  Widget? backgroundImage; // Cambio del tipo a Widget
+  Widget? backgroundImage;
 
   void loadPreferences() {
     Future.wait([
@@ -31,9 +30,25 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
         backgroundColor = Color(values[1] as int);
         textColor = Color(values[2] as int);
         isDarkTheme = values[3] as bool;
+        setBackgroundImage();
       });
     }).catchError((error) {
       print('Error loading preferences: $error');
+    });
+  }
+
+  void setBackgroundImage() {
+    setState(() {
+      try {
+        backgroundImage = SvgPicture.asset(
+          'images/background_chat.svg',
+          color: backgroundColor,
+          fit: BoxFit.cover, // Assicura che l'immagine si adatti senza distorsione
+        );
+      } catch (e) {
+        print('Error loading background image: $e');
+        // Gestisci l'eccezione in base alla tua logica (es. visualizzare un'immagine alternativa o un messaggio di errore)
+      }
     });
   }
 
@@ -41,7 +56,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
   void initState() {
     super.initState();
     loadPreferences();
-    // Initialize theme based on system theme
+    // Inizializza il tema in base al tema di sistema
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       var brightness = MediaQuery.of(context).platformBrightness;
       setState(() {
@@ -96,6 +111,8 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
               ),
               const SizedBox(height: 20),
               Container(
+                height: MediaQuery.of(context).size.height * 0.5, // Altezza massima dello schermo
+                width: MediaQuery.of(context).size.width, // Larghezza massima dello schermo
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.grey,
@@ -116,8 +133,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             padding: const EdgeInsets.all(10),
                             margin: const EdgeInsets.symmetric(vertical: 5),
                             decoration: BoxDecoration(
-                              color: const Color(0xff1b2a41)
-                                  .withOpacity(0.6), // Opacità del colore
+                              color: const Color(0xff1b2a41).withOpacity(0.6),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
@@ -133,8 +149,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             padding: const EdgeInsets.all(10),
                             margin: const EdgeInsets.symmetric(vertical: 5),
                             decoration: BoxDecoration(
-                              color: const Color(0xff3b28cc)
-                                  .withOpacity(0.6), // Opacità del colore
+                              color: const Color(0xff3b28cc).withOpacity(0.6),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
@@ -150,8 +165,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             padding: const EdgeInsets.all(10),
                             margin: const EdgeInsets.symmetric(vertical: 5),
                             decoration: BoxDecoration(
-                              color: const Color(0xff1b2a41)
-                                  .withOpacity(0.6), // Opacità del colore
+                              color: const Color(0xff1b2a41).withOpacity(0.6),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
@@ -169,7 +183,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
               const SizedBox(height: 30),
               InkWell(
                 onTap: () {
-                  // Open a dialog to change the background color
+                  // Apri un dialog per cambiare il colore dello sfondo
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -184,6 +198,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                                   color.value);
                               setState(() {
                                 backgroundColor = color;
+                                setBackgroundImage();
                               });
                               Navigator.of(context).pop();
                             },
@@ -196,7 +211,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      'images/background.svg',
+                      'images/background_color.svg',
                       width: 40,
                       height: 40,
                     ),
@@ -211,7 +226,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
               const SizedBox(height: 20),
               InkWell(
                 onTap: () {
-                  // Open a dialog to change the text color
+                  // Apri un dialog per cambiare il colore del testo
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -258,7 +273,6 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                 onChanged: (bool? value) async {
                   if (value != null && value) {
                     await SettingsPreferences.setDarkMode(false);
-                    SynapseNetsApp.setTheme(context, false);
                     setState(() {
                       isDarkTheme = false;
                     });
@@ -272,7 +286,6 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                 onChanged: (bool? value) async {
                   if (value != null && value) {
                     await SettingsPreferences.setDarkMode(true);
-                    SynapseNetsApp.setTheme(context, true);
                     setState(() {
                       isDarkTheme = true;
                     });

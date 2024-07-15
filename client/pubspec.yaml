@@ -89,6 +89,7 @@ flutter:
     - images/background_chat.svg
     - images/info.svg
     - images/background_chat.svg
+    - images/background_color.svg
     - images/error.svg
     # - images/a_dot_burr.jpeg
     #- images/a_dot_ham.jpeg

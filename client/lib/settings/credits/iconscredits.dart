@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:client/l10n/app_localizations.dart';
 
@@ -35,7 +36,7 @@ class _IconscreditsState extends State<Iconscredits> {
                     shape: BoxShape.circle,
                   ),
                   child: ClipOval(
-                    child: Image.asset(
+                    child: SvgPicture.asset(
                       imageUrl,
                       width: 80, // Adjust the width and height as needed
                       height: 80,
@@ -85,13 +86,13 @@ class _IconscreditsState extends State<Iconscredits> {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
         child: Column(
           children: [
-            buildIconCredit('images/info.png',AppLocalizations.of(context).iconscreditsPageInfoIcon, 'https://www.flaticon.com/authors/anggara'),
-            buildIconCredit('images/chat_settings.png',AppLocalizations.of(context).iconscreditsPageMessageIcon, 'https://www.flaticon.com/authors/fathema-khanom'),
-            buildIconCredit('images/background.png',AppLocalizations.of(context).iconscreditsPageGalleryIcon, 'https://www.flaticon.com/authors/adrianadam'),
-            buildIconCredit('images/add_server.png',AppLocalizations.of(context).iconscreditsPageAddDatabaseIcon, 'https://www.flaticon.com/authors/arafat-uddin'),
-            buildIconCredit('images/default_profile.png',AppLocalizations.of(context).iconscreditsPageProfileImageIcon, 'https://www.flaticon.com/authors/freepik'),
-            buildIconCredit('images/user.png',AppLocalizations.of(context).iconscreditsPageUserIcon, 'https://www.flaticon.com/authors/md-tanvirul-haque'),
-            buildIconCredit('images/language.png',AppLocalizations.of(context).iconscreditsPageEarthGlobeIcon, 'https://www.flaticon.com/authors/freepik'),
+            buildIconCredit('images/info.svg',AppLocalizations.of(context).iconscreditsPageInfoIcon, 'https://www.flaticon.com/authors/anggara'),
+            buildIconCredit('images/chat_settings.svg',AppLocalizations.of(context).iconscreditsPageMessageIcon, 'https://www.flaticon.com/authors/fathema-khanom'),
+            buildIconCredit('images/background_color.svg',AppLocalizations.of(context).iconscreditsPageGalleryIcon, 'https://www.flaticon.com/authors/adrianadam'),
+            buildIconCredit('images/add_server.svg',AppLocalizations.of(context).iconscreditsPageAddDatabaseIcon, 'https://www.flaticon.com/authors/arafat-uddin'),
+            buildIconCredit('images/default_profile.svg',AppLocalizations.of(context).iconscreditsPageProfileImageIcon, 'https://www.flaticon.com/authors/freepik'),
+            buildIconCredit('images/user.svg',AppLocalizations.of(context).iconscreditsPageUserIcon, 'https://www.flaticon.com/authors/md-tanvirul-haque'),
+            buildIconCredit('images/language.svg',AppLocalizations.of(context).iconscreditsPageEarthGlobeIcon, 'https://www.flaticon.com/authors/freepik'),
           ],
         ),
       ),
