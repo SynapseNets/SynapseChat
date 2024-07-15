@@ -25,7 +25,11 @@ class _LoginPageState extends State<LoginPage> {
   bool _isSnackBarActive = false;
 
   Future<bool> _login() async {
+
     const storage = FlutterSecureStorage();
+    if(await storage.read(key: 'remember') == 'true') {
+      return true;
+    }
 
     List<int> bytes = utf8.encode(_passwordController.text);
     String hash = sha256.convert(bytes).toString();
@@ -37,11 +41,25 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleLogin() async {
+    const storage = FlutterSecureStorage();
+
     bool loginSuccess = await _login();
     if (loginSuccess) {
+
+      await storage.read(key: 'remember') == 'true' ? 
+      Cryptography.setUpKeyFromHash((await storage.read(key: 'key'))!) : 
       Cryptography.setUpKey(_passwordController.text);
+
       if (File(await Cryptography.getEncryptedFile()).existsSync()) {
         await Cryptography().decryptFile();
+      }
+
+      if(_isChecked){
+        await storage.write(key: 'remember', value: 'true');
+        await storage.write(key: 'key', value: md5.convert(utf8.encode(_passwordController.text)).toString());
+      } else {
+        await storage.write(key: 'remember', value: 'false');
+        await storage.write(key: 'key', value: null);
       }
 
       //WebSocket
@@ -78,6 +96,17 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     }
+  }
+
+  @override
+  void initState() {
+    const storage = FlutterSecureStorage();
+    storage.read(key: 'remember').then((value) => {
+      if(value == 'true'){
+        _handleLogin()
+      }
+    });
+    super.initState();
   }
 
   @override

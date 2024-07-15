@@ -15,6 +15,10 @@ class Cryptography{
      _key = Key.fromUtf8(md5.convert(utf8.encode(key)).toString());
   }
 
+  static setUpKeyFromHash(String hash){
+    _key = Key.fromUtf8(hash);
+  }
+
   static Future<String> getDatabaseFile() async{
     return join(await getDatabasesPath(), 'database.db');
   }
