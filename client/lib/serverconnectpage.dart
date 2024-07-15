@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -62,6 +63,10 @@ class _RegistrationpageState extends State<Serverconnectpage> {
 
     var body = json.decode(response.body);
     String totpUri = body['auth'];
+
+    if(!totpUri.startsWith('otpauth://totp/')) {
+      return false;
+    }
 
     await addServer(serverIP, port, _username!, totpUri);
 
