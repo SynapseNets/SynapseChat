@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -101,21 +102,42 @@ class _RegistrationpageState extends State<Serverconnectpage> {
                               } catch (e) {
                                 print('Caught an exception: $e');
                                 showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text('Errore'),
-                                        content: const Text('Errore'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            child: const Text('OK'),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    });
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Column(
+                              children: [
+                                SvgPicture.asset(
+                                  'images/error.svg', 
+                                  height: 65, 
+                                  width: 65, 
+                                ), 
+                                const SizedBox(
+                                    height:
+                                        10),
+                                const Text(
+                                  'Error',
+                                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red), // Stile personalizzato per il titolo
+                                ),
+                              ],
+                            ),
+                            content: const Text(
+                              'Error',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text(
+                                  'Ok',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        });
                               }
                             },
                             child: Text(AppLocalizations.of(context)
@@ -142,8 +164,8 @@ class _RegistrationpageState extends State<Serverconnectpage> {
         child: Column(
           children: [
             const SizedBox(height: 70),
-            Image.asset(
-              'images/logo.png', //change
+            SvgPicture.asset(
+              'images/logo.svg', //change
               width: 140,
               height: 140,
             ),

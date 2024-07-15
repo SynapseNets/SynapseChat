@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -41,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
         decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(
-                color:  Color.fromARGB(255, 255, 255, 255), width: 0.25),
+                color: Color.fromARGB(255, 255, 255, 255), width: 0.25),
             bottom: BorderSide(
                 color: Color.fromARGB(255, 255, 255, 255), width: 0.25),
           ),
@@ -50,16 +51,25 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const CircleAvatar(
-                radius: 40,
-                backgroundImage: AssetImage('images/default_profile.png')),
+                CircleAvatar(
+              radius: 40,
+              child: ClipOval(
+                child: SvgPicture.asset(
+                  'images/default_profile.svg',
+                  width: 80, 
+                  height: 80, 
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   AppLocalizations.of(context).settingsPageUsername,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -86,9 +96,10 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const CircleAvatar(
-                radius: 23,
-                backgroundImage:  AssetImage('images/chat_settings.png')),
+            CircleAvatar(
+              radius: 23,
+              child: SvgPicture.asset('images/chat_settings.svg'),
+            ),
             const SizedBox(width: 12),
             Text(
               AppLocalizations.of(context).settingsPageChatSettings,
@@ -112,8 +123,10 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const CircleAvatar(
-                radius: 23, backgroundImage: AssetImage('images/language.png')),
+            CircleAvatar(
+              radius: 23,
+              child: SvgPicture.asset('images/language.svg'),
+            ),
             const SizedBox(width: 12),
             Text(
               AppLocalizations.of(context).settingsPageLanguages,
@@ -137,8 +150,17 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const CircleAvatar(
-                radius: 23, backgroundImage: AssetImage('images/info.png')),
+            CircleAvatar(
+              radius: 23,
+              child: ClipOval(
+                child: SvgPicture.asset(
+                  'images/info.svg',
+                  width: 80, 
+                  height: 80, 
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             const SizedBox(width: 12),
             Text(
               AppLocalizations.of(context).settingsPageCredits,

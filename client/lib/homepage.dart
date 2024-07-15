@@ -1,6 +1,7 @@
 import 'package:client/main.dart';
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 const List<String> languages = <String>['English', 'Italiano', 'Español'];
 
@@ -19,8 +20,8 @@ class _SynapseNetsAppHomepageState extends State<SynapseNetsAppHomepage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'images/logo.png',
+            SvgPicture.asset(
+              'images/logo.svg',
               width: 256,
               height: 256,
             ),

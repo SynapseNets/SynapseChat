@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:client/l10n/app_localizations.dart';
 import 'package:client/utils/settings_preferences.dart';
 import 'package:client/main.dart';
 
 class ChatPreferencesPage extends StatefulWidget {
-  const ChatPreferencesPage({super.key});
+  const ChatPreferencesPage({Key? key}) : super(key: key);
 
   @override
-  State<ChatPreferencesPage> createState() => _ChatPreferencesPageState();
+  _ChatPreferencesPageState createState() => _ChatPreferencesPageState();
 }
 
 class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
@@ -16,8 +17,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
   Color backgroundColor = const Color.fromARGB(255, 134, 120, 235);
   Color textColor = Colors.white;
   bool isDarkTheme = true;
-  ImageProvider<Object> backgroundImage =
-      const AssetImage('images/background_chat.png'); // Immagine doodle
+  Widget? backgroundImage; // Cambio del tipo a Widget
 
   void loadPreferences() {
     Future.wait([
@@ -27,7 +27,6 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
       SettingsPreferences.getDarkMode(),
     ]).then((values) {
       setState(() {
-        print(values[0]);
         sizeChar = values[0] as double;
         backgroundColor = Color(values[1] as int);
         textColor = Color(values[2] as int);
@@ -38,26 +37,15 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
     });
   }
 
-  bool lightThemeSelected = true;
-  bool darkThemeSelected = false;
-
   @override
   void initState() {
     super.initState();
-
     loadPreferences();
     // Initialize theme based on system theme
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       var brightness = MediaQuery.of(context).platformBrightness;
       setState(() {
         isDarkTheme = brightness == Brightness.dark;
-        if (isDarkTheme) {
-          lightThemeSelected = false;
-          darkThemeSelected = true;
-        } else {
-          lightThemeSelected = true;
-          darkThemeSelected = false;
-        }
       });
     });
   }
@@ -66,7 +54,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).chatPreferencesTitle),
+        title: Text(AppLocalizations.of(context)!.chatPreferencesTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -84,7 +72,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppLocalizations.of(context).chatPreferencesFontSize,
+                    AppLocalizations.of(context)!.chatPreferencesFontSize,
                     style: const TextStyle(fontSize: 20),
                   ),
                   Text(
@@ -114,68 +102,66 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                     width: 3,
                   ),
                   borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: backgroundImage,
-                    colorFilter: ColorFilter.mode(backgroundColor,
-                        BlendMode.color), // Applica il colore dello sfondo
-                    fit: BoxFit.cover,
-                  ),
                 ),
-                child: ListView(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(10),
+                child: Stack(
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xff1b2a41)
-                              .withOpacity(0.6), // Opacità del colore
-                          borderRadius: BorderRadius.circular(10),
+                    if (backgroundImage != null) backgroundImage!, // Utilizzo dell'immagine di sfondo se non è nulla
+                    ListView(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(10),
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: const Color(0xff1b2a41)
+                                  .withOpacity(0.6), // Opacità del colore
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .chatPreferencesFirstText,
+                              style: TextStyle(fontSize: sizeChar, color: textColor),
+                            ),
+                          ),
                         ),
-                        child: Text(
-                          AppLocalizations.of(context).chatPreferencesFirstText,
-                          style:
-                              TextStyle(fontSize: sizeChar, color: textColor),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: const Color(0xff3b28cc)
+                                  .withOpacity(0.6), // Opacità del colore
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .chatPreferencesSecondText,
+                              style: TextStyle(fontSize: sizeChar, color: textColor),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xff3b28cc)
-                              .withOpacity(0.6), // Opacità del colore
-                          borderRadius: BorderRadius.circular(10),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              color: const Color(0xff1b2a41)
+                                  .withOpacity(0.6), // Opacità del colore
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .chatPreferencesThirdText,
+                              style: TextStyle(fontSize: sizeChar, color: textColor),
+                            ),
+                          ),
                         ),
-                        child: Text(
-                          AppLocalizations.of(context)
-                              .chatPreferencesSecondText,
-                          style:
-                              TextStyle(fontSize: sizeChar, color: textColor),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xff1b2a41)
-                              .withOpacity(0.6), // Opacità del colore
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context).chatPreferencesThirdText,
-                          style:
-                              TextStyle(fontSize: sizeChar, color: textColor),
-                        ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
@@ -188,7 +174,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text(AppLocalizations.of(context)
+                        title: Text(AppLocalizations.of(context)!
                             .chatPreferencesTextDialogBackground),
                         content: SingleChildScrollView(
                           child: BlockPicker(
@@ -196,7 +182,6 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             onColorChanged: (Color color) async {
                               await SettingsPreferences.setBackgroundColor(
                                   color.value);
-
                               setState(() {
                                 backgroundColor = color;
                               });
@@ -210,14 +195,14 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                 },
                 child: Row(
                   children: [
-                    Image.asset(
-                      'images/background.png',
+                    SvgPicture.asset(
+                      'images/background.svg',
                       width: 40,
                       height: 40,
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      AppLocalizations.of(context).chatPreferencesBackground,
+                      AppLocalizations.of(context)!.chatPreferencesBackground,
                       style: const TextStyle(fontSize: 18),
                     ),
                   ],
@@ -231,7 +216,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text(AppLocalizations.of(context)
+                        title: Text(AppLocalizations.of(context)!
                             .chatPreferencesTextDialogColor),
                         content: SingleChildScrollView(
                           child: BlockPicker(
@@ -259,7 +244,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      AppLocalizations.of(context).chatPreferencesTextColor,
+                      AppLocalizations.of(context)!.chatPreferencesTextColor,
                       style: const TextStyle(fontSize: 18),
                     ),
                   ],
@@ -268,7 +253,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
               const SizedBox(height: 20),
               CheckboxListTile(
                 title: Text(
-                    AppLocalizations.of(context).chatPreferencesLightTheme),
+                    AppLocalizations.of(context)!.chatPreferencesLightTheme),
                 value: !isDarkTheme,
                 onChanged: (bool? value) async {
                   if (value != null && value) {
@@ -282,7 +267,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
               ),
               CheckboxListTile(
                 title:
-                    Text(AppLocalizations.of(context).chatPreferencesDarkTheme),
+                    Text(AppLocalizations.of(context)!.chatPreferencesDarkTheme),
                 value: isDarkTheme,
                 onChanged: (bool? value) async {
                   if (value != null && value) {

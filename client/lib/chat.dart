@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'chat/sidebar.dart';
 import 'chat/content.dart';
 import 'package:client/chat/chatcontroller.dart';
@@ -14,7 +15,7 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
-  final ChatFocus _chatFocus = ChatFocus(); //mobile toggle option
+  final ChatFocus _chatFocus = ChatFocus(); // mobile toggle option
   double? _lastWidth;
   final ChatController currentChatController = Get.put(ChatController());
   final MessageNotifier messageNotifier = MessageNotifier();
@@ -40,8 +41,7 @@ class _ChatState extends State<Chat> {
               children: [
                 Builder(
                   builder: (context) {
-                    return !_chatFocus.chatFocus ||
-                            MediaQuery.of(context).size.width > 730
+                    return !_chatFocus.chatFocus || MediaQuery.of(context).size.width > 730
                         ? Expanded(
                             child: Scaffold(
                               appBar: AppBar(
@@ -76,8 +76,8 @@ class _ChatState extends State<Chat> {
                                   Stack(
                                     alignment: Alignment.center,
                                     children: [
-                                      Image.asset(
-                                        'images/add_server.png',
+                                      SvgPicture.asset(
+                                        'images/add_server.svg',
                                         width: 33,
                                         height: 33,
                                         fit: BoxFit.cover,
@@ -131,51 +131,60 @@ class _ChatState extends State<Chat> {
                 ),
                 Builder(
                   builder: (context) {
-                    return _chatFocus.chatFocus ||
-                            MediaQuery.of(context).size.width > 730
+                    return _chatFocus.chatFocus || MediaQuery.of(context).size.width > 730
                         ? Expanded(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('images/background_chat.png'), 
-                                  fit: BoxFit.cover,
+                            child: Stack(
+                              children: [
+                                Positioned.fill(
+                                  child: SvgPicture.asset(
+                                    'images/background_chat.svg',
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                              child: Column(
-                                children: [
-                                  AppBar(
-                                    toolbarHeight: 60,
-                                    backgroundColor: const Color(0xFF0A121D),
-                                    title: Text(
-                                          currentChatController.currentChat,
-                                          style: const TextStyle(fontSize: 30, color: Color(0xFFFFFFFF)),
-                                        ),
-                                    actions: [
-                                       Builder(builder: (context){
-                                          if(_chatFocus.chatFocus &&
-                                                MediaQuery.of(context).size.width <= 730){
+                                Column(
+                                  children: [
+                                    AppBar(
+                                      toolbarHeight: 60,
+                                      backgroundColor: const Color(0xFF0A121D),
+                                      title: Text(
+                                        currentChatController.currentChat,
+                                        style: const TextStyle(
+                                            fontSize: 30,
+                                            color: Color(0xFFFFFFFF)),
+                                      ),
+                                      actions: [
+                                        Builder(builder: (context) {
+                                          if (_chatFocus.chatFocus &&
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .width <=
+                                                  730) {
                                             return IconButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  _chatFocus.toggleChatFocus();
+                                                  _chatFocus
+                                                      .toggleChatFocus();
                                                 });
                                               },
                                               icon: const Icon(Icons.menu),
-                                        );
-                                        } else {return const SizedBox(width: 0,);}
-                                          
+                                            );
+                                          } else {
+                                            return const SizedBox(width: 0);
+                                          }
                                         }),
-                                    ],
-                                    automaticallyImplyLeading: false,
-                                  ),
-                                  Expanded(
-                                    child: Content(
-                                      currentChatController: currentChatController,
-                                      messageNotifier: messageNotifier,
+                                      ],
+                                      automaticallyImplyLeading: false,
                                     ),
-                                  ),
-                                ],
-                              ),
+                                    Expanded(
+                                      child: Content(
+                                        currentChatController:
+                                            currentChatController,
+                                        messageNotifier: messageNotifier,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           )
                         : const SizedBox(width: 0);

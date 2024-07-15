@@ -1,5 +1,6 @@
 // chat_button.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ChatButton extends StatelessWidget {
   final String title;
@@ -27,13 +28,14 @@ class ChatButton extends StatelessWidget {
           color: const Color(0xFF121212),
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Column(
+         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
+                // Utilizza SvgPicture.asset per caricare le immagini SVG
+                SvgPicture.asset(
                   profileImagePath,
                   width: 60,
                   height: 60,

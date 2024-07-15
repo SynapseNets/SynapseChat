@@ -80,15 +80,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/logo.png             #logo image
-    - images/user.png             #login page image
-    - images/default_profile.png  #default_profile image
-    - images/add_server.png       #add server image
-    - images/chat_settings.png    #chat preferences image
-    - images/language.png
-    - images/background.png
-    - images/info.png
-    - images/background_chat.png
+    - images/logo.svg             #logo image
+    - images/user.svg             #login page image
+    - images/default_profile.svg  #default_profile image
+    - images/add_server.svg       #add server image
+    - images/chat_settings.svg    #chat preferences image
+    - images/language.svg
+    - images/background_chat.svg
+    - images/info.svg
+    - images/background_chat.svg
     - images/error.svg
     # - images/a_dot_burr.jpeg
     #- images/a_dot_ham.jpeg

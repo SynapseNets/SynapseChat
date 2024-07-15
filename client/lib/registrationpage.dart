@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Registrationpage extends StatefulWidget {
   const Registrationpage({Key? key}) : super(key: key);
@@ -126,8 +127,8 @@ class _RegistrationpageState extends State<Registrationpage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 90),
-                Image.asset(
-                  'images/user.png',
+                SvgPicture.asset(
+                  'images/user.svg',
                   width: 140,
                   height: 140,
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:client/l10n/app_localizations.dart';
@@ -34,9 +35,18 @@ Widget build(BuildContext context) {
           const SizedBox(height: 20), // Add some space from the top AppBar
           CircleAvatar(
             radius: 80,
-            backgroundImage: _image == null
-                ? const AssetImage('images/default_profile.png')
-                : FileImage(_image!) as ImageProvider,
+            backgroundColor: Colors.transparent, // Per assicurarti che lo sfondo del CircleAvatar sia trasparente
+            child: _image == null
+                ? SvgPicture.asset(
+                    'images/default_profile.svg',
+                    width: 160,  // Imposta la larghezza desiderata per l'immagine SVG
+                    height: 160, // Imposta l'altezza desiderata per l'immagine SVG
+                  )
+                : CircleAvatar(
+                    radius: 80,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: FileImage(_image!) as ImageProvider<Object>,
+                  ),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
