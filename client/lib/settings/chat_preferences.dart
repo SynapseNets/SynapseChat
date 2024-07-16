@@ -42,7 +42,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
       try {
         backgroundImage = SvgPicture.asset(
           'images/background_chat.svg',
-          color: backgroundColor,
+          colorFilter: ColorFilter.mode(backgroundColor, BlendMode.color),
           fit: BoxFit.cover, // Assicura che l'immagine si adatti senza distorsione
         );
       } catch (e) {
