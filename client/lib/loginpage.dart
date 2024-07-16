@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
       webSocketProvider.connect('ws://localhost:8765'); 
       webSocketProvider.sendMessage('test message');
       */
-
+      storage.write(key: 'logged', value: 'true');
       Navigator.pushNamed(context, '/chat');
     } else {
       setState(() {

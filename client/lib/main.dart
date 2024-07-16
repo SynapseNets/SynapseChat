@@ -7,6 +7,7 @@ import 'package:client/settings/credits/iconscredits.dart';
 import 'package:client/settings/creditspage.dart';
 import 'package:client/utils/db.dart';
 import 'package:client/utils/encrypt.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:client/chat/message.dart';
@@ -31,6 +32,8 @@ import 'package:client/utils/settings_preferences.dart';
 import 'package:provider/provider.dart'; // Importa il pacchetto provider
 import 'websocket_provider.dart'; // Importa il WebSocketProvider
 
+bool alreadyLogged = false;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -43,6 +46,8 @@ void main() async {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
+
+  alreadyLogged = (await const FlutterSecureStorage().read(key: 'logged')) == 'true';
 
   // Setup Database
   //await getDb();
@@ -114,7 +119,7 @@ class _SynapseNetsAppState extends State<SynapseNetsApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: widget.isDarkMode ? ThemeData.dark() : ThemeData.light(),
-      initialRoute: '/',
+      initialRoute: alreadyLogged ? '/login' : '/',
       routes: {
         '/': (context) => const SynapseNetsAppHomepage(),
         '/login': (context) => const LoginPage(),
