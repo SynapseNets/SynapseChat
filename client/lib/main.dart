@@ -47,7 +47,8 @@ void main() async {
     databaseFactory = databaseFactoryFfi;
   }
 
-  alreadyLogged = (await const FlutterSecureStorage().read(key: 'logged')) == 'true';
+  alreadyLogged =
+      (await const FlutterSecureStorage().read(key: 'logged')) == 'true';
 
   // Setup Database
   //await getDb();
@@ -56,7 +57,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => WebSocketProvider()), // Aggiungi il WebSocketProvider
+        ChangeNotifierProvider(
+            create: (_) =>
+                WebSocketProvider()), // Aggiungi il WebSocketProvider
       ],
       child: SynapseNetsApp(
         isDarkMode: isDarkMode,
@@ -113,6 +116,25 @@ class _SynapseNetsAppState extends State<SynapseNetsApp> {
     setState(() {
       widget.isDarkMode = isDarkMode;
     });
+  }
+
+  // Load Language Selection
+  void loadLanguage() {
+    Future.wait([
+      SettingsPreferences.getLanguage(),
+    ]).then((values) {
+      setState(() {
+        _locale = Locale(values[0]);
+      });
+    }).catchError((error) {
+      print('Error loading preferences: $error');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadLanguage();
   }
 
   @override

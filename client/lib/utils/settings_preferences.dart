@@ -5,6 +5,7 @@ class SettingsPreferences {
   static const String _keyBackgroundColor = 'backgroundColor';
   static const String _keyTextColor = 'textColor';
   static const String _keyDarkMode = 'darkMode';
+  static const String _keyLanguage = 'language';
 
   static Future<double> getFontSize() async {
     var storage = const FlutterSecureStorage();
@@ -51,6 +52,18 @@ class SettingsPreferences {
   static Future<void> setDarkMode(bool value) async {
     const storage = FlutterSecureStorage();
     await storage.write(key: _keyDarkMode, value: value.toString());
+    return;
+  }
+
+  static Future<String> getLanguage() async {
+    var storage = const FlutterSecureStorage();
+    String? value = await storage.read(key: _keyLanguage);
+    return value ?? 'en';
+  }
+
+  static Future<void> setLanguage(String language) async {
+    var storage = const FlutterSecureStorage();
+    await storage.write(key: _keyLanguage, value: language);
     return;
   }
 }

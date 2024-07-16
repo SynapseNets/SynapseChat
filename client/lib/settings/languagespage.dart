@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:client/main.dart';
 import 'package:client/l10n/app_localizations.dart';
+import 'package:client/utils/settings_preferences.dart';
 
 class RoundCheckbox extends StatelessWidget {
   final bool value;
@@ -59,7 +60,9 @@ class _ChatLanguagesPageState extends State<ChatLanguagesPage> {
       children: [
         RoundCheckbox(
           value: _selectedCheckboxIndex == index,
-          onChanged: (bool? value) {
+          onChanged: (bool? value) async {
+            SettingsPreferences.setLanguage(
+                primaryText.substring(0, 2).toLowerCase());
             setState(() {
               SynapseNetsApp.setLocale(
                   context,

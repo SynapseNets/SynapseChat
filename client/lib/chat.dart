@@ -6,6 +6,7 @@ import 'package:client/chat/chatcontroller.dart';
 import 'package:get/get.dart';
 import 'package:client/chat/messagenotifier.dart';
 import 'package:client/chat/chatfocus.dart';
+import 'package:client/utils/settings_preferences.dart';
 
 class Chat extends StatefulWidget {
   const Chat({super.key});
@@ -19,11 +20,31 @@ class _ChatState extends State<Chat> {
   double? _lastWidth;
   final ChatController currentChatController = Get.put(ChatController());
   final MessageNotifier messageNotifier = MessageNotifier();
+  Color? backgroundColor = const Color(4287002859);
+
+  void loadPreferences() {
+    Future.wait([
+      SettingsPreferences.getBackgroundColor(),
+    ]).then((values) {
+      setState(() {
+        backgroundColor = Color(values[0]);
+      });
+    }).catchError((error) {
+      print('Error loading preferences: $error');
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadPreferences();
+  }
 
   @override
   Widget build(BuildContext context) {
     _lastWidth = MediaQuery.of(context).size.width;
 
+    print(backgroundColor);
     return Scaffold(
       body: NotificationListener<SizeChangedLayoutNotification>(
         onNotification: (notification) {
@@ -41,7 +62,8 @@ class _ChatState extends State<Chat> {
               children: [
                 Builder(
                   builder: (context) {
-                    return !_chatFocus.chatFocus || MediaQuery.of(context).size.width > 730
+                    return !_chatFocus.chatFocus ||
+                            MediaQuery.of(context).size.width > 730
                         ? Expanded(
                             child: Scaffold(
                               appBar: AppBar(
@@ -54,11 +76,15 @@ class _ChatState extends State<Chat> {
                                       listenable: _chatFocus,
                                       builder: (context, child) {
                                         return _chatFocus.chatFocus &&
-                                                MediaQuery.of(context).size.width <= 600
+                                                MediaQuery.of(context)
+                                                        .size
+                                                        .width <=
+                                                    600
                                             ? IconButton(
                                                 onPressed: () {
                                                   setState(() {
-                                                    _chatFocus.toggleChatFocus();
+                                                    _chatFocus
+                                                        .toggleChatFocus();
                                                   });
                                                 },
                                                 icon: const Icon(Icons.menu),
@@ -68,7 +94,9 @@ class _ChatState extends State<Chat> {
                                     ),
                                     const Text(
                                       'SynapseChat',
-                                      style: TextStyle(fontSize: 30, color: Color(0xFF232A80)),
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          color: Color(0xFF232A80)),
                                     ), // Text on the left
                                   ],
                                 ),
@@ -84,7 +112,8 @@ class _ChatState extends State<Chat> {
                                       ),
                                       ElevatedButton(
                                         onPressed: () {
-                                          Navigator.pushNamed(context, '/serverconnect');
+                                          Navigator.pushNamed(
+                                              context, '/serverconnect');
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.transparent,
@@ -92,7 +121,8 @@ class _ChatState extends State<Chat> {
                                           padding: EdgeInsets.zero,
                                           shape: const CircleBorder(),
                                         ),
-                                        child: const SizedBox(width: 40, height: 40),
+                                        child: const SizedBox(
+                                            width: 40, height: 40),
                                       ),
                                     ],
                                   ),
@@ -114,9 +144,11 @@ class _ChatState extends State<Chat> {
                                   ),
                                   Expanded(
                                     child: Container(
-                                      color: const Color(0xFF121212), // Colore di sfondo della sidebar
+                                      color: const Color(
+                                          0xFF121212), // Colore di sfondo della sidebar
                                       child: Sidebar(
-                                        currentChatController: currentChatController,
+                                        currentChatController:
+                                            currentChatController,
                                         messageNotifier: messageNotifier,
                                         chatFocus: _chatFocus,
                                       ),
@@ -131,13 +163,16 @@ class _ChatState extends State<Chat> {
                 ),
                 Builder(
                   builder: (context) {
-                    return _chatFocus.chatFocus || MediaQuery.of(context).size.width > 730
+                    return _chatFocus.chatFocus ||
+                            MediaQuery.of(context).size.width > 730
                         ? Expanded(
                             child: Stack(
                               children: [
                                 Positioned.fill(
                                   child: SvgPicture.asset(
                                     'images/background_chat.svg',
+                                    colorFilter: ColorFilter.mode(
+                                        backgroundColor!, BlendMode.color),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -162,8 +197,7 @@ class _ChatState extends State<Chat> {
                                             return IconButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  _chatFocus
-                                                      .toggleChatFocus();
+                                                  _chatFocus.toggleChatFocus();
                                                 });
                                               },
                                               icon: const Icon(Icons.menu),

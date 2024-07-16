@@ -43,7 +43,8 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
         backgroundImage = SvgPicture.asset(
           'images/background_chat.svg',
           colorFilter: ColorFilter.mode(backgroundColor, BlendMode.color),
-          fit: BoxFit.cover, // Assicura che l'immagine si adatti senza distorsione
+          fit: BoxFit
+              .cover, // Assicura che l'immagine si adatti senza distorsione
         );
       } catch (e) {
         print('Error loading background image: $e');
@@ -111,8 +112,11 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
               ),
               const SizedBox(height: 20),
               Container(
-                height: MediaQuery.of(context).size.height * 0.5, // Altezza massima dello schermo
-                width: MediaQuery.of(context).size.width, // Larghezza massima dello schermo
+                height: MediaQuery.of(context).size.height *
+                    0.5, // Altezza massima dello schermo
+                width: MediaQuery.of(context)
+                    .size
+                    .width, // Larghezza massima dello schermo
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.grey,
@@ -122,7 +126,8 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                 ),
                 child: Stack(
                   children: [
-                    if (backgroundImage != null) backgroundImage!, // Utilizzo dell'immagine di sfondo se non è nulla
+                    if (backgroundImage != null)
+                      backgroundImage!, // Utilizzo dell'immagine di sfondo se non è nulla
                     ListView(
                       shrinkWrap: true,
                       padding: const EdgeInsets.all(10),
@@ -139,7 +144,8 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             child: Text(
                               AppLocalizations.of(context)!
                                   .chatPreferencesFirstText,
-                              style: TextStyle(fontSize: sizeChar, color: textColor),
+                              style: TextStyle(
+                                  fontSize: sizeChar, color: textColor),
                             ),
                           ),
                         ),
@@ -155,7 +161,8 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             child: Text(
                               AppLocalizations.of(context)!
                                   .chatPreferencesSecondText,
-                              style: TextStyle(fontSize: sizeChar, color: textColor),
+                              style: TextStyle(
+                                  fontSize: sizeChar, color: textColor),
                             ),
                           ),
                         ),
@@ -171,7 +178,8 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                             child: Text(
                               AppLocalizations.of(context)!
                                   .chatPreferencesThirdText,
-                              style: TextStyle(fontSize: sizeChar, color: textColor),
+                              style: TextStyle(
+                                  fontSize: sizeChar, color: textColor),
                             ),
                           ),
                         ),
@@ -268,20 +276,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
               const SizedBox(height: 20),
               CheckboxListTile(
                 title: Text(
-                    AppLocalizations.of(context)!.chatPreferencesLightTheme),
-                value: !isDarkTheme,
-                onChanged: (bool? value) async {
-                  if (value != null && value) {
-                    await SettingsPreferences.setDarkMode(false);
-                    setState(() {
-                      isDarkTheme = false;
-                    });
-                  }
-                },
-              ),
-              CheckboxListTile(
-                title:
-                    Text(AppLocalizations.of(context)!.chatPreferencesDarkTheme),
+                    AppLocalizations.of(context)!.chatPreferencesDarkTheme),
                 value: isDarkTheme,
                 onChanged: (bool? value) async {
                   if (value != null && value) {
