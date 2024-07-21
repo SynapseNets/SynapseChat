@@ -3,7 +3,7 @@ services:
     image: backend
     build: .
     ports:
-      - "443:5050"
+      - "${SERVER_PORT}:5050"
     depends_on:
       db:
         condition: service_healthy
