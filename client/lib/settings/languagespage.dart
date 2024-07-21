@@ -8,10 +8,10 @@ class RoundCheckbox extends StatelessWidget {
   final ValueChanged<bool?>? onChanged;
 
   const RoundCheckbox({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class RoundCheckbox extends StatelessWidget {
 }
 
 class ChatLanguagesPage extends StatefulWidget {
-  const ChatLanguagesPage({Key? key}) : super(key: key);
+  const ChatLanguagesPage({super.key});
 
   @override
   State<ChatLanguagesPage> createState() => _ChatLanguagesPageState();

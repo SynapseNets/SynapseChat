@@ -1,16 +1,11 @@
 import 'dart:io';
 import 'dart:async';
 
-import 'package:client/chat/conversation.dart';
 import 'package:client/settings/credits/developerscredits.dart';
 import 'package:client/settings/credits/iconscredits.dart';
 import 'package:client/settings/creditspage.dart';
-import 'package:client/utils/db.dart';
 import 'package:client/utils/encrypt.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:client/chat/message.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'package:client/homepage.dart';

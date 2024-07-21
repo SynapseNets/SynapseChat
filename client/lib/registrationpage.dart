@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Aggiunto per usare TextInputFormatter
+// Aggiunto per usare TextInputFormatter
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
@@ -7,7 +7,7 @@ import 'package:client/l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Registrationpage extends StatefulWidget {
-  const Registrationpage({Key? key}) : super(key: key);
+  const Registrationpage({super.key});
 
   @override
   State<Registrationpage> createState() => _RegistrationpageState();

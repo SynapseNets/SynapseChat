@@ -1,6 +1,4 @@
 import 'dart:ui';
-import 'package:get/get.dart';
-import 'package:path/path.dart';
 
 class Message {
   final String text;

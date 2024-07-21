@@ -54,7 +54,10 @@ dependencies:
   flutter_secure_storage: ^4.2.1
   encrypt: ^5.0.3
   qr_flutter: ^4.1.0
+  otp_util: ^1.0.2
 
+  http: any
+  path: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

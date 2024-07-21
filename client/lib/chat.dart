@@ -20,7 +20,7 @@ class _ChatState extends State<Chat> {
   double? _lastWidth;
   final ChatController currentChatController = Get.put(ChatController());
   final MessageNotifier messageNotifier = MessageNotifier();
-  Color? backgroundColor = const Color(4287002859);
+  Color? backgroundColor = const Color(0xff8678eb); //TODO: remove skill issue
 
   void loadPreferences() {
     Future.wait([

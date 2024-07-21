@@ -1,7 +1,6 @@
 import 'package:client/chat/graphicmessages.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'message.dart';
 import 'package:client/utils/db.dart';
@@ -120,7 +119,7 @@ class _ContentState extends State<Content> {
       String result = '';
       String tmp = '';
 
-      words.forEach((element) {
+      for (var element in words) {
         if (tmp.length + element.length > 34) {
           //case element is longer than 34
           if (element.length > 34) {
@@ -138,7 +137,7 @@ class _ContentState extends State<Content> {
         } else {
           tmp += ' $element';
         }
-      });
+      }
 
       result += tmp;
       return result;

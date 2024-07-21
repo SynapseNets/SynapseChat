@@ -5,7 +5,7 @@ import 'package:client/l10n/app_localizations.dart';
 import 'package:client/utils/settings_preferences.dart';
 
 class ChatPreferencesPage extends StatefulWidget {
-  const ChatPreferencesPage({Key? key}) : super(key: key);
+  const ChatPreferencesPage({super.key});
 
   @override
   _ChatPreferencesPageState createState() => _ChatPreferencesPageState();
@@ -58,7 +58,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
     super.initState();
     loadPreferences();
     // Inizializza il tema in base al tema di sistema
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       var brightness = MediaQuery.of(context).platformBrightness;
       setState(() {
         isDarkTheme = brightness == Brightness.dark;
@@ -70,7 +70,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.chatPreferencesTitle),
+        title: Text(AppLocalizations.of(context).chatPreferencesTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -88,7 +88,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.chatPreferencesFontSize,
+                    AppLocalizations.of(context).chatPreferencesFontSize,
                     style: const TextStyle(fontSize: 20),
                   ),
                   Text(
@@ -142,7 +142,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              AppLocalizations.of(context)!
+                              AppLocalizations.of(context)
                                   .chatPreferencesFirstText,
                               style: TextStyle(
                                   fontSize: sizeChar, color: textColor),
@@ -159,7 +159,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              AppLocalizations.of(context)!
+                              AppLocalizations.of(context)
                                   .chatPreferencesSecondText,
                               style: TextStyle(
                                   fontSize: sizeChar, color: textColor),
@@ -176,7 +176,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              AppLocalizations.of(context)!
+                              AppLocalizations.of(context)
                                   .chatPreferencesThirdText,
                               style: TextStyle(
                                   fontSize: sizeChar, color: textColor),
@@ -196,7 +196,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text(AppLocalizations.of(context)!
+                        title: Text(AppLocalizations.of(context)
                             .chatPreferencesTextDialogBackground),
                         content: SingleChildScrollView(
                           child: BlockPicker(
@@ -225,7 +225,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      AppLocalizations.of(context)!.chatPreferencesBackground,
+                      AppLocalizations.of(context).chatPreferencesBackground,
                       style: const TextStyle(fontSize: 18),
                     ),
                   ],
@@ -239,7 +239,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text(AppLocalizations.of(context)!
+                        title: Text(AppLocalizations.of(context)
                             .chatPreferencesTextDialogColor),
                         content: SingleChildScrollView(
                           child: BlockPicker(
@@ -267,7 +267,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      AppLocalizations.of(context)!.chatPreferencesTextColor,
+                      AppLocalizations.of(context).chatPreferencesTextColor,
                       style: const TextStyle(fontSize: 18),
                     ),
                   ],
@@ -276,7 +276,7 @@ class _ChatPreferencesPageState extends State<ChatPreferencesPage> {
               const SizedBox(height: 20),
               CheckboxListTile(
                 title: Text(
-                    AppLocalizations.of(context)!.chatPreferencesDarkTheme),
+                    AppLocalizations.of(context).chatPreferencesDarkTheme),
                 value: isDarkTheme,
                 onChanged: (bool? value) async {
                   if (value != null && value) {

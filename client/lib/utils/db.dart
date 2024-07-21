@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:client/chat/message.dart';
 import 'package:client/chat/conversation.dart';
-import 'package:flutter/gestures.dart';
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';

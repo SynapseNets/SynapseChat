@@ -6,8 +6,6 @@ import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:client/utils/encrypt.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
-import 'websocket_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

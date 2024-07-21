@@ -1,20 +1,17 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:client/utils/db.dart';
+import 'package:otp_util/otp_util.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:client/l10n/app_localizations.dart';
 
 class Serverconnectpage extends StatefulWidget {
   const Serverconnectpage({super.key});
@@ -45,14 +42,14 @@ class _RegistrationpageState extends State<Serverconnectpage> {
     const storage = FlutterSecureStorage();
     final client = http.Client();
 
-    String? _username = await storage.read(key: 'username');
-    var response;
+    String? username = await storage.read(key: 'username');
+    http.Response response;
 
     try {
       response = await client.post(
           Uri.parse('https://$serverIP:$port/api/register'),
           headers: {'Content-Type': 'application/json'},
-          body: json.encode({'username': _username!}));
+          body: json.encode({'username': username!}));
     } catch (e) {
       return false;
     }
@@ -64,11 +61,27 @@ class _RegistrationpageState extends State<Serverconnectpage> {
     var body = json.decode(response.body);
     String totpUri = body['auth'];
 
-    if(!totpUri.startsWith('otpauth://totp/')) {
+    if (!totpUri.startsWith('otpauth://totp/')) {
       return false;
     }
 
-    await addServer(serverIP, port, _username!, totpUri);
+    await addServer(serverIP, port, username, totpUri);
+
+    TOTP totp = TOTP(secret: totpUri.split('secret=')[1].split('&')[0]);
+    print(totpUri.split('secret=')[1].split('&')[0]);
+    print(totp.now());
+    var totpResponse = await client.post(Uri.parse('https://$serverIP:$port/api/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'username': username,
+          'otp': totp.now(),
+          }));
+    
+    if(totpResponse.statusCode != 200) {
+      return false; //TODO: add popup
+    }
+
+    await storage.write(key: 'serverIP', value: json.decode(totpResponse.body)['auth']);
 
     showDialog(
         context: context,
@@ -107,42 +120,44 @@ class _RegistrationpageState extends State<Serverconnectpage> {
                               } catch (e) {
                                 print('Caught an exception: $e');
                                 showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Column(
-                              children: [
-                                SvgPicture.asset(
-                                  'images/error.svg', 
-                                  height: 65, 
-                                  width: 65, 
-                                ), 
-                                const SizedBox(
-                                    height:
-                                        10),
-                                const Text(
-                                  'Error',
-                                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red), // Stile personalizzato per il titolo
-                                ),
-                              ],
-                            ),
-                            content: const Text(
-                              'Error',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            actions: <Widget>[
-                              TextButton(
-                                child: const Text(
-                                  'Ok',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        });
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Column(
+                                          children: [
+                                            SvgPicture.asset(
+                                              'images/error.svg',
+                                              height: 65,
+                                              width: 65,
+                                            ),
+                                            const SizedBox(height: 10),
+                                            const Text(
+                                              'Error',
+                                              style: TextStyle(
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors
+                                                      .red), // Stile personalizzato per il titolo
+                                            ),
+                                          ],
+                                        ),
+                                        content: const Text(
+                                          'Error',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: const Text(
+                                              'Ok',
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    });
                               }
                             },
                             child: Text(AppLocalizations.of(context)
@@ -229,16 +244,19 @@ class _RegistrationpageState extends State<Serverconnectpage> {
                             title: Column(
                               children: [
                                 SvgPicture.asset(
-                                  'images/error.svg', 
-                                  height: 65, 
-                                  width: 65, 
-                                ), 
-                                const SizedBox(
-                                    height:
-                                        10),
+                                  'images/error.svg',
+                                  height: 65,
+                                  width: 65,
+                                ),
+                                const SizedBox(height: 10),
                                 Text(
-                                  AppLocalizations.of(context).serverConnectPageTitleErrorConnectionPopUp,
-                                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red), // Stile personalizzato per il titolo
+                                  AppLocalizations.of(context)
+                                      .serverConnectPageTitleErrorConnectionPopUp,
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors
+                                          .red), // Stile personalizzato per il titolo
                                 ),
                               ],
                             ),
