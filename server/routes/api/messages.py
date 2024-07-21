@@ -1,8 +1,7 @@
 from flask import request, jsonify
 from utils.models import UserGroup, Messages
-from utils.decorators import token_required
 
-def get_messages(user_id):
+def messages(user_id):
     data = request.get_json()
     if not isinstance(data, dict):
         return jsonify({'message': 'Invalid JSON'}), 400

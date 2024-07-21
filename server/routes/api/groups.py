@@ -1,7 +1,7 @@
 from flask import jsonify
 from utils.models import UserGroup
 
-def get_groups(user_id):
+def groups(user_id):
     groups: list[UserGroup] = UserGroup.query.filter_by(user_id=user_id).all()
     return jsonify([
         {

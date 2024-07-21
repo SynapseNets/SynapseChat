@@ -17,7 +17,8 @@ def register():
     if not isinstance(username, str):
         return jsonify({'message': 'Invalid username'}), 400
     
-    # TODO : check if username is already taken
+    if User.query.filter_by(username=username).first():
+        return jsonify({'message': 'Username already exists'}), 400
     
     otp_secret = b32encode(os.urandom(32)).decode()[:52]
     user = User(username=username, otp_secret=otp_secret)
