@@ -77,9 +77,34 @@ class _RegistrationpageState extends State<Serverconnectpage> {
           'otp': totp.now(),
           }));
     
-    if(totpResponse.statusCode != 200) {
-      return false; //TODO: add popup
+    if (totpResponse.statusCode != 200) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min, 
+              children: <Widget>[
+                Image.asset('images/error.svg'), 
+                const SizedBox(height: 16.0), 
+                const Text('Server did not provide an acceptable response'),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); 
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return false;
     }
+
 
     await storage.write(key: 'serverIP', value: json.decode(totpResponse.body)['auth']);
 
@@ -116,7 +141,7 @@ class _RegistrationpageState extends State<Serverconnectpage> {
                               try {
                                 await launchUrl(url,
                                     mode: LaunchMode
-                                        .externalApplication); //TODO: add popup if not successfull
+                                        .externalApplication); 
                               } catch (e) {
                                 print('Caught an exception: $e');
                                 showDialog(
@@ -141,8 +166,8 @@ class _RegistrationpageState extends State<Serverconnectpage> {
                                             ),
                                           ],
                                         ),
-                                        content: const Text(
-                                          'Error',
+                                        content: const Text(   //TODO: add link to install google authenticator
+                                          '"Error with Google Authenticator"',
                                           style: TextStyle(fontSize: 20),
                                         ),
                                         actions: <Widget>[
@@ -169,7 +194,9 @@ class _RegistrationpageState extends State<Serverconnectpage> {
                   }
                 })
               ]),
-            )));
+            )
+          )
+        );
 
     return true;
   }
