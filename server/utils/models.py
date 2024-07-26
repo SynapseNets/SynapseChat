@@ -18,7 +18,6 @@ class Session(db.Model):
     id          = Column(Integer, nullable=False, unique=True, autoincrement=True, primary_key=True)
     user_id     = Column(Integer, nullable=False)
     token       = Column(String(162), nullable=False, unique=True) # safe hash of random token
-    expiration  = Column(Integer, nullable=False)
     
     def __repr__(self) -> str:
         return f"<Session user {self.user_id}, token {self.token}>"
@@ -46,6 +45,7 @@ class Messages(db.Model):
 class UserGroup(db.Model):
     user_id     = Column(Integer, nullable=False, primary_key=True)
     group_id    = Column(Integer, nullable=False, primary_key=True)
+    public_key  = Column(Integer, nullable=False)
     group_name  = Column(String(20), nullable=False)
     last_time   = Column(DateTime, nullable=False)
     

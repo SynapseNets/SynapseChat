@@ -1,11 +1,13 @@
 from flask_socketio import SocketIO, join_room, leave_room, emit
 from werkzeug.security import generate_password_hash
 from utils.decorators import token_socket
+from Crypto.Util.number import isPrime
+from datetime import datetime
 from flask import Flask
 from utils.db import get_db_path
 from utils.models import *
 from utils import login
-import ssl, os, time, re, datetime
+import ssl, os, time, re
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 context.load_cert_chain('server_cert.pem', 'server_key.pem')
@@ -22,9 +24,22 @@ def connect():
 @socketio.on('send')
 @token_socket
 def send_message(message: dict, user_id: int):
-    text = message.get('text')
+    texts = message.get('text')
     group = message.get('group')
     timestamp = message.get('time')
+    
+    if not texts:
+        emit('error', {'message': 'Missing text'})
+        return
+    if not isinstance(texts, list):
+        emit('error', {'message': 'Invalid text'})
+        return
+    if not all(isinstance(text, str) for text in texts):
+        emit('error', {'message': 'Invalid text'})
+        return
+    if not isinstance(timestamp, int):
+        emit('error', {'message': 'Invalid timestamp'})
+        return
     
     group: Group = Group.query.filter_by(id=group).first()
     if not group:
@@ -32,14 +47,16 @@ def send_message(message: dict, user_id: int):
         return
            
     user: User = User.query.filter_by(id=user_id).first()
-    msg = Messages(user_id=user.id, group_id=group, username=user.username, message=text, time=timestamp)
-    db.session.add(msg)
+    for text in texts:
+        msg = Messages(user_id=user.id, group_id=group, username=user.username, message=text, time=timestamp)
+        db.session.add(msg)
     db.session.commit()
-    emit('message', {'text': text, 'time': timestamp, 'user': user.username}, room=group.id)
+    emit('message', {'text': text, 'time': timestamp, 'user': user.username}, to=group.id)
 
 @socketio.on('join')
 @token_socket
-def join_group(data: dict, user_id: int):    
+def join_group(data: dict, user_id: int):
+    public_key = data.get('public_key')
     invite_code = data.get('invite_code')
     
     if not invite_code:
@@ -52,6 +69,16 @@ def join_group(data: dict, user_id: int):
         emit('error', {'message': 'Invalid invite code format'})
         return
     
+    if not public_key:
+        emit('error', {'message': 'Missing public key'})
+        return
+    if not isinstance(public_key, int):
+        emit('error', {'message': 'Invalid public key'})
+        return
+    if not isPrime(public_key) or public_key < (1 << 2048):
+        emit('error', {'message': 'Invalid public key'})
+        return
+    
     group: Group = Group.query.filter_by(invite_code=invite_code).first()
     if not group:
         emit('error', {'message': 'Group not found'})
@@ -60,21 +87,27 @@ def join_group(data: dict, user_id: int):
     group_id = group.id
     user_group = UserGroup(
         user_id=user_id, 
-        group_id=group_id, 
-        group_name=group.name, 
+        group_id=group_id,
+        public_key=public_key,
+        group_name=group.name,
         last_time=datetime.now()
     )
     
     db.session.add(user_group)
     db.session.commit()
     join_room(group_id)
+    emit('joined', {'key': public_key}, to=group.id)
     
-    emit('success', {'message': 'Joined group', 'id': group_id})
+    keys = []
+    for key in UserGroup.query.filter_by(group_id=group_id).all():
+        keys.append(key.public_key)
+    
+    emit('success', {'message': 'Joined group', 'id': group_id, 'keys': keys})
     return
 
 @socketio.on('leave')
 @token_socket
-def leave_group(data: dict, user_id: int):    
+def leave_group(data: dict, user_id: int):
     group_id = data.get('group_id')
     
     if not group_id:
@@ -84,7 +117,7 @@ def leave_group(data: dict, user_id: int):
         emit('error', {'message': 'Invalid group id'})
         return
     
-    user_group: Group = UserGroup.query.filter_by(user_id=user_id, group_id=group_id).first()
+    user_group: UserGroup = UserGroup.query.filter_by(user_id=user_id, group_id=group_id).first()
     if not user_group:
         emit('error', {'message': 'User not in group'})
         return 

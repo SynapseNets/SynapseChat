@@ -1,7 +1,7 @@
 from werkzeug.security import generate_password_hash
-from flask import request, jsonify
 from utils.models import User, Session, db
-import asyncio, os, pyotp, datetime
+from flask import request, jsonify
+import os, pyotp
 
 def login():
     data = request.get_json()
@@ -23,10 +23,11 @@ def login():
 
     # TODO: add tool anti-DDoS
     if pyotp.TOTP(user.otp_secret, name=user.username, issuer=os.getenv('ISSUER')).verify(otp):
+        if (session := Session.query.filter_by(user_id=user.id).first()):
+            return jsonify({'auth': session.token}), 200
         session = Session(
             user_id=user.id,
-            token=(token := generate_password_hash(os.urandom(20).hex())),
-            expiration=datetime.datetime.now().timestamp() + (3600 * 24) # 1 day
+            token=(token := generate_password_hash(os.urandom(20).hex()))
         )
         db.session.add(session)
         db.session.commit()

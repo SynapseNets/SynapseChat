@@ -17,11 +17,6 @@ def token_required(f):
         if not session:
             return make_response(jsonify({"message": "Invalid token"}), 401)
         
-        if session.expiration < int(time.time()):
-            db.session.delete(session)
-            db.session.commit()
-            return make_response(jsonify({"message": "Token expired"}), 401)
-        
         user = session.user_id
         current_user: User = User.query.filter_by(id=user).first()
         
@@ -43,11 +38,6 @@ def token_socket(f):
         session: Session = Session.query.filter_by(token=token).first()
         if not session:
             return emit('error', {"message": "Invalid token"})
-        
-        if session.expiration < int(time.time()):
-            db.session.delete(session)
-            db.session.commit()
-            return emit('error', {"message": "Token expired"})
         
         user = session.user_id
         current_user: User = User.query.filter_by(id=user).first()
