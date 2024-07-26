@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:async';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +12,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:client/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 
 class Serverconnectpage extends StatefulWidget {
@@ -107,6 +109,21 @@ class _RegistrationpageState extends State<Serverconnectpage> {
 
 
     await storage.write(key: 'serverIP', value: json.decode(totpResponse.body)['auth']);
+
+    final socket = IO.io(Uri(host: serverIP, port: port).toString());
+    socket.onConnect((_) {
+      socket.emit('connect', {});
+    });
+
+    bool connected = false;
+    Timer(const Duration(seconds: 5), () => (){if(!connected) {socket.disconnect(); return false;}});
+
+    socket.on('connected', (data) {
+      if(data['status'] == 'ok') {
+        connected = true;
+        Navigator.pushNamed(context, '/chat');
+      }
+    });
 
     showDialog(
         context: context,

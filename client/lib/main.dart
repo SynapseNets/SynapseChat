@@ -25,7 +25,6 @@ import 'package:client/l10n/app_localizations.dart';
 import 'package:client/utils/settings_preferences.dart';
 
 import 'package:provider/provider.dart'; // Importa il pacchetto provider
-import 'websocket_provider.dart'; // Importa il WebSocketProvider
 
 bool alreadyLogged = false;
 
@@ -54,7 +53,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(
             create: (_) =>
-                WebSocketProvider()), // Aggiungi il WebSocketProvider
+                WebSocketProvider()), // TODO: fix
       ],
       child: SynapseNetsApp(
         isDarkMode: isDarkMode,
