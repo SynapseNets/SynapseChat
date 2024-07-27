@@ -32,7 +32,8 @@ class Group(db.Model):
 
 class Messages(db.Model):
     id          = Column(Integer, nullable=False, unique=True, autoincrement=True, primary_key=True)
-    user_id     = Column(Integer, nullable=False)
+    sender_id   = Column(Integer, nullable=False)
+    reciver_id  = Column(Integer, nullable=False)
     group_id    = Column(Integer, nullable=False)
     username    = Column(String(20), nullable=False)
     message     = Column(String(300), nullable=False)

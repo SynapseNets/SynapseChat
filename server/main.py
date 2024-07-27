@@ -1,7 +1,6 @@
 from flask_socketio import SocketIO, join_room, leave_room, emit
 from werkzeug.security import generate_password_hash
 from utils.decorators import token_socket
-from Crypto.Util.number import isPrime
 from datetime import datetime
 from flask import Flask
 from utils.db import get_db_path
@@ -45,14 +44,57 @@ def send_message(message: dict, user_id: int):
     if not group:
         emit('error', {'message': 'Group not found'})
         return
-           
+    
+    user_group: list[UserGroup] = UserGroup.query.filter_by(group_id=group.id).all()
+    user_group = [user for user in user_group if user.user_id != user_id]
     user: User = User.query.filter_by(id=user_id).first()
-    for text in texts:
-        msg = Messages(user_id=user.id, group_id=group, username=user.username, message=text, time=timestamp)
+    for i, text in enumerate(texts):
+        msg = Messages(
+            sender_id=user.id, 
+            reciever_id=user_group[i].user_id,
+            group_id=group.id, 
+            username=user.username, 
+            message=text, 
+            time=timestamp
+        )
+        emit('message', {
+                'message_id': msg.id, 
+                'text': text, 
+                'time': timestamp, 
+                'user': user.username
+            }, 
+            to=user_group[i].user_id,
+            broadcast=False
+        )
         db.session.add(msg)
+        
     db.session.commit()
-    emit('message', {'text': text, 'time': timestamp, 'user': user.username}, to=group.id)
-
+    emit('success', {'message': 'success'})
+    
+@socketio.on('received')
+@token_socket
+def received_message(data: dict, user_id: int):
+    message_id = data.get('message_id')
+    
+    if not message_id:
+        emit('error', {'message': 'Missing message id'})
+        return
+    if not isinstance(message_id, int):
+        emit('error', {'message': 'Invalid message id'})
+        return
+    
+    message: Messages = Messages.query.filter_by(id=message_id).first()
+    if not message:
+        emit('error', {'message': 'Message not found'})
+        return
+    if message.reciver_id != user_id:
+        emit('error', {'message': 'Message not for this user'})
+        return
+    
+    db.session.delete(message)
+    db.session.commit()
+    emit('success', {'message': 'success'})
+    
 @socketio.on('join')
 @token_socket
 def join_group(data: dict, user_id: int):
@@ -75,9 +117,6 @@ def join_group(data: dict, user_id: int):
     if not isinstance(public_key, int):
         emit('error', {'message': 'Invalid public key'})
         return
-    if not isPrime(public_key) or public_key < (1 << 2048):
-        emit('error', {'message': 'Invalid public key'})
-        return
     
     group: Group = Group.query.filter_by(invite_code=invite_code).first()
     if not group:
@@ -95,15 +134,14 @@ def join_group(data: dict, user_id: int):
     
     db.session.add(user_group)
     db.session.commit()
-    join_room(group_id)
-    emit('joined', {'key': public_key}, to=group.id)
+    join_room(group_id, sid=user_id)
+    emit('joined', {'key': public_key}, to=group.id, include_self=False)
     
     keys = []
     for key in UserGroup.query.filter_by(group_id=group_id).all():
         keys.append(key.public_key)
     
     emit('success', {'message': 'Joined group', 'id': group_id, 'keys': keys})
-    return
 
 @socketio.on('leave')
 @token_socket
@@ -124,10 +162,9 @@ def leave_group(data: dict, user_id: int):
     
     db.session.delete(user_group)
     db.session.commit()
-    leave_room(group_id)
+    leave_room(group_id, sid=user_id)
         
     emit('success', {'message': 'Left group'})
-    return 
 
 if __name__ == '__main__':
     from routes import main
