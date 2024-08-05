@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:client/chat/message.dart';
 import 'package:client/chat/conversation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -14,7 +16,7 @@ Future<Database> getDb() async {
           'CREATE TABLE IF NOT EXISTS messages(id AUTO_INCREMENT INTEGER PRIMARY KEY, text TEXT, type INTEGER, status INTEGER, sender TEXT, name TEXT, time TEXT, audio TEXT, image TEXT)'
           );
       db.execute(
-          'CREATE TABLE IF NOT EXISTS conversations(id AUTO_INCREMENT INTEGER PRIMARY KEY, name TEXT)' //name = name
+          'CREATE TABLE IF NOT EXISTS conversations(id AUTO_INCREMENT INTEGER PRIMARY KEY, name TEXT)' //name here = name in messages
           );
       db.execute(
         'CREATE TABLE IF NOT EXISTS servers(id AUTO_INCREMENT INTEGER PRIMARY KEY, ip TEXT, port INTEGER, username TEXT, totp_uri TEXT)',
@@ -134,4 +136,16 @@ Future<bool> addServer(String ip, int port, String username, String totpUri) asy
     }
   );
   return true;
+}
+
+Future<List<Map<String, Object?>>> getServers() async {
+  final db = await getDb();
+
+  return await db.query('servers');
+}
+
+Future<Null> switchServer(String serverIp) async{
+  const storage = FlutterSecureStorage();
+
+  await storage.write(key: 'active', value: serverIp);
 }

@@ -48,18 +48,7 @@ void main() async {
   //await getDb();
   final bool isDarkMode = await SettingsPreferences.getDarkMode();
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-            create: (_) =>
-                WebSocketProvider()), // TODO: fix
-      ],
-      child: SynapseNetsApp(
-        isDarkMode: isDarkMode,
-      ),
-    ),
-  );
+  runApp(SynapseNetsApp(isDarkMode: isDarkMode));
 }
 
 class MyWindowListener extends WindowListener {

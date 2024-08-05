@@ -42,6 +42,7 @@ class _RegistrationpageState extends State<Serverconnectpage> {
     }
 
     const storage = FlutterSecureStorage();
+
     final client = http.Client();
 
     String? username = await storage.read(key: 'username');
@@ -69,9 +70,8 @@ class _RegistrationpageState extends State<Serverconnectpage> {
 
     await addServer(serverIP, port, username, totpUri);
 
+    //login
     TOTP totp = TOTP(secret: totpUri.split('secret=')[1].split('&')[0]);
-    print(totpUri.split('secret=')[1].split('&')[0]);
-    print(totp.now());
     var totpResponse = await client.post(Uri.parse('https://$serverIP:$port/api/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
@@ -107,23 +107,36 @@ class _RegistrationpageState extends State<Serverconnectpage> {
       return false;
     }
 
-
+    //saving session-token
     await storage.write(key: 'serverIP', value: json.decode(totpResponse.body)['auth']);
 
-    final socket = IO.io(Uri(host: serverIP, port: port).toString());
+    IO.Socket socket = IO.io("https://$serverIP:$port", <String, dynamic>{
+      'transports': ['websocket'],
+    });
+
+    socket = socket.connect();
     socket.onConnect((_) {
+      print('connection established');
       socket.emit('connect', {});
     });
+    socket.onError((err)=>print(err));
+    socket.onConnectError((err)=>print(err));
+    socket.onDisconnect((_)=>print("connection Disconnection"));
 
     bool connected = false;
     Timer(const Duration(seconds: 5), () => (){if(!connected) {socket.disconnect(); return false;}});
 
     socket.on('connected', (data) {
+      print('connected received');
       if(data['status'] == 'ok') {
-        connected = true;
+        //connected = true;
+        switchServer(serverIP);
         Navigator.pushNamed(context, '/chat');
       }
     });
+
+    //if everything works, the socket is closed
+    socket.close();
 
     showDialog(
         context: context,

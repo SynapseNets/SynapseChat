@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'chat/sidebar.dart';
 import 'chat/content.dart';
 import 'package:client/chat/chatcontroller.dart';
@@ -15,12 +17,24 @@ class Chat extends StatefulWidget {
   State<Chat> createState() => _ChatState();
 }
 
+Future<String?> getActiveServer() async {
+  const storage = FlutterSecureStorage();
+  return await storage.read(key: 'active');
+}
+
 class _ChatState extends State<Chat> {
   final ChatFocus _chatFocus = ChatFocus(); // mobile toggle option
   double? _lastWidth;
   final ChatController currentChatController = Get.put(ChatController());
   final MessageNotifier messageNotifier = MessageNotifier();
-  Color? backgroundColor = const Color(0xff8678eb); //TODO: remove skill issue
+  Color? backgroundColor = const Color(0xff8678eb);
+  late String? _currentServer;
+
+  void _fetchActiveServer() {
+    Future.wait([getActiveServer()]).then((values) {
+        _currentServer = values[0];
+    });
+  }
 
   void loadPreferences() {
     Future.wait([
@@ -38,13 +52,13 @@ class _ChatState extends State<Chat> {
   void initState() {
     super.initState();
     loadPreferences();
+    _fetchActiveServer();
   }
 
   @override
   Widget build(BuildContext context) {
     _lastWidth = MediaQuery.of(context).size.width;
 
-    print(backgroundColor);
     return Scaffold(
       body: NotificationListener<SizeChangedLayoutNotification>(
         onNotification: (notification) {
