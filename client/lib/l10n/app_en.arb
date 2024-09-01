@@ -1,0 +1,103 @@
+{
+  "homepageTitle": "Welcome to SynapseChat",
+  "homepageDescription": "The most secure messaging service available",
+  "homepageSelectLanguage": "Select your language",
+  "homepageContinue": "Continue",
+  "homepageOptions": "Options",
+
+  "loginPageTitle": "Login",
+  "loginPageDescription": "Login to SynapseChat",
+  "loginPageRememberMe": "Remember me",
+  "loginPageSignUp": "Sign Up",
+  "loginPageLogin": "Login",
+  "loginPageSnackbarError": "Incorrect username or password",
+
+
+  "registrationPageTitle": "Registration",
+  "registrationPageDescription": "Signup to SynapseChat",
+  "registrationPageRepeatPw": "Repeat Password",
+  "registrationPageRegistration": "Register",
+  "registrationPageUsernameError": "Username must not be empty",
+  "registrationPageFirstPasswordError": "Password must be 8 characters long\n with numbers and special characters",
+  "registrationPageSecondPasswordError": "Passwords do not match",
+  "registrationPageSnackbarError": "Access denied: Correct the errors in the fields above",
+
+
+  "contentPageSelectChatText":"Select a chat to start messaging",
+
+
+  "serverConnectPageTitle": "Connect to a server",
+  "serverConnectPageDescription": "Connect to a new server",
+  "serverConnectPageIp": "Server IP",
+  "serverConnectPagePort": "Port",
+  "serverConnectPageConnect": "Connect",
+  "serverConnectPageFirstStringAuthenticatorPopUp": "Add TOTP to your Authenticator",
+  "serverConnectPageSecondStringAuthenticatorPopUp": "Scan the QR code with your Authenticator",
+  "serverConnectPageThirdStringAuthenticatorPopUp": "or",
+  "serverConnectPageFourthStringAuthenticatorPopUp": "Add to Google Authenticator",
+  "serverConnectPageTitleErrorConnectionPopUp": "Connection Error",
+  "serverConnectPageContentErrorConnectionPopUp": "The IP address, password, or port might be incorrect",
+  "serverConnectPageButtonErrorConnectionPopUp": "Try Again",
+
+
+
+  "settingsPageTitle": "Settings",
+  "settingsPageUsername": "Name",
+  "settingsPageDescription": "Biography",
+  "settingsPageChatSettings": "Chat settings",
+  "settingsPageLanguages": "Language",
+  "settingsPageCredits": "Credits",
+  
+  
+  "profilePageTitle": "Profile",
+  "profilePageChangePicture": "Change profile picture",
+  "profilePageName": "Name",
+  "profilePageDescriptionName": "This is the name your contacts will see \nIs not related to your login username",
+  "profilePageBiography": "Biography",
+  "profilePageDescriptionBiography": "Describe yourself briefly",
+
+
+  "chatPreferencesTitle": "Chat Settings",
+  "chatPreferencesFontSize": "Font Size",
+  "chatPreferencesFirstText": "Hi there!",
+  "chatPreferencesSecondText": "Hello! How are you?",
+  "chatPreferencesThirdText": "I'm good, thanks! And you?",
+  "chatPreferencesBackground": "Change Background Color",
+  "chatPreferencesTextDialogBackground": "Choose Background Color",
+  "chatPreferencesTextColor": "Change Text Color",
+  "chatPreferencesTextDialogColor": "Choose Text Color",
+  "chatPreferencesLightTheme": "Light Theme",
+  "chatPreferencesDarkTheme": "Dark Theme",
+
+
+  "languagesPageTitle": "Languages",
+
+
+  "creditsPageTitle": "Credits",
+  "creditsPageDescription": "Credits",
+  "creditsPageDeveloperCreditsButton": "Developers credits",
+  "creditsPageIconsCreditsButton": "Icons credits",
+
+
+  "developerscreditsPageTitle": "Developers Credits",
+  "developerscreditsPageDescriptionAlBovo": "Server-side development",
+  "developerscreditsPageDescriptionMark74": "Frontend and client-side backend development",
+  "developerscreditsPageDescriptionMattiaCincotta": "Frontend development",
+  "developerscreditsPageDescriptionLorii0": "Frontend development",
+  "developerscreditsPageDescriptionAntostarwars": "Frontend and client-side backend development",
+
+
+  "iconscreditsPageTitle":"Icons Credits",
+  "iconscreditsPageInfoIcon":"  Info icon created by Anggara - Flaticon",
+  "iconscreditsPageMessageIcon":"   Message icon created by Fathema Khanom - Flaticon",
+  "iconscreditsPageGalleryIcon":"   Gallery icon created by adrianadam - Flaticon",
+  "iconscreditsPageAddDatabaseIcon":"   Add database icon created by Arafat Uddin - Flaticon",
+  "iconscreditsPageProfileImageIcon":"   Profile image icon created by Md Tanvirul Haque - Flaticon",
+  "iconscreditsPageUserIcon":"   User icons created by Freepik - Flaticon",
+  "iconscreditsPageEarthGlobeIcon":"   Earth globe icon created by Freepik - Flaticon",
+
+
+  "contentPageTextbar":"Type a message"
+
+
+}

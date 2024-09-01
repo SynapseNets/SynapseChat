@@ -1,0 +1,95 @@
+{
+    "homepageTitle": "Benvenuto in SynapseChat",
+    "homepageDescription": "Il servizio di messaggistica più sicuro al mondo",
+    "homepageSelectLanguage": "Seleziona la lingua",
+    "homepageContinue": "Continua",
+    "homepageOptions": "Opzioni",
+
+    "loginPageTitle": "Accesso",
+    "loginPageDescription": "Accedi a SynapseChat",
+    "loginPageRememberMe": "Ricordami",
+    "loginPageSignUp": "Registrati",
+    "loginPageLogin": "Accedi",
+    "loginPageSnackbarError": "Nome utente o password sbagliati",
+
+    "registrationPageTitle": "Registrazione",
+    "registrationPageDescription": "Registrati a SynapseChat",
+    "registrationPageRepeatPw": "Ripeti Password",
+    "registrationPageRegistration": "Registrati",
+    "registrationPageUsernameError": "Lo username non deve essere vuoto",
+    "registrationPageFirstPasswordError": "La password deve essere di almeno 8 caratteri\n              con numeri e caratteri speciali",
+    "registrationPageSecondPasswordError": "Le password non coincidono",
+    "registrationPageSnackbarError": "Accesso negato: Correggere gli errori nei campi sopra",
+
+
+
+    "contentPageSelectChatText":"Seleziona una chat per iniziare a messaggiare",
+
+
+    "serverConnectPageTitle": "Connessione al server",
+    "serverConnectPageDescription": "Connettiti ad un nuovo server",
+    "serverConnectPageIp": "IP del server",
+    "serverConnectPagePort": "Porta",
+    "serverConnectPageConnect": "Connettiti",
+    "serverConnectPageFirstStringAuthenticatorPopUp": "Aggiungi TOTP al tuo Authenticator",
+    "serverConnectPageSecondStringAuthenticatorPopUp": "Scansiona il codice QR con il tuo Authenticator",
+    "serverConnectPageThirdStringAuthenticatorPopUp": "oppure",
+    "serverConnectPageFourthStringAuthenticatorPopUp": "Aggiungi a Google Authenticator",
+    "serverConnectPageTitleErrorConnectionPopUp": "Errore di Connessione",
+    "serverConnectPageContentErrorConnectionPopUp": "L'indirizzo IP, la password o la porta potrebbero essere errati",
+    "serverConnectPageButtonErrorConnectionPopUp": "Riprova",
+
+    "settingsPageTitle": "Impostazioni",
+    "settingsPageUsername": "Nome",
+    "settingsPageDescription": "Biografia",
+    "settingsPageChatSettings": "Impostazioni chat",
+    "settingsPageLanguages": "Lingua",
+    "settingsPageCredits": "Riconoscimenti",
+
+    "profilePageTitle": "Profilo",
+    "profilePageChangePicture": "Cambia l'immagine profilo",
+    "profilePageName": "Nome",
+    "profilePageDescriptionName": "Nome visibile ai contatti. \nNon è legato allo username di login",
+    "profilePageBiography": "Biografia",
+    "profilePageDescriptionBiography": "Descriviti brevemente",
+
+
+    "chatPreferencesTitle": "Impostazioni Chat",
+    "chatPreferencesFontSize": "Grandezza Caratteri",
+    "chatPreferencesFirstText": "Ciao!",
+    "chatPreferencesSecondText": "Ciao! Come stai?",
+    "chatPreferencesThirdText": "Sto bene, grazie! E tu?",
+    "chatPreferencesBackground": "Cambia il colore dello sfondo",
+    "chatPreferencesTextDialogBackground": "Scegli il colore dello sfondo",
+    "chatPreferencesTextColor": "Cambia il colore dei caratteri",
+    "chatPreferencesTextDialogColor": "Scegli il colore del testo",
+    "chatPreferencesLightTheme": "Tema chiaro",
+    "chatPreferencesDarkTheme": "Tema scuro",
+
+
+    "languagesPageTitle": "Lingue",
+
+
+    "creditsPageTitle": "Crediti",
+    "creditsPageDescription": "Crediti",
+    "creditsPageDeveloperCreditsButton": "Crediti Sviluppatori",
+    "creditsPageIconsCreditsButton": "Crediti Icone",
+
+
+    "developerscreditsPageTitle": "Crediti Sviluppatori",
+    "developerscreditsPageDescriptionAlBovo": "Sviluppo lato server",
+    "developerscreditsPageDescriptionMark74": "Sviluppo frontend e backend del client",
+    "developerscreditsPageDescriptionMattiaCincotta": "Sviluppo frontend",
+    "developerscreditsPageDescriptionLorii0": "Sviluppo frontend",
+    "developerscreditsPageDescriptionAntostarwars": "Sviluppo frontend e backend del client",
+
+
+    "iconscreditsPageTitle":"Crediti Icone",
+    "iconscreditsPageInfoIcon": "Icona informazioni creata da Anggara - Flaticon",
+    "iconscreditsPageMessageIcon": "Icona messaggio creata da Fathema Khanom - Flaticon",
+    "iconscreditsPageGalleryIcon": "Icona galleria creata da adrianadam - Flaticon",
+    "iconscreditsPageAddDatabaseIcon": "Icona aggiungi database creata da Arafat Uddin - Flaticon",
+    "iconscreditsPageProfileImageIcon": "Icona immagine profilo creata da Md Tanvirul Haque - Flaticon",
+    "iconscreditsPageUserIcon": "Icone utente create da Freepik - Flaticon",
+    "iconscreditsPageEarthGlobeIcon": "Icona globo terrestre creata da Freepik - Flaticon"
+}
