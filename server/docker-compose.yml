@@ -1,0 +1,27 @@
+services:
+  backend:
+    image: backend
+    build: .
+    ports:
+      - "${SERVER_PORT}:5050"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
+    env_file:
+      - .env
+  db:
+    image: mysql
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 1s
+      timeout: 1s
+      retries: 30
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:

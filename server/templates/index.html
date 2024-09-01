@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Server panel{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="d-flex flex-column">
+        <h1 class="display-1 p-4">
+            <strong>SERVER PANEL</strong>
+        </h1>
+        <a href="{{ url_for('main.login') }}" class="btn btn-outline-light d-flex justify-content-center display-6 my-3">
+            <h3 class="px-4 py-3">Login</h3>
+        </a>
+        <div class="d-flex justify-content-center align-items-center">
+            <a href="https://github.com/SynapseNets/SynapseChat" class="btn btn-outline-light d-flex justify-content-center display-6">
+                <h3 class="px-4 py-3">Github repository</h3>
+            </a>
+            <div class="container-fluid w-auto">
+                <img src="{{ url_for('static', filename='images/github.svg')}}"></img>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
+{% endblock %}

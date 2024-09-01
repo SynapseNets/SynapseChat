@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\title{\textbf{Setup Server}}
+\author{\href{https://github.com/AlBovo/}{@AlBovo} (Alan Bovo)}
+\date{June 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+The goal of our project is to build a fast and free to use chat application \textbf{peer-to-peer} based with the
+possibility to use a server to save temporarily all the data sent to all the other peers of the network.
+We decided to develop the server of SynapseChat using \textbf{Python 3.12} and its \textbf{asyncio} library to meet this simple goal
+without too much effort. \\
+
+\section{Docker}
+To make everything even simpler, we decided to use Docker for the creation of a specific container that is separate from the machine's hardware, allowing us to \textbf{sandbox} potential vulnerabilities in the code.
+
+\subsection{Dockerfile}
+We decided to use the Python 3.12-alpine version due to its \textbf{speed} and \textbf{lightness}, installing some libraries like \textbf{aiomysql} for the server database connection. The latter will (possibly) be explored in a dedicated guide soon.
+
+\subsection{Docker compose}
+As for this section, there are no specific details to mention except that the database is tested by a \textbf{healthcheck} to ensure it is fully up and running, and the server will listen on \textbf{port 5050} of the host machine.
+
+\subsection{Start docker}
+There's a simple command to run: \texttt{docker compose [--build]}.\\
+P.S.: this command should be runned in the same directory of the \texttt{docker-compose.yml} file to make it work.
+
+\end{document}
