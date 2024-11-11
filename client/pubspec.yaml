@@ -44,7 +44,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   chat_bubbles: ^1.6.0
   window_manager: ^0.4.2
-  sqflite: ^2.3.3+1
+  sqflite: ^2.4.1
   sqflite_common_ffi: ^2.3.3
   get: ^4.6.6
   visibility_detector: ^0.4.0+2
